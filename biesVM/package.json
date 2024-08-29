@@ -1,0 +1,24 @@
+{
+  "name": "biesvm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && jest",
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.3",
+    "standard": "^17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json",
+    "rules": {
+      "import/no-absolute-path": "off"
+    }
+  }
+}
