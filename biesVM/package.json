@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "standard && jest",
+    "test": "jest",
     "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
@@ -19,6 +19,9 @@
     "extends": "./node_modules/standard/eslintrc.json",
     "rules": {
       "import/no-absolute-path": "off"
+    },
+    "env": {
+      "jest": true
     }
   }
 }
