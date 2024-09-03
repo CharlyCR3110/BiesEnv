@@ -24,8 +24,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Run linter
+      run: npm run lint
+
     - name: Run tests
-      run: npm test
+      run: npm run test
 
     - name: Generate documentation
       run: npm run doc
