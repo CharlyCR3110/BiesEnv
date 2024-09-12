@@ -12,7 +12,7 @@
  * console.log(stack.isEmpty()) // false
  * @see {@link https://www.geeksforgeeks.org/implementation-stack-javascript/}
  */
-class Stack {
+export class Stack {
   /**
    * Creates an instance of Stack.
    * @memberof Stack
@@ -77,5 +77,3 @@ class Stack {
     return str
   }
 }
-
-module.exports = Stack
