@@ -12,7 +12,7 @@
  * context.hasVariable('x') // true
  * context.hasVariable('y') // false
  */
-class Context {
+export class Context {
   /**
    * Creates an instance of Context.
    * @param {Object} [parent=null] - The parent context.
@@ -72,5 +72,3 @@ class Context {
     }
   }
 }
-
-module.exports = Context
