@@ -63,12 +63,7 @@ export class Context {
    * @returns {boolean} - Whether the variable is defined.
    */
   hasVariable (name) {
-    if (name in this.variables) {
-      return true
-    } else if (this.parent) {
-      return this.parent.hasVariable(name)
-    } else {
-      return false
-    }
+    // if `name` is in the local variables or in the parent context
+    return name in this.variables || (this.parent && this.parent.hasVariable(name))
   }
 }
