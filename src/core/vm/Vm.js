@@ -1,7 +1,8 @@
 // src/core/vm.js
 
-import { Stack } from './Stack.js'
-import { Context } from './Context.js'
+import { Stack } from '../Stack.js'
+import { Context } from '../Context.js'
+import { instructionHandlers } from './instructions.js'
 
 /**
  * The Virtual Machine class is responsible for executing instructions and managing the execution state.
@@ -47,51 +48,7 @@ export class VM {
    * vm.processInstruction({ op: 'push', value: 5 });
    */
   processInstruction (instruction) {
-    switch (instruction.op) {
-      case 'push':
-        this.stack.push(instruction.value)
-        break
-      case 'pop':
-        this.stack.pop()
-        break
-      case 'add': {
-        const a = this.stack.pop()
-        const b = this.stack.pop()
-        this.stack.push(a + b)
-        break
-      }
-      case 'subtract': {
-        const x = this.stack.pop()
-        const y = this.stack.pop()
-        this.stack.push(x - y)
-      }
-        break
-      case 'multiply': {
-        const m = this.stack.pop()
-        const n = this.stack.pop()
-        this.stack.push(m * n)
-      }
-        break
-      case 'divide':{
-        const d1 = this.stack.pop()
-        const d2 = this.stack.pop()
-        if (d2 === 0) throw new Error('Division by zero.')
-        this.stack.push(d1 / d2)
-        break
-      }
-      case 'set':
-        this.context.setVariable(instruction.name, instruction.value)
-        break
-      case 'get':{
-        const value = this.context.getVariable(instruction.name)
-        this.stack.push(value)
-        break
-      }
-      case 'print':
-        console.log(this.stack.printStack())
-        break
-      default:
-        throw new Error(`Unknown operation: ${instruction.op}`)
-    }
+    const handler = instructionHandlers[instruction.op] || instructionHandlers.default
+    handler(this, instruction)
   }
 }
