@@ -1,1 +1,0 @@
-// Manejo del entorno (B)
