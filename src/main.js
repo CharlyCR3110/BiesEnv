@@ -1,7 +1,34 @@
-import { VM } from './core/vm/Vm.js'
+import antlr4 from 'antlr4'
+import BiesASMLexer from './asm/grammar/.antlr/biesASMLexer.js'
+import BiesASMParser from './asm/grammar/.antlr/biesASMParser.js'
+import PrintVisitor from './asm/PrintVisitor.js'
 
-const vm = new VM()
+const input = `
+; Esto es un ejemplo de código BIESVM
+POP
+BLD 1, 2
+BST 3
+LDC 10
+ADD
+MUL
+DIV
+SUB
+PRN 5
+RET
+HLT
 
-vm.execute([{ op: 'push', value: 5 }, { op: 'push', value: 10 }, { op: 'add' }])
+$FUN miFuncion 1 2
+; Una función de ejemplo
+$END
 
-console.log(vm.stack.pop()) // 15
+`
+
+const chars = new antlr4.InputStream(input)
+const lexer = new BiesASMLexer(chars)
+const tokens = new antlr4.CommonTokenStream(lexer)
+
+const parser = new BiesASMParser(tokens)
+const tree = parser.program()
+
+const visitor = new PrintVisitor()
+visitor.visit(tree)
