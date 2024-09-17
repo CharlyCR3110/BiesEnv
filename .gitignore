@@ -1,4 +1,4 @@
 node_modules/*
 # Ignorar la carpeta docs generada por JSDoc
 /docs/
-src/asm/antlr/
+src/asm/grammar/.antlr/
