@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "doc": "jsdoc -c jsdoc.json",
-    "lint": "standard --fix"
+    "lint": "standard --fix",
+    "antlr": "src\\asm\\grammar\\generate_parser.bat",
+    "start": "node src/main.js"
   },
   "keywords": [],
   "author": "",

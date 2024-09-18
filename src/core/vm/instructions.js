@@ -47,8 +47,12 @@ const handlePrint = (vm) => {
   console.log(vm.stack.pop())
 }
 
+const handleEndOfProgram = (vm) => {
+  console.log('End of program')
+}
+
 const handleUnknown = (vm, instruction) => {
-  throw new Error(`Unknown operation: ${instruction.op}`)
+  console.error(`Unknown instruction: ${instruction.op}`)
 }
 
 export const instructionHandlers = {
@@ -60,6 +64,12 @@ export const instructionHandlers = {
   divide: handleDivide,
   set: handleSet,
   get: handleGet,
-  print: handlePrint,
+  prn: handlePrint,
+  ldv: handlePush,
+  bst: handleSet,
+  mul: handleMultiply,
+  div: handleDivide,
+  ret: handlePop,
+  hlt: handleEndOfProgram,
   default: handleUnknown
 }
