@@ -9,11 +9,12 @@ instruction
     | BLD expression ',' expression
     | BST expression
     | LDC expression
+    | LDV expression
     | ADD
     | MUL
     | DIV
     | SUB
-    | PRN expression
+    | PRN
     | RET
     | HLT
     ;
@@ -30,6 +31,7 @@ POP: 'POP';
 BLD: 'BLD';
 BST: 'BST';
 LDC: 'LDC';
+LDV: 'LDV';
 ADD: 'ADD';
 MUL: 'MUL';
 DIV: 'DIV';
