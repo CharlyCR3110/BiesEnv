@@ -24,7 +24,8 @@ export class VM {
    */
   constructor () {
     this.stack = new Stack()
-    this.context = new Context()
+    this.contexts = new Stack() // Stack of contexts
+    this.contexts.push(new Context()) // Initial context
   }
 
   /**
