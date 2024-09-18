@@ -1,8 +1,3 @@
-import antlr4 from 'antlr4'
-import BiesASMLexer from './asm/grammar/.antlr/biesASMLexer.js'
-import BiesASMParser from './asm/grammar/.antlr/biesASMParser.js'
-import InstructionBuilderVisitor from './asm/InstructionBuilderVisitor.js'
-import PrintVisitor from './asm/PrintVisitor.js'
 import { VM } from './core/vm/Vm.js'
 
 const input = `
@@ -12,15 +7,27 @@ PRN
 HLT
 `
 
-const chars = new antlr4.InputStream(input)
-const lexer = new BiesASMLexer(chars)
-const tokens = new antlr4.CommonTokenStream(lexer)
+const input2 = `
+; Esto es un ejemplo de código BIESVM
+LDV 666 ; Cargar valor 666 en la pila
+BST 0 0
+BLD 0 0
+PRN
+HLT
+`
 
-const parser = new BiesASMParser(tokens)
-const tree = parser.program()
-
-const visitor = new InstructionBuilderVisitor()
-const instructions = visitor.visit(tree)
+const input3 = `
+; Esto es un ejemplo de código BIESVM
+LDV 1
+BST 0 0
+LDV 665
+BST 0 1
+BLD 0 0
+BLD 0 1
+ADD
+PRN
+HLT
+`
 
 const vm = new VM()
-vm.execute(instructions)
+vm.executeParsedCode(input3)
