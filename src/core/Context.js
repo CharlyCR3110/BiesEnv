@@ -53,7 +53,7 @@ export class Context {
     } else if (this.parent) {
       return this.parent.getVariable(name)
     } else {
-      return undefined // variable not defined -> or throw an error?
+      throw new Error(`Context: Variable ${name} is not defined`)
     }
   }
 
