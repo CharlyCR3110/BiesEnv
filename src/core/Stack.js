@@ -74,4 +74,14 @@ export class Stack {
   printStack () {
     return this.items.join(' ')
   }
+
+  /**
+   * Return the element at the specified index.
+   *
+   * @param {int} index
+   * @returns
+   */
+  get (index) {
+    return this.items[index]
+  }
 }
