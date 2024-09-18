@@ -3,6 +3,10 @@
 import { Stack } from '../Stack.js'
 import { Context } from '../Context.js'
 import { instructionHandlers } from './instructions.js'
+import InstructionBuilderVisitor from '../../asm/InstructionBuilderVisitor.js'
+import BiesASMParser from '../../asm/grammar/.antlr/biesASMParser.js'
+import BiesASMLexer from '../../asm/grammar/.antlr/biesASMLexer.js'
+import antlr4 from 'antlr4'
 
 /**
  * The Virtual Machine class is responsible for executing instructions and managing the execution state.
@@ -51,5 +55,19 @@ export class VM {
   processInstruction (instruction) {
     const handler = instructionHandlers[instruction.op] || instructionHandlers.default
     handler(this, instruction)
+  }
+
+  executeParsedCode (input) {
+    const chars = new antlr4.InputStream(input)
+    const lexer = new BiesASMLexer(chars)
+    const tokens = new antlr4.CommonTokenStream(lexer)
+
+    const parser = new BiesASMParser(tokens)
+    const tree = parser.program()
+
+    const visitor = new InstructionBuilderVisitor()
+    const instructions = visitor.visit(tree)
+
+    this.execute(instructions)
   }
 }
