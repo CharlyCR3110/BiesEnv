@@ -4,7 +4,7 @@
  */
 
 const handlePush = (vm, instruction) => {
-  vm.stack.push(instruction.value)
+  vm.stack.push(instruction.args[0].value)
 }
 
 const handlePop = (vm) => {
@@ -36,7 +36,7 @@ const handleDivide = (vm) => {
 }
 
 const handleSet = (vm, instruction) => {
-  vm.context.set(instruction.key, instruction.value)
+  vm.context.set(instruction.key, instruction.args[0].value)
 }
 
 const handleGet = (vm, instruction) => {
@@ -45,6 +45,25 @@ const handleGet = (vm, instruction) => {
 
 const handlePrint = (vm) => {
   console.log(vm.stack.pop())
+}
+
+const handleBst = (vm, instruction) => {
+  const value = vm.stack.pop()
+  const contextIndex = instruction.args[0].value // indice del contexto
+  const variableIndex = instruction.args[1].value // indice de la variable
+
+  // Accedemos al contexto y hacemos la asignación
+  const context = vm.contexts.get(contextIndex)
+  context[variableIndex] = value
+}
+
+const handleBld = (vm, instruction) => {
+  const contextIndex = instruction.args[0].value // indice del contexto
+  const variableIndex = instruction.args[1].value // variable name
+
+  // Accedemos al contexto y hacemos la asignación
+  const context = vm.contexts.get(contextIndex)
+  vm.stack.push(context[variableIndex])
 }
 
 const handleEndOfProgram = (vm) => {
@@ -56,17 +75,13 @@ const handleUnknown = (vm, instruction) => {
 }
 
 export const instructionHandlers = {
-  push: handlePush,
   pop: handlePop,
-  add: handleAdd,
-  subtract: handleSubtract,
-  multiply: handleMultiply,
-  divide: handleDivide,
+  bst: handleBst,
+  bld: handleBld,
   set: handleSet,
   get: handleGet,
   prn: handlePrint,
   ldv: handlePush,
-  bst: handleSet,
   mul: handleMultiply,
   div: handleDivide,
   ret: handlePop,
