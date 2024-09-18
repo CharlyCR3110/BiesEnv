@@ -1,26 +1,15 @@
 import antlr4 from 'antlr4'
 import BiesASMLexer from './asm/grammar/.antlr/biesASMLexer.js'
 import BiesASMParser from './asm/grammar/.antlr/biesASMParser.js'
+import InstructionBuilderVisitor from './asm/InstructionBuilderVisitor.js'
 import PrintVisitor from './asm/PrintVisitor.js'
+import { VM } from './core/vm/Vm.js'
 
 const input = `
 ; Esto es un ejemplo de código BIESVM
-POP
-BLD 1, 2
-BST 3
-LDC 10
-ADD
-MUL
-DIV
-SUB
-PRN 5
-RET
+LDV 666
+PRN
 HLT
-
-$FUN miFuncion 1 2
-; Una función de ejemplo
-$END
-
 `
 
 const chars = new antlr4.InputStream(input)
@@ -30,5 +19,8 @@ const tokens = new antlr4.CommonTokenStream(lexer)
 const parser = new BiesASMParser(tokens)
 const tree = parser.program()
 
-const visitor = new PrintVisitor()
-visitor.visit(tree)
+const visitor = new InstructionBuilderVisitor()
+const instructions = visitor.visit(tree)
+
+const vm = new VM()
+vm.execute(instructions)
