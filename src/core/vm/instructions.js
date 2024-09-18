@@ -12,8 +12,8 @@ const handlePop = (vm) => {
 }
 
 const handleAdd = (vm) => {
-  const a = vm.stack.pop()
-  const b = vm.stack.pop()
+  const a = parseInt(vm.stack.pop())
+  const b = parseInt(vm.stack.pop())
   vm.stack.push(a + b)
 }
 
@@ -78,6 +78,7 @@ export const instructionHandlers = {
   pop: handlePop,
   bst: handleBst,
   bld: handleBld,
+  add: handleAdd,
   set: handleSet,
   get: handleGet,
   prn: handlePrint,
