@@ -6,8 +6,8 @@ program: (instruction | directive | BLOCK_COMMENT)* EOF;
 // Instrucciones con su respectiva validación de argumentos
 instruction
     : POP
-    | BLD expression ',' expression
-    | BST expression
+    | BLD expression expression
+    | BST expression expression
     | LDC expression
     | LDV expression
     | ADD
