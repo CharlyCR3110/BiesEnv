@@ -15,10 +15,14 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     const mnemonic = ctx.children[0].getText()
     let args = ctx.expression()
     if (args.length > 0) {
-      args = args.map(arg => ({ op: 'push', value: parseInt(arg.getText(), 10) }))
+      args = args.map(arg => {
+        return {
+          value: arg.children[0].getText()
+        }
+      })
     }
 
-    this.instructions.push({ op: mnemonic.toLowerCase(), value: parseInt(args[0]?.value, 10) })
+    this.instructions.push({ op: mnemonic.toLowerCase(), args })
 
     return this.visitChildren(ctx)
   }
