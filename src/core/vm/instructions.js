@@ -17,11 +17,11 @@ const handleAdd = (vm) => {
   vm.stack.push(a + b)
 }
 
-const handleSubtract = (vm) => {
-  const x = vm.stack.pop()
-  const y = vm.stack.pop()
-  vm.stack.push(x - y)
-}
+// const handleSubtract = (vm) => {
+//   const x = vm.stack.pop()
+//   const y = vm.stack.pop()
+//   vm.stack.push(x - y)
+// }
 
 const handleMultiply = (vm) => {
   const m = vm.stack.pop()
@@ -35,15 +35,15 @@ const handleDivide = (vm) => {
   vm.stack.push(a / b)
 }
 
-const handleSet = (vm, instruction) => {
-  const env = vm.environments.peek() // Get the current environment
-  env.setVariable(instruction.key, instruction.args[0].value)
-}
+// const handleSet = (vm, instruction) => {
+//   const env = vm.environments.peek() // Get the current environment
+//   env.setVariable(instruction.key, instruction.args[0].value)
+// }
 
-const handleGet = (vm, instruction) => {
-  const env = vm.environments.peek() // Get the current environment
-  vm.stack.push(env.getVariable(instruction.key))
-}
+// const handleGet = (vm, instruction) => {
+//   const env = vm.environments.peek() // Get the current environment
+//   vm.stack.push(env.getVariable(instruction.key))
+// }
 
 const handlePrint = (vm) => {
   console.log(vm.stack.pop())
@@ -84,18 +84,18 @@ const handleBld = (vm, instruction) => {
 
 const handleLdf = (vm, instruction) => {
   // todo: implementar
-  return "WORK IN PROGRESS"
+  return 'WORK IN PROGRESS'
 }
 
 // Manejar la instrucción de llamada a función (app) input: {op: 'app'}
 const handleApp = (vm, instruction) => {
   // todo: implementar
-  return "WORK IN PROGRESS"
+  return 'WORK IN PROGRESS'
 }
 
 const handleRet = (vm) => {
   // todo: implementar
-  return "WORK IN PROGRESS"
+  return 'WORK IN PROGRESS'
 }
 
 const handleEndOfProgram = (vm) => {

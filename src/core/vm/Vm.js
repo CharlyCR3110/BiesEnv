@@ -1,12 +1,7 @@
-// src/core/vm.js
-
 import { Stack } from '../Stack.js'
 import { Environment } from '../Environment.js'
 import { StackFrame } from '../StackFrame.js'
 import { instructionHandlers } from './instructions.js'
-import InstructionBuilderVisitor from '../../asm/InstructionBuilderVisitor.js'
-import PrintVisitor from '../../asm/PrintVisitor.js'
-
 /**
  * The Virtual Machine class is responsible for executing instructions and managing the execution state.
  * @class

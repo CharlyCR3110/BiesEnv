@@ -1,4 +1,3 @@
-import { VM } from '../core/vm/Vm.js'
 import { loadCode } from './loader.js'
 
 /**
