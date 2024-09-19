@@ -81,28 +81,14 @@ export class VM {
     handler(this, instruction)
   }
 
-  executeParsedCode (input) {
-    const chars = new antlr4.InputStream(input)
-    const lexer = new BiesASMLexer(chars)
-    const tokens = new antlr4.CommonTokenStream(lexer)
-
-    const parser = new BiesASMParser(tokens)
-    const tree = parser.program()
-
+  executeParsedCode (tree) {
     const visitor = new InstructionBuilderVisitor()
     const instructions = visitor.visit(tree)
 
     this.execute(instructions)
   }
 
-  printParsedCode (input) {
-    const chars = new antlr4.InputStream(input)
-    const lexer = new BiesASMLexer(chars)
-    const tokens = new antlr4.CommonTokenStream(lexer)
-
-    const parser = new BiesASMParser(tokens)
-    const tree = parser.program()
-
+  printParsedCode (tree) {
     const visitor = new PrintVisitor()
     const instructions = visitor.visit(tree)
   }
