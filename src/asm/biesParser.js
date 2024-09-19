@@ -3,7 +3,7 @@ import BiesASMLexer from './grammar/.antlr/biesASMLexer.js'
 import BiesASMParser from './grammar/.antlr/biesASMParser.js'
 import { MyErrorListener } from '../errors/MyErrorListener.js'
 
-function parse (input) {
+export const parse = (input) => {
   const chars = new antlr4.InputStream(input)
   const lexer = new BiesASMLexer(chars)
   const tokens = new antlr4.CommonTokenStream(lexer)
@@ -18,5 +18,3 @@ function parse (input) {
 
   return tree
 }
-
-export default parse
