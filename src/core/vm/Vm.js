@@ -62,7 +62,7 @@ export class VM {
     this.instructions = instructions
     this.instructionPointer = 0
 
-    while (this.instructionPointer < this.instructions.length) {
+    while (this.instructionPointer < this.instructions?.length) {
       const instruction = this.instructions[this.instructionPointer]
       this.processInstruction(instruction)
       this.instructionPointer++
