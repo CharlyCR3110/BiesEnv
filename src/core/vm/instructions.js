@@ -49,20 +49,26 @@ const handlePrint = (vm) => {
 
 const handleBst = (vm, instruction) => {
   const value = vm.stack.pop()
-  const contextIndex = instruction.args[0].value // indice del contexto
-  const variableIndex = instruction.args[1].value // indice de la variable
+  const contextIndex = instruction.args[0].value // índice del contexto
+  const variableIndex = instruction.args[1].value // índice de la variable
 
-  // Accedemos al contexto y hacemos la asignación
-  const context = vm.contexts.get(contextIndex)
+  // Acceder al contexto correcto
+  let context = vm.contexts.peek()
+  for (let i = 0; i < contextIndex; i++) {
+    context = context.parent
+  }
   context[variableIndex] = value
 }
 
 const handleBld = (vm, instruction) => {
-  const contextIndex = instruction.args[0].value // indice del contexto
-  const variableIndex = instruction.args[1].value // variable name
+  const contextIndex = instruction.args[0].value // índice del contexto
+  const variableIndex = instruction.args[1].value // índice de la variable
 
-  // Accedemos al contexto y hacemos la asignación
-  const context = vm.contexts.get(contextIndex)
+  // Acceder al contexto correcto
+  let context = vm.contexts.peek()
+  for (let i = 0; i < contextIndex; i++) {
+    context = context.parent
+  }
   vm.stack.push(context[variableIndex])
 }
 
@@ -79,8 +85,6 @@ export const instructionHandlers = {
   bst: handleBst,
   bld: handleBld,
   add: handleAdd,
-  set: handleSet,
-  get: handleGet,
   prn: handlePrint,
   ldv: handlePush,
   mul: handleMultiply,
