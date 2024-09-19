@@ -7,6 +7,7 @@ import InstructionBuilderVisitor from '../../asm/InstructionBuilderVisitor.js'
 import BiesASMParser from '../../asm/grammar/.antlr/biesASMParser.js'
 import BiesASMLexer from '../../asm/grammar/.antlr/biesASMLexer.js'
 import antlr4 from 'antlr4'
+import PrintVisitor from '../../asm/PrintVisitor.js'
 
 /**
  * The Virtual Machine class is responsible for executing instructions and managing the execution state.
@@ -28,8 +29,22 @@ export class VM {
    */
   constructor () {
     this.stack = new Stack()
-    this.contexts = new Stack() // Stack of contexts
+    this.contexts = new Stack() // Stack of contexts (each function call will have its own context)
+    this.callStack = [] // Stack to keep track of function calls
+    this.functions = {} // Store function definitions
     this.contexts.push(new Context()) // Initial context
+  }
+
+  /**
+   * Register a function to be used in the VM.
+   * @param {string} name - The name of the function.
+   * @param {Function} func - The function to register.
+   * @memberof VM
+   * @example
+   * vm.registerFunction('add', (a, b) => a + b);
+   */
+  registerFunction (name, func) {
+    this.functions[name] = func
   }
 
   /**
@@ -40,9 +55,18 @@ export class VM {
    * vm.execute([{ op: 'push', value: 5 }, { op: 'push', value: 10 }, { op: 'add' }]);
    */
   execute (instructions) {
-    instructions.forEach(instruction => {
+    if (!instructions) {
+      throw new Error('Instructions cannot be null or undefined')
+    }
+
+    this.instructions = instructions
+    this.instructionPointer = 0
+
+    while (this.instructionPointer < this.instructions.length) {
+      const instruction = this.instructions[this.instructionPointer]
       this.processInstruction(instruction)
-    })
+      this.instructionPointer++
+    }
   }
 
   /**
@@ -69,5 +93,17 @@ export class VM {
     const instructions = visitor.visit(tree)
 
     this.execute(instructions)
+  }
+
+  printParsedCode (input) {
+    const chars = new antlr4.InputStream(input)
+    const lexer = new BiesASMLexer(chars)
+    const tokens = new antlr4.CommonTokenStream(lexer)
+
+    const parser = new BiesASMParser(tokens)
+    const tree = parser.program()
+
+    const visitor = new PrintVisitor()
+    const instructions = visitor.visit(tree)
   }
 }
