@@ -1,5 +1,7 @@
 import { VM } from './core/vm/Vm.js'
 
+import parse from './asm/biesParser.js'
+
 // print(666)
 const input1 = `
 ; Esto es un ejemplo de código BIESVM
@@ -110,13 +112,13 @@ $END
 `
 const vm = new VM()
 console.log('Input 1:')
-vm.executeParsedCode(input1)
+const tree1 = parse(input1)
+vm.executeParsedCode(tree1)
 
 console.log('Input 2:')
-vm.executeParsedCode(input2)
+const tree2 = parse(input2)
+vm.executeParsedCode(tree2)
 
 console.log('Input 3:')
-vm.executeParsedCode(input3)
-
-console.log('Input 4:')
-vm.executeParsedCode(input4)
+const tree3 = parse(input3)
+vm.executeParsedCode(tree3)
