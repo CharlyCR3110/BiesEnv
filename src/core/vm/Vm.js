@@ -126,6 +126,16 @@ export class VM {
 
     while (this.instructionPointer < this.instructions?.length) {
       const instruction = this.instructions[this.instructionPointer]
+
+      // debug
+      // console.log('Executing instruction:', instruction)
+      // console.log('Stack:', this.stack.printStack())
+      // console.log('Environments:', this.environments.printStack())
+      // console.log('Call stack:', this.callStack.printStack())
+      // console.log('Functions:', this.functions)
+      // console.log('Instruction pointer:', this.instructionPointer)
+      // end debug
+
       this.processInstruction(instruction)
       this.instructionPointer++
     }
