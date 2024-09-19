@@ -153,16 +153,4 @@ export class VM {
       throw e
     }
   }
-
-  executeParsedCode (tree) {
-    const visitor = new InstructionBuilderVisitor()
-    const instructions = visitor.visit(tree)
-
-    this.execute(instructions)
-  }
-
-  printParsedCode (tree) {
-    const visitor = new PrintVisitor()
-    const instructions = visitor.visit(tree)
-  }
 }
