@@ -16,20 +16,16 @@ import { loadCode } from './loader.js'
 export const run = (filePath) => {
   try {
     console.log('Running the code in path:', filePath)
-    // Load, parse, and link the source code into an executable format (array of instructions)
-    const [instructions, functions] = loadCode(filePath)
+    const [instructions, vm] = loadCode(filePath)
 
-    // Create a new instance of the virtual machine
-    const vm = new VM()
+    // Obtener la primera función para ejecutar, si existe
+    const keys = Object.keys(vm.functions)
+    const firstElement = vm.functions[keys[0]]
 
-    // Get the first function to execute
-    const keys = Object.keys(functions)
-    const firstElement = functions[keys[0]]
+    const functionInstructions = firstElement?.instructions || instructions // Usar las instrucciones de la función o las globales
 
-    const functionInstructions = firstElement?.instructions || null
-
-    // Execute the parsed code
-    functionInstructions ? vm.execute(functionInstructions) : vm.execute(instructions) // this allows the user to run the code with or without functions (no need of $FUN...$END)
+    // Ejecutar las instrucciones
+    vm.execute(functionInstructions)
 
     console.log('Execution completed successfully.')
   } catch (error) {
