@@ -9,14 +9,14 @@ export default class PrintVisitor extends BiesASMVisitor {
   }
 
   visitInstruction (ctx) {
+    // La primera parte del contexto debería ser el mnemonico de la instrucción
     const mnemonic = ctx.children[0].getText()
     console.log('Instruction:', mnemonic)
 
-    // Obtener los argumentos según la instrucción
-    const args = ctx.expression()
+    // Obtener los argumentos como texto directamente desde los hijos del contexto
+    const args = ctx.children.slice(1).map(child => child.getText())
     if (args.length > 0) {
-      const argText = args.map(arg => arg.getText()).join(', ')
-      console.log('Arguments:', argText)
+      console.log('Arguments:', args.join(', '))
     }
 
     return this.visitChildren(ctx)
@@ -32,16 +32,17 @@ export default class PrintVisitor extends BiesASMVisitor {
 
     // Verifica los nombres de las funciones y si se pueden obtener
     const nameNode = ctx.IDENTIFIER()
-    if (nameNode) {
+    if (nameNode && nameNode.length > 0) {
       console.log('Name:', nameNode[0].getText())
     } else {
       console.log('Function name not found')
     }
 
     // Verifica los argumentos
-    const argsNode = ctx.INT(0)
-    if (argsNode) {
-      console.log('Args:', argsNode.getText())
+    const argsNodes = ctx.INT()
+    if (argsNodes.length > 0) {
+      const args = argsNodes.map(arg => arg.getText()).join(', ')
+      console.log('Args:', args)
     } else {
       console.log('Args not found')
     }
@@ -65,7 +66,6 @@ export default class PrintVisitor extends BiesASMVisitor {
     return null
   }
 
-  // Método para visitar comentarios
   visitBLOCK_COMMENT (ctx) {
     console.log('Comment:', ctx.getText().slice(1).trim())
     return null
