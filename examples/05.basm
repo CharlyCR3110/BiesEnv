@@ -1,0 +1,33 @@
+; $0 es main
+; $1 es x => $2
+; $2 es y => x + y
+;
+$FUN $0 args:0 parent:$0
+; x es 0 0
+; foo es 0 1
+LDV 1
+BST 0 0 ; let x = 1
+LDF $1 ;crea clausura de $1 (denotamos como [$1]) y pone en pila
+BST 0 1 ; foo = [$1]
+LDV 4
+LDV 3
+BLD 0 1 ; [$1] en pila
+APP     ; $1(3). Cuando RETorne habrá una clausura [$2]
+APP     ; $2(4)
+PRN     ; print(3+4)
+HLT    ; el compilador añade un hlt al final del main
+$END
+;
+$fun $1 args:1 parent:$0
+; x es 0 0
+LDF $2 ; crea clausura [$2] y pone en pila
+RET 
+$END
+;
+$FUN $2 args:1 parent:$1
+; y es 0 0
+BLD 1 0 ; carga x de $1 en pila
+BLD 0 0 ; carga y local  en pila
+ADD
+RET ; RETorna x + y
+$END
