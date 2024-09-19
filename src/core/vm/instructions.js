@@ -82,6 +82,22 @@ const handleBld = (vm, instruction) => {
   vm.stack.push(env.getVariable(variableIndex))
 }
 
+const handleLdf = (vm, instruction) => {
+  // todo: implementar
+  return "WORK IN PROGRESS"
+}
+
+// Manejar la instrucción de llamada a función (app) input: {op: 'app'}
+const handleApp = (vm, instruction) => {
+  // todo: implementar
+  return "WORK IN PROGRESS"
+}
+
+const handleRet = (vm) => {
+  // todo: implementar
+  return "WORK IN PROGRESS"
+}
+
 const handleEndOfProgram = (vm) => {
   console.log('End of program')
 }
@@ -99,7 +115,9 @@ export const instructionHandlers = {
   ldv: handlePush,
   mul: handleMultiply,
   div: handleDivide,
-  ret: handlePop,
   hlt: handleEndOfProgram,
+  ldf: handleLdf,
+  app: handleApp,
+  ret: handleRet,
   default: handleUnknown
 }
