@@ -50,6 +50,19 @@ export class Stack {
   }
 
   /**
+   * Returns the top element of the stack without removing it
+   * @returns {*}
+   * @memberof Stack
+   * @example
+   * stack.push(10)
+   * stack.push(20)
+   * stack.peek() // Returns 20
+   */
+  peek () {
+    return this.items[this.items.length - 1]
+  }
+
+  /**
    * Checks if the stack is empty.
    * @returns {boolean}
    * @memberof Stack
@@ -73,5 +86,15 @@ export class Stack {
    */
   printStack () {
     return this.items.join(' ')
+  }
+
+  /**
+   * Return the element at the specified index.
+   *
+   * @param {int} index
+   * @returns
+   */
+  get (index) {
+    return this.items[index]
   }
 }

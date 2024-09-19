@@ -4,7 +4,7 @@
  */
 
 const handlePush = (vm, instruction) => {
-  vm.stack.push(instruction.value)
+  vm.stack.push(instruction.args[0].value)
 }
 
 const handlePop = (vm) => {
@@ -12,8 +12,8 @@ const handlePop = (vm) => {
 }
 
 const handleAdd = (vm) => {
-  const a = vm.stack.pop()
-  const b = vm.stack.pop()
+  const a = parseInt(vm.stack.pop())
+  const b = parseInt(vm.stack.pop())
   vm.stack.push(a + b)
 }
 
@@ -36,15 +36,50 @@ const handleDivide = (vm) => {
 }
 
 const handleSet = (vm, instruction) => {
-  vm.context.set(instruction.key, instruction.value)
+  const env = vm.environments.peek() // Get the current environment
+  env.setVariable(instruction.key, instruction.args[0].value)
 }
 
 const handleGet = (vm, instruction) => {
-  vm.stack.push(vm.context.get(instruction.key))
+  const env = vm.environments.peek() // Get the current environment
+  vm.stack.push(env.getVariable(instruction.key))
 }
 
 const handlePrint = (vm) => {
   console.log(vm.stack.pop())
+}
+
+const handleBst = (vm, instruction) => {
+  const value = vm.stack.pop()
+  const contextIndex = instruction.args[0].value // index of the context
+  const variableIndex = instruction.args[1].value // index of the variable
+
+  // Access the correct context
+  let env = vm.environments.peek()
+  for (let i = 0; i < contextIndex; i++) {
+    if (env.parent) {
+      env = env.parent
+    } else {
+      throw new Error('Context index out of bounds')
+    }
+  }
+  env.setVariable(variableIndex, value)
+}
+
+const handleBld = (vm, instruction) => {
+  const contextIndex = instruction.args[0].value // index of the context
+  const variableIndex = instruction.args[1].value // index of the variable
+
+  // Access the correct context
+  let env = vm.environments.peek()
+  for (let i = 0; i < contextIndex; i++) {
+    if (env.parent) {
+      env = env.parent
+    } else {
+      throw new Error('Context index out of bounds')
+    }
+  }
+  vm.stack.push(env.getVariable(variableIndex))
 }
 
 const handleEndOfProgram = (vm) => {
@@ -56,17 +91,12 @@ const handleUnknown = (vm, instruction) => {
 }
 
 export const instructionHandlers = {
-  push: handlePush,
   pop: handlePop,
+  bst: handleBst,
+  bld: handleBld,
   add: handleAdd,
-  subtract: handleSubtract,
-  multiply: handleMultiply,
-  divide: handleDivide,
-  set: handleSet,
-  get: handleGet,
   prn: handlePrint,
   ldv: handlePush,
-  bst: handleSet,
   mul: handleMultiply,
   div: handleDivide,
   ret: handlePop,
