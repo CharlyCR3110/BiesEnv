@@ -36,11 +36,13 @@ const handleDivide = (vm) => {
 }
 
 const handleSet = (vm, instruction) => {
-  vm.context.set(instruction.key, instruction.args[0].value)
+  const env = vm.environments.peek() // Get the current environment
+  env.setVariable(instruction.key, instruction.args[0].value)
 }
 
 const handleGet = (vm, instruction) => {
-  vm.stack.push(vm.context.get(instruction.key))
+  const env = vm.environments.peek() // Get the current environment
+  vm.stack.push(env.getVariable(instruction.key))
 }
 
 const handlePrint = (vm) => {
@@ -49,27 +51,35 @@ const handlePrint = (vm) => {
 
 const handleBst = (vm, instruction) => {
   const value = vm.stack.pop()
-  const contextIndex = instruction.args[0].value // índice del contexto
-  const variableIndex = instruction.args[1].value // índice de la variable
+  const contextIndex = instruction.args[0].value // index of the context
+  const variableIndex = instruction.args[1].value // index of the variable
 
-  // Acceder al contexto correcto
-  let context = vm.contexts.peek()
+  // Access the correct context
+  let env = vm.environments.peek()
   for (let i = 0; i < contextIndex; i++) {
-    context = context.parent
+    if (env.parent) {
+      env = env.parent
+    } else {
+      throw new Error('Context index out of bounds')
+    }
   }
-  context[variableIndex] = value
+  env.setVariable(variableIndex, value)
 }
 
 const handleBld = (vm, instruction) => {
-  const contextIndex = instruction.args[0].value // índice del contexto
-  const variableIndex = instruction.args[1].value // índice de la variable
+  const contextIndex = instruction.args[0].value // index of the context
+  const variableIndex = instruction.args[1].value // index of the variable
 
-  // Acceder al contexto correcto
-  let context = vm.contexts.peek()
+  // Access the correct context
+  let env = vm.environments.peek()
   for (let i = 0; i < contextIndex; i++) {
-    context = context.parent
+    if (env.parent) {
+      env = env.parent
+    } else {
+      throw new Error('Context index out of bounds')
+    }
   }
-  vm.stack.push(context[variableIndex])
+  vm.stack.push(env.getVariable(variableIndex))
 }
 
 const handleEndOfProgram = (vm) => {
