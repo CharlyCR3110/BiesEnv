@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { parse } from '../asm/biesParser.js'
 import InstructionBuilderVisitor from '../asm/InstructionBuilderVisitor.js'
+import { VM } from '../core/vm/Vm.js'
 
 /**
  * Loader for loading and preparing code for the virtual machine.
@@ -37,11 +38,17 @@ export const loadCode = (filePath) => {
  * const instructions = linkCode(tree)
  */
 const linkCode = (tree) => {
-  // Create a new instance of the instruction builder visitor
   const visitor = new InstructionBuilderVisitor()
+  const [instructions, functions] = visitor.visit(tree) // visit the tree and get the instructions and functions
 
-  // Visit the tree to build the instructions
-  const instructions = visitor.visit(tree)
+  const vm = new VM() // create a new virtual machine
+  for (const [name, func] of Object.entries(functions)) {
+    vm.registerFunction(name, {
+      returnAddress: 0, // not sure about this
+      startAddress: instructions.length, // not sure about this
+      instructions: func.instructions // not sure about this
+    })
+  }
 
-  return instructions
+  return [instructions, vm] // instructions: instructions to execute, vm: virtual machine
 }
