@@ -1,0 +1,6 @@
+; Esto es un ejemplo de código BIESVM
+LDV 666 ; Cargar valor 666 en la pila
+BST 0 0
+BLD 0 0
+PRN
+HLT
