@@ -49,9 +49,12 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     const nameNode = ctx.IDENTIFIER(0)
     const name = nameNode ? nameNode.getText() : 'unknown'
 
-    // Extrae los argumentos de la función
-    const argsNodes = ctx.INT() || [] // Asegúrate de que argsNodes es un array
-    const args = Array.isArray(argsNodes) ? argsNodes.map(arg => arg.getText()) : []
+    // numero de argumentos
+    const argCount = parseInt(ctx.INT().getText(), 10)
+
+    // parent context
+    const parentNode = ctx.IDENTIFIER(1)
+    const parentName = parentNode ? parentNode.getText() : 'unknown'
 
     // Extrae el bloque de instrucciones de la función
     const block = ctx.block()
@@ -64,7 +67,7 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     }
 
     // Almacena la definición de la función
-    this.functions[name] = { args, instructions }
+    this.functions[name] = { argCount, parentName, instructions }
 
     return this.visitChildren(ctx)
   }
