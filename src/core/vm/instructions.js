@@ -3,6 +3,8 @@
  * @module core/vm/instructions
  */
 
+import { StackFrame } from '../StackFrame.js'
+
 const handlePush = (vm, instruction) => {
   vm.stack.push(instruction.args[0].value)
 }
@@ -70,7 +72,6 @@ const handleBld = (vm, instruction) => {
   const contextIndex = instruction.args[0].value // index of the context
   const variableIndex = instruction.args[1].value // index of the variable
 
-  // Access the correct context
   let env = vm.environments.peek()
   for (let i = 0; i < contextIndex; i++) {
     if (env.parent) {
@@ -83,19 +84,57 @@ const handleBld = (vm, instruction) => {
 }
 
 const handleLdf = (vm, instruction) => {
-  // todo: implementar
-  return 'WORK IN PROGRESS'
+  vm.stack.push(instruction.args[0].value)
 }
 
-// Manejar la instrucción de llamada a función (app) input: {op: 'app'}
 const handleApp = (vm, instruction) => {
-  // todo: implementar
-  return 'WORK IN PROGRESS'
+  const returnPostion = vm.instructionPointer + 1
+
+  // save the return position in the call stack
+  vm.callStack.push(returnPostion) // ain't using this yet
+
+  // get the function name from the stack
+  const functionName = vm.stack.pop()
+
+  // Obtener la función
+  const func = vm.functions[functionName]
+  if (!func) throw new Error(`Function ${functionName} not found`)
+
+  // store the current environment and instruction pointer in a stack frame
+  const currentEnvironment = vm.environments.peek() // ain't using this yet
+  const frame = new StackFrame(returnPostion, currentEnvironment) // ain't using this yet
+
+  // store the frame in the call stack
+  vm.callStack.push(frame) // ain't using this  yet
+
+  // create a new environment
+  vm.pushEnvironment()
+
+  // todo: use the environment instead of calling the function directly
+
+  let localPointer = 0
+
+  while (localPointer < func.instructions.length) {
+    const localInstruction = func.instructions[localPointer]
+    const handler = instructionHandlers[localInstruction.op] || instructionHandlers.default
+    handler(vm, localInstruction)
+    localPointer++
+  }
 }
 
 const handleRet = (vm) => {
-  // todo: implementar
-  return 'WORK IN PROGRESS'
+  // get the return position from the call stack
+  const returnPosition = vm.callStack.pop()
+
+  // restore the previous environment from the stack frame
+  const frame = vm.callStack.pop()
+  if (!frame) throw new Error('Call stack is empty')
+
+  vm.popEnvironment()
+  vm.environments.push(frame.environment)
+
+  // restore the instruction pointer from the stack frame
+  vm.instructionPointer = returnPosition
 }
 
 const handleEndOfProgram = (vm) => {
