@@ -45,8 +45,9 @@ const linkCode = (tree) => {
   for (const [name, func] of Object.entries(functions)) {
     vm.registerFunction(name, {
       returnAddress: 0, // not sure about this
-      startAddress: instructions.length, // not sure about this
-      instructions: func.instructions // not sure about this
+      instructions: func.instructions, // not sure about this
+      argCount: func.argCount, // not sure about this
+      parentName: func.parentName // not sure about this
     })
   }
 
