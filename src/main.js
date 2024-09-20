@@ -8,3 +8,6 @@ run('examples/02.basm')
 
 console.log('Input 3:')
 run('examples/03.basm')
+
+console.log('Input 4:')
+run('examples/04.basm')
