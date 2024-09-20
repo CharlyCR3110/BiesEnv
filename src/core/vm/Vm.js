@@ -1,12 +1,7 @@
-// src/core/vm.js
-
 import { Stack } from '../Stack.js'
 import { Environment } from '../Environment.js'
 import { StackFrame } from '../StackFrame.js'
 import { instructionHandlers } from './instructions.js'
-import InstructionBuilderVisitor from '../../asm/InstructionBuilderVisitor.js'
-import PrintVisitor from '../../asm/PrintVisitor.js'
-
 /**
  * The Virtual Machine class is responsible for executing instructions and managing the execution state.
  * @class
@@ -126,6 +121,16 @@ export class VM {
 
     while (this.instructionPointer < this.instructions?.length) {
       const instruction = this.instructions[this.instructionPointer]
+
+      // debug
+      // console.log('Executing instruction:', instruction)
+      // console.log('Stack:', this.stack.printStack())
+      // console.log('Environments:', this.environments.printStack())
+      // console.log('Call stack:', this.callStack.printStack())
+      // console.log('Functions:', this.functions)
+      // console.log('Instruction pointer:', this.instructionPointer)
+      // end debug
+
       this.processInstruction(instruction)
       this.instructionPointer++
     }
@@ -152,17 +157,5 @@ export class VM {
       console.error(`Error processing instruction: ${instruction.op}`, e)
       throw e
     }
-  }
-
-  executeParsedCode (tree) {
-    const visitor = new InstructionBuilderVisitor()
-    const instructions = visitor.visit(tree)
-
-    this.execute(instructions)
-  }
-
-  printParsedCode (tree) {
-    const visitor = new PrintVisitor()
-    const instructions = visitor.visit(tree)
   }
 }

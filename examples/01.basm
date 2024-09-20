@@ -1,0 +1,4 @@
+; Esto es un ejemplo de código BIESVM
+LDV 666
+PRN
+HLT
