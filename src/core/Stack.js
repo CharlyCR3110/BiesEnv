@@ -97,4 +97,13 @@ export class Stack {
   get (index) {
     return this.items[index]
   }
+
+  /**
+   * Return the size of the stack.
+   *
+   * @returns {int}
+   */
+  size () {
+    return this.items.length
+  }
 }
