@@ -6,7 +6,6 @@ LDV 1                      ; Cargar valor 1 (a) en la pila
 BST 0 0                    ; Guardar 'a' en la posición 0 del entorno
 LDV 656                    ; Cargar valor 656 (b) en la pila
 BST 0 1                    ; Guardar 'b' en la posición 1 del entorno
-HLT
 
 ; Operación aritmética a * 10 + b
 BLD 0 0                    ; Cargar 'a' en la pila
