@@ -80,20 +80,19 @@ export class VM {
     if (!func) throw new Error(`Function ${funcName} not found`)
 
     // Save the current environment and instruction pointer in a stack frame
-    const returnAddress = this.instructionPointer 
+    const returnAddress = this.instructionPointer
     const currentEnvironment = this.environments.peek()
-    const stackState = this.stack.clone() //estado del stack actual
+    const stackState = this.stack.clone() // estado del stack actual
     const frame = new StackFrame(returnAddress, currentEnvironment, stackState)
     this.callStack.push(frame)
-    
-    this.acualFunction= funcName
+
+    this.acualFunction = funcName
     // Push new environment
     this.pushEnvironment()
 
-    this.instructions= func.instructions;
+    this.instructions = func.instructions
     // Set instruction pointer to function start
     this.instructionPointer = -1
-
   }
 
   returnFromFunction () {
@@ -108,10 +107,10 @@ export class VM {
     this.stack.items = [...frame.stackState.items, ...remainingStack]
 
     // Restore instruction pointer from stack frame
-    
-    const child= this.functions[this.acualFunction]
+
+    const child = this.functions[this.acualFunction]
     // console.log(child.parentName)
-    this.instructions= this.functions[child.parentName].instructions
+    this.instructions = this.functions[child.parentName].instructions
     // this.instructions= this.functions['$0'].instructions
     this.instructionPointer = frame.returnAddress
   }
@@ -159,7 +158,7 @@ export class VM {
     if (!instruction) {
       throw new Error('Instruction is undefined')
     }
-    
+
     const handler = instructionHandlers[instruction.op]
     if (!handler) {
       throw new Error(`Unknown operation: ${instruction.op}`)

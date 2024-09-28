@@ -106,11 +106,10 @@ const handleUnknown = (vm, instruction) => {
 }
 
 const handleGT = (vm) => {
-  const a = vm.stack.pop(); 
-  const b = vm.stack.pop(); 
-  vm.stack.push(a > b ? 1 : 0); 
+  const a = vm.stack.pop()
+  const b = vm.stack.pop()
+  vm.stack.push(a > b ? 1 : 0)
 }
-
 
 export const instructionHandlers = {
   pop: handlePop,
@@ -125,6 +124,6 @@ export const instructionHandlers = {
   ldf: handleLdf,
   app: handleApp,
   ret: handleRet,
-  gt: handleGT, 
+  gt: handleGT,
   default: handleUnknown
 }

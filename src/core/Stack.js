@@ -112,18 +112,18 @@ export class Stack {
  * @param {int} n - The number of elements to extract.
  * @returns {Array} - The last 'n' elements from the stack.
  */
-  getLast(n) {
-    const startIndex = Math.max(0, this.items.length - n); // Asegúrate de no ir a índices negativos
-    return this.items.slice(startIndex); // Retorna los elementos desde el índice calculado hasta el final
+  getLast (n) {
+    const startIndex = Math.max(0, this.items.length - n) // Asegúrate de no ir a índices negativos
+    return this.items.slice(startIndex) // Retorna los elementos desde el índice calculado hasta el final
   }
 
   /**
  * Creates a shallow copy of the stack.
  * @returns {Stack} - A new Stack instance with the same items.
  */
-clone() {
-  const newStack = new Stack();
-  newStack.items = [...this.items]; // Crea una copia superficial del array de items
-  return newStack;
-}
+  clone () {
+    const newStack = new Stack()
+    newStack.items = [...this.items] // Crea una copia superficial del array de items
+    return newStack
+  }
 }
