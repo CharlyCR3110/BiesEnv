@@ -18,7 +18,7 @@ PRN     ; print(3+4)
 HLT    ; el compilador añade un hlt al final del main
 $END
 ;
-$fun $1 args:1 parent:$0
+$FUN $1 args:1 parent:$0
 ; x es 0 0
 LDF $2 ; crea clausura [$2] y pone en pila
 RET 
