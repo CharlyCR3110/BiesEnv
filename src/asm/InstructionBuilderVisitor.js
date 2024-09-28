@@ -66,10 +66,8 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
       instructions.push(...blockVisitor.instructions)
     }
 
-    const startAddress = this.instructions.length
-
     // Almacena la definición de la función
-    this.functions[name] = { argCount, parentName, instructions, startAddress }
+    this.functions[name] = { argCount, parentName, instructions }
 
     return this.visitChildren(ctx)
   }

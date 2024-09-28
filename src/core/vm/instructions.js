@@ -84,7 +84,8 @@ const handleBld = (vm, instruction) => {
 }
 
 const handleLdf = (vm, instruction) => {
-  vm.stack.push(instruction.args[0].value)
+  console.log('Loading function:', instruction.args[0].value)
+  vm.stack.push(instruction.args[0].value) // instruction.args[0].value is the function name (e.g., '$2')
 }
 
 const handleApp = (vm, instruction) => {

@@ -47,8 +47,7 @@ const linkCode = (tree) => {
       returnAddress: 0, // not sure about this
       instructions: func.instructions, // not sure about this
       argCount: func.argCount, // not sure about this
-      parentName: func.parentName, // not sure about this
-      startAddress: func.startAddress
+      parentName: func.parentName // not sure about this
     })
   }
 
