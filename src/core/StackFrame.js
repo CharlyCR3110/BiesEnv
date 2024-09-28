@@ -13,14 +13,16 @@ export class StackFrame {
    * Creates an instance of StackFrame.
    * @param {number} returnAddress - The address to return to after the function call.
    * @param {Environment} environment - The environment where the function is executed.
+   * @param {Array} stackState - The state of the stack at the time of the function call.
    * @memberof StackFrame
    * @constructor
    * @example
-   * const frame = new StackFrame(10, environment);
+   * const frame = new StackFrame(10, environment, stackState);
    */
-  constructor (returnAddress, environment) {
+  constructor (returnAddress, environment, stackState) {
     this.returnAddress = returnAddress // The address to return to
     this.environment = environment // The environment of the function call
+    this.stackState = stackState // The state of the stack at the time of the function call
   }
 
   /**
@@ -43,5 +45,16 @@ export class StackFrame {
    */
   getReturnAddress () {
     return this.returnAddress
+  }
+
+  /**
+   * Get the state of the stack at the time of the function call.
+   * @returns {Array} - The state of the stack.
+   * @memberof StackFrame
+   * @example
+   * const state = frame.getStackState();
+   */
+  getStackState () {
+    return this.stackState
   }
 }
