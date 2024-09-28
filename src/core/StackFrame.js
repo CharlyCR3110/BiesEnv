@@ -2,38 +2,38 @@
  * Represents a stack frame for a function call in the VM.
  * @class
  * @property {number} returnAddress - The address to return to after the function call.
- * @property {Environment} environment - The environment where the function is executed.
+ * @property {Context} context - The context where the function is executed.
  * @example
- * const frame = new StackFrame(10, environment);
+ * const frame = new StackFrame(10, context);
  * console.log(frame.returnAddress); // 10
- * console.log(frame.environment); // Environment instance
+ * console.log(frame.context); // Context instance
  */
 export class StackFrame {
   /**
    * Creates an instance of StackFrame.
    * @param {number} returnAddress - The address to return to after the function call.
-   * @param {Environment} environment - The environment where the function is executed.
+   * @param {Context} context - The context where the function is executed.
    * @param {Array} stackState - The state of the stack at the time of the function call.
    * @memberof StackFrame
    * @constructor
    * @example
-   * const frame = new StackFrame(10, environment, stackState);
+   * const frame = new StackFrame(10, context, stackState);
    */
-  constructor (returnAddress, environment, stackState) {
+  constructor (returnAddress, context, stackState) {
     this.returnAddress = returnAddress // The address to return to
-    this.environment = environment // The environment of the function call
+    this.context = context // The context of the function call
     this.stackState = stackState // The state of the stack at the time of the function call
   }
 
   /**
-   * Get the environment of the current stack frame.
-   * @returns {Environment} - The environment of the function call.
+   * Get the context of the current stack frame.
+   * @returns {Context} - The context of the function call.
    * @memberof StackFrame
    * @example
-   * const environment = frame.getEnvironment();
+   * const context = frame.getContext();
    */
-  getEnvironment () {
-    return this.environment
+  getContext () {
+    return this.context
   }
 
   /**

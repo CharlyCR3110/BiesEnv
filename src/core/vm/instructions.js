@@ -3,8 +3,6 @@
  * @module core/vm/instructions
  */
 
-import { StackFrame } from '../StackFrame.js'
-
 const handlePush = (vm, instruction) => {
   vm.stack.push(instruction.args[0].value)
 }
@@ -37,16 +35,6 @@ const handleDivide = (vm) => {
   vm.stack.push(a / b)
 }
 
-// const handleSet = (vm, instruction) => {
-//   const env = vm.environments.peek() // Get the current environment
-//   env.setVariable(instruction.key, instruction.args[0].value)
-// }
-
-// const handleGet = (vm, instruction) => {
-//   const env = vm.environments.peek() // Get the current environment
-//   vm.stack.push(env.getVariable(instruction.key))
-// }
-
 const handlePrint = (vm) => {
   console.log(vm.stack.pop())
 }
@@ -56,35 +44,36 @@ const handleBst = (vm, instruction) => {
   const contextIndex = instruction.args[0].value // index of the context
   const variableIndex = instruction.args[1].value // index of the variable
 
-  // Access the correct context
-  let env = vm.environments.peek()
+  // get the context from the top of the stack
+  let context = vm.contexts.peek()
   for (let i = 0; i < contextIndex; i++) {
-    if (env.parent) {
-      env = env.parent
+    if (context.parent) {
+      context = context.parent // navigate to the parent context
     } else {
-      throw new Error('Context index out of bounds')
+      throw new Error('Context index out of bounds') // context index out of bounds
     }
   }
-  env.setVariable(variableIndex, value)
+
+  context.setVariable(variableIndex, value) // set the variable in the context
 }
 
 const handleBld = (vm, instruction) => {
-  const contextIndex = instruction.args[0].value // index of the context
-  const variableIndex = instruction.args[1].value // index of the variable
+  const contextIndex = instruction.args[0].value // context index
+  const variableIndex = instruction.args[1].value // variable index
 
-  let env = vm.environments.peek()
+  let context = vm.contexts.peek() // get the context from the top of the stack
   for (let i = 0; i < contextIndex; i++) {
-    if (env.parent) {
-      env = env.parent
+    if (context.parent) {
+      context = context.parent // go to the parent context
     } else {
-      throw new Error('Context index out of bounds')
+      throw new Error('Context index out of bounds') // index out of bounds
     }
   }
-  vm.stack.push(env.getVariable(variableIndex))
+
+  vm.stack.push(context.getVariable(variableIndex)) // get the variable from the context and push it to the stack
 }
 
 const handleLdf = (vm, instruction) => {
-  console.log('Loading function:', instruction.args[0].value)
   vm.stack.push(instruction.args[0].value) // instruction.args[0].value is the function name (e.g., '$2')
 }
 

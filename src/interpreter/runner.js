@@ -14,7 +14,6 @@ import { loadCode } from './loader.js'
  */
 export const run = (filePath) => {
   try {
-    console.log('Running the code in path:', filePath)
     const [instructions, vm] = loadCode(filePath)
 
     // Obtener la primera función para ejecutar, si existe
