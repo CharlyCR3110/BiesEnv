@@ -50,7 +50,7 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     const name = nameNode ? nameNode.getText() : 'unknown'
 
     // numero de argumentos
-    const argCount = parseInt(ctx.INT().getText(), 10)
+    const argCount = parseInt(ctx.NUMBER().getText(), 10)
 
     // parent context
     const parentNode = ctx.IDENTIFIER(1)
@@ -66,8 +66,10 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
       instructions.push(...blockVisitor.instructions)
     }
 
+    const startAddress = this.instructions.length;
+
     // Almacena la definición de la función
-    this.functions[name] = { argCount, parentName, instructions }
+    this.functions[name] = { argCount, parentName, instructions, startAddress }
 
     return this.visitChildren(ctx)
   }
