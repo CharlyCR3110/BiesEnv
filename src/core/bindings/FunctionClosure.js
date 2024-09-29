@@ -1,17 +1,18 @@
 import { Environment } from '../environment/Environment.js'
 
 export class FunctionClosure {
-  constructor (params, body, environment) {
-    this.params = params
+  constructor (argsCount, body, environment) {
+    this.argsCount = argsCount
     this.body = body
     this.environment = environment
   }
 
   apply (args) {
-    const localEnv = new Environment(this.environment)
-    this.params.forEach((param, index) => {
-      localEnv.define(param, args[index])
+    const environment = new Environment(this.environment)
+    args.forEach((arg, index) => {
+      console.log(`Defining arg${index} as ${arg}`)
+      environment.define(`arg${index}`, arg)
     })
-    return { body: this.body, environment: localEnv }
+    return { body: this.body, environment }
   }
 }
