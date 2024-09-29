@@ -17,7 +17,7 @@ export class PushInstruction extends Instruction {
 export class BldInstruction extends Instruction {
   execute (vm) {
     const [contextIndex, variableIndex] = this.args
-    const value = vm.B.frames[contextIndex].lookup(variableIndex)
+    const value = vm.B.getFrame(contextIndex).lookup(variableIndex)
     vm.S.push(value)
   }
 }
@@ -27,6 +27,6 @@ export class BstInstruction extends Instruction {
   execute (vm) {
     const value = vm.S.pop()
     const [contextIndex, variableIndex] = this.args
-    vm.B.frames[contextIndex].define(variableIndex, value)
+    vm.B.getFrame(contextIndex).define(variableIndex, value)
   }
 }
