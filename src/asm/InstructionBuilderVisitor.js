@@ -19,17 +19,7 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
 
     // Obtiene los argumentos, si los hay, a partir del contexto
     const args = ctx.children.slice(1).map(child => {
-      if (child.getText() === 'BLD' || child.getText() === 'BST' || child.getText() === 'LDF') {
-        return {
-          type: 'expression',
-          value: child.getText()
-        }
-      } else {
-        return {
-          type: 'constant',
-          value: child.getText()
-        }
-      }
+      return child.getText()
     })
 
     // Agrega la instrucción a la lista de instrucciones
