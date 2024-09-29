@@ -27,7 +27,13 @@ export class VM {
 
   run () {
     console.log(`Running program with ${this.C.length} instructions`)
+    console.log(this.functions)
     while (this.D.currentInstructionPointer < this.C.length && !this.halted) {
+      console.log('---'.repeat(20))
+      console.log(`Instruction pointer: ${this.D.currentInstructionPointer}`)
+      console.log(`Instruction: ${this.C[this.D.currentInstructionPointer].constructor.name}`)
+      console.log(`Args: ${this.C[this.D.currentInstructionPointer].args}`)
+      console.log('---'.repeat(20))
       const instruction = this.C[this.D.currentInstructionPointer]
       instruction.execute(this)
       if (!this.halted) {
@@ -36,8 +42,8 @@ export class VM {
     }
   }
 
-  defineFunction (name, params, body) {
-    console.log(`Defining function ${name} with ${params.length} parameters`)
-    this.functions[name] = new FunctionClosure(params, body, this.B.frames.peek())
+  defineFunction (name, closure) {
+    console.log(`Defining function ${name}`)
+    this.functions[name] = closure
   }
 }
