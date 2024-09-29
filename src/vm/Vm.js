@@ -1,8 +1,8 @@
-import { Stack } from '../Stack.js'
-import { BindingStack } from '../BindingStack.js'
-import { ContextStack } from '../ContextStack.js'
-import { createInstruction } from './InstructionFactory.js'
-import { FunctionClosure } from '../FunctionClosure.js'
+import { BindingStack } from '../core/bindings/BindingStack.js'
+import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
+import { ContextStack } from '../core/context/ContextStack.js'
+import { Stack } from '../core/stack/Stack.js'
+import { createInstruction } from './factories/InstructionFactory.js'
 
 export class VM {
   constructor () {

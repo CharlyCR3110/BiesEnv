@@ -1,5 +1,5 @@
 import { ExecutionContext } from './ExecutionContext.js'
-import { Stack } from './Stack.js'
+import { Stack } from '../stack/Stack.js'
 
 export class ContextStack {
   constructor () {

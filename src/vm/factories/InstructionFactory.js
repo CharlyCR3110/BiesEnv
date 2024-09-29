@@ -1,8 +1,8 @@
-import { BldInstruction, BstInstruction, PopInstruction, PushInstruction } from './instructions/stackAndEnvInstructions.js'
-import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction } from './instructions/arithmeticInstructions.js'
-import { PrintInstruction } from './instructions/ioInstructions.js'
-import { AppInstruction, LdfInstruction, RetInstruction } from './instructions/functionInstructions.js'
-import { HltInstruction } from './instructions/startAndStop.js'
+import { BldInstruction, BstInstruction, PopInstruction, PushInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
+import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
+import { PrintInstruction } from '../../instructions/io/ioInstructions.js'
+import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
+import { HltInstruction } from '../../instructions/control/startAndStop.js'
 
 // Factory function to create instructions
 const instructionMap = new Map([

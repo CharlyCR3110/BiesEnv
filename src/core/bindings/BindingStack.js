@@ -1,5 +1,5 @@
-import { Environment } from './Environment.js'
-import { Stack } from './Stack.js'
+import { Environment } from '../environment/Environment.js'
+import { Stack } from '../stack/Stack.js'
 
 /**
  * Manages a stack of environments, corresponding to the B component in the VM.

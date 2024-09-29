@@ -1,4 +1,4 @@
-import { Environment } from './Environment.js'
+import { Environment } from '../environment/Environment.js'
 
 export class FunctionClosure {
   constructor (params, body, environment) {

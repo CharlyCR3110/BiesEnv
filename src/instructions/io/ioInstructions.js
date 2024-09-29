@@ -1,4 +1,4 @@
-import { Instruction } from './Instruction.js'
+import { Instruction } from '../Instruction.js'
 
 export class PrintInstruction extends Instruction {
   execute (vm) {

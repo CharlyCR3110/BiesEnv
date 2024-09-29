@@ -1,4 +1,4 @@
-import { Instruction } from '../../Instruction.js'
+import { Instruction } from '../Instruction.js'
 // ([[INI N]|C], [], [], [[]]) => (C, S, B, D) si código C es cargado, S, B y D
 // inicializados y D.current = C
 
