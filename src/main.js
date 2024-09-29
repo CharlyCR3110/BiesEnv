@@ -1,13 +1,14 @@
-import { VM } from './vm/Vm.js'
+import { loadAndRun } from './interpreter/loader.js'
 
-const program = [
-  { op: 'ldv', args: [5] },
-  { op: 'ldv', args: [3] },
-  { op: 'add' },
-  { op: 'prn' },
-  { op: 'hlt' }
-]
+console.log('Running 01.basm')
+loadAndRun('examples/01.basm')
 
-const vm = new VM()
-vm.loadProgram(program)
-vm.run()
+console.log('Running 02.basm')
+loadAndRun('examples/02.basm')
+
+console.log('Running 03.basm')
+loadAndRun('examples/03.basm')
+
+// currently not working (does not handle functions yet)
+// console.log('Running 04.basm')
+// loadAndRun('examples/04.basm')
