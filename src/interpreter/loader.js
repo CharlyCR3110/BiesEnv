@@ -51,9 +51,11 @@ const linkCode = (tree) => {
 
   // Process functions
   for (const [name, func] of Object.entries(rawFunctions)) {
+    console.log(`Processing function ${name}`)
+    console.log(func)
     const functionInstructions = convertInstructions(func.instructions)
     const closure = new FunctionClosure(
-      func.params,
+      func.argCount,
       functionInstructions,
       vm.B.frames.peek()
     )
