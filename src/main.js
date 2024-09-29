@@ -1,13 +1,13 @@
-import { run } from './interpreter/runner.js'
+import { VM } from './vm/Vm.js'
 
-console.log('Input 1:')
-run('examples/01.basm')
+const program = [
+  { op: 'ldv', args: [5] },
+  { op: 'ldv', args: [3] },
+  { op: 'add' },
+  { op: 'prn' },
+  { op: 'hlt' }
+]
 
-console.log('Input 2:')
-run('examples/02.basm')
-
-console.log('Input 3:')
-run('examples/03.basm')
-
-console.log('Input 4:')
-run('examples/04.basm')
+const vm = new VM()
+vm.loadProgram(program)
+vm.run()
