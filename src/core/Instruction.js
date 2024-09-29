@@ -1,6 +1,5 @@
 export class Instruction {
-  constructor (mnemonic, ...args) {
-    this.mnemonic = mnemonic
+  constructor (...args) {
     this.args = args
   }
 
