@@ -17,6 +17,10 @@ export class BindingStack {
     this.frames.push(new Environment())
   }
 
+  getFrame (index) {
+    return this.frames.get(index)
+  }
+
   pushFrame () {
     this.frames.push(new Environment(this.frames.peek()))
   }
