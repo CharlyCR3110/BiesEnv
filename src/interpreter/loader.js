@@ -1,7 +1,9 @@
 import fs from 'fs'
 import { parse } from '../asm/biesParser.js'
 import InstructionBuilderVisitor from '../asm/InstructionBuilderVisitor.js'
-import { VM } from '../core/vm/Vm.js'
+import { VM } from '../vm/Vm.js'
+import { createInstruction } from '../vm/factories/InstructionFactory.js'
+import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
 
 /**
  * Loader for loading and preparing code for the virtual machine.
@@ -11,7 +13,7 @@ import { VM } from '../core/vm/Vm.js'
 /**
  * Loads a source code file and converts it into an executable format.
  * @param {string} filePath - Path to the source code file.
- * @returns {Array} - List of instructions to execute.
+ * @returns {Object} - Object containing the VM instance and the main program instructions.
  * @throws {Error} - If there is a problem reading or processing the file.
  */
 export const loadCode = (filePath) => {
@@ -29,27 +31,47 @@ export const loadCode = (filePath) => {
 }
 
 /**
- * Links the code by converting the AST into a list of instructions.
+ * Links the code by converting the AST into a list of instructions and setting up the VM.
  * @param {ProgramContext} tree
- * @returns {Array} - List of instructions to execute.
+ * @returns {Object} - Object containing the VM instance and the main program instructions.
  * @throws {Error} - If there is a problem linking the code.
  * @see {@link InstructionBuilderVisitor}
  * @example
- * const instructions = linkCode(tree)
+ * const { vm, mainInstructions } = linkCode(tree);
  */
 const linkCode = (tree) => {
   const visitor = new InstructionBuilderVisitor()
-  const [instructions, functions] = visitor.visit(tree) // visit the tree and get the instructions and functions
+  const [rawInstructions, rawFunctions] = visitor.visit(tree)
 
-  const vm = new VM() // create a new virtual machine
-  for (const [name, func] of Object.entries(functions)) {
-    vm.registerFunction(name, {
-      returnAddress: 0, // not sure about this
-      instructions: func.instructions, // not sure about this
-      argCount: func.argCount, // not sure about this
-      parentName: func.parentName // not sure about this
-    })
+  const vm = new VM()
+
+  // Convert raw instructions to Instruction objects
+  const convertInstructions = (instr) =>
+    instr.map(i => createInstruction(i.op, ...i.args))
+
+  // Process functions
+  for (const [name, func] of Object.entries(rawFunctions)) {
+    const functionInstructions = convertInstructions(func.instructions)
+    const closure = new FunctionClosure(
+      func.params,
+      functionInstructions,
+      vm.B.frames.peek()
+    )
+    vm.defineFunction(name, closure)
   }
 
-  return [instructions, vm] // instructions: instructions to execute, vm: virtual machine
+  // Convert main program instructions
+  const mainInstructions = convertInstructions(rawInstructions)
+
+  return { vm, mainInstructions }
+}
+
+/**
+ * Loads and runs a biesVM program.
+ * @param {string} filePath - Path to the source code file.
+ */
+export const loadAndRun = (filePath) => {
+  const { vm, mainInstructions } = loadCode(filePath)
+  vm.loadProgram(mainInstructions)
+  vm.run()
 }
