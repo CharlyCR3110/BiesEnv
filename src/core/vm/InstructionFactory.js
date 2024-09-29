@@ -27,10 +27,10 @@ const instructionMap = new Map([
 ])
 
 export function createInstruction (op, ...args) {
-  console.log(`createInstruction: ${op} ${args}`)
-  const instructionCreator = instructionMap.get(op)
-  if (!instructionCreator) {
-    throw new Error(`Unknown instruction: ${op}`)
+  if (!instructionMap.has(op)) {
+    throw new Error(`Unknown instruction ${op}`)
   }
-  return instructionCreator(args)
+  const returning = instructionMap.get(op)(args)
+  console.log(returning)
+  return returning
 }
