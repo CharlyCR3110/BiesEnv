@@ -2,7 +2,6 @@ import { BindingStack } from '../core/bindings/BindingStack.js'
 import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
 import { ContextStack } from '../core/context/ContextStack.js'
 import { Stack } from '../core/stack/Stack.js'
-import { createInstruction } from './factories/InstructionFactory.js'
 
 export class VM {
   constructor () {
@@ -16,10 +15,14 @@ export class VM {
   }
 
   loadProgram (instructions) {
-    console.log(instructions)
+    console.log(`loading program with: ${instructions}`)
     // instructions is an array of objects with op and args properties
     // if args is not present, it defaults to an empty array
-    this.C = instructions.map(instr => createInstruction(instr.op, ...(instr.args || [])))
+    if (instructions.length === 0) {
+      throw new Error('No instructions to load')
+    }
+
+    this.C = instructions
   }
 
   run () {
@@ -35,6 +38,6 @@ export class VM {
 
   defineFunction (name, params, body) {
     console.log(`Defining function ${name} with ${params.length} parameters`)
-    this.functions[name] = new FunctionClosure(params, body, this.B.frames[this.B.frames.length - 1])
+    this.functions[name] = new FunctionClosure(params, body, this.B.frames.peek())
   }
 }
