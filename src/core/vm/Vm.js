@@ -82,10 +82,11 @@ export class VM {
     if (!frame) throw new Error('Call stack is empty')
     const remainingStack = [...this.stack.items]
 
+    console.log('Returning from function:', this.acualFunction)
     this.popContext() // Remove current context
     this.contexts.push(frame.context) // Restore previous context
 
-    this.stack.items = [...frame.stackState.items, ...remainingStack]
+    this.stack.items = remainingStack
 
     // Restore instruction pointer from stack frame
     const child = this.functions[this.acualFunction]
@@ -112,6 +113,7 @@ export class VM {
     if (!instruction) {
       throw new Error('Instruction is undefined')
     }
+    console.log(`Processing instruction: ${instruction.op}`)
 
     const handler = instructionHandlers[instruction.op]
     if (!handler) {
@@ -123,5 +125,6 @@ export class VM {
       console.error(`Error processing instruction: ${instruction.op}`, e)
       throw e
     }
+    console.log('Stack:', this.stack.printStack())
   }
 }
