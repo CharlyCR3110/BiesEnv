@@ -43,6 +43,10 @@ export class VM {
       console.log(`Instruction pointer: ${this.D.currentInstructionPointer}`)
       console.log(`Instruction: ${this.C[this.D.currentInstructionPointer].constructor.name}`)
       console.log(`Args: ${this.C[this.D.currentInstructionPointer].args}`)
+      console.log(`Stack: ${[...this.S.items]}`)
+      for (let index = 0; index < this.B.frames.size(); index++) {
+        console.log('Frame ' + index + ': ', this.B.getFrame(index))
+      }
       console.log('---'.repeat(20))
       const instruction = this.C[this.D.currentInstructionPointer]
       instruction.execute(this)

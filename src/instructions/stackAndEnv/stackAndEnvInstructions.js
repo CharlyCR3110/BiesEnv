@@ -18,6 +18,9 @@ export class BldInstruction extends Instruction {
   execute (vm) {
     const [contextIndex, variableIndex] = this.args
     const value = vm.B.getFrame(contextIndex).lookup(variableIndex)
+    console.log(`ContextIndex ${contextIndex}, VariableIndex ${variableIndex}`)
+    console.log('Frame: ', vm.B.getFrame(contextIndex))
+    console.log(value)
     vm.S.push(value)
   }
 }
@@ -28,5 +31,6 @@ export class BstInstruction extends Instruction {
     const value = vm.S.pop()
     const [contextIndex, variableIndex] = this.args
     vm.B.getFrame(contextIndex).define(variableIndex, value)
+    console.log(`Saving local ${contextIndex} , ${variableIndex}, value: ${value}`)
   }
 }
