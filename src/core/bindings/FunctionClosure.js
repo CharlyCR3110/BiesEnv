@@ -10,9 +10,11 @@ export class FunctionClosure {
   apply (args) {
     const environment = new Environment(this.environment)
     args.forEach((arg, index) => {
-      console.log(`Defining arg${index} as ${arg}`)
-      environment.define(`arg${index}`, arg)
+      console.log(`Defining arg ${index} as ${arg}`)
+      environment.define(index, arg)
+      console.log(`Saving local ${index}, value: ${arg}`)
     })
+    console.log(`Recent environment create ${environment}`)
     return { body: this.body, environment }
   }
 }

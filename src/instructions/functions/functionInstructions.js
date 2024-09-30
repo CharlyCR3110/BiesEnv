@@ -14,14 +14,20 @@ export class AppInstruction extends Instruction {
       throw new Error(`Function ${functionName} not found`)
     }
 
+    console.log(`Function ${functionName}`, func)
     const args = []
+
+    for (let i = 0; i < 1; i++) {
+      args.unshift(vm.S.pop())
+    }
 
     const { body, environment } = func.apply(args)
     vm.D.push(vm.D.currentInstructionPointer, vm.B.frames.peek())
-    vm.B.pushFrame()
+    vm.B.frames.push(environment)
     Object.entries(environment.bindings).forEach(([key, value]) => {
       vm.B.define(key, value)
     })
+    vm.D.lastInstructions = vm.C
     vm.C = body
     vm.D.updateInstructionPointer(-1)
 
@@ -34,6 +40,7 @@ export class AppInstruction extends Instruction {
 export class RetInstruction extends Instruction {
   execute (vm) {
     const returnValue = vm.S.pop()
+    vm.C = vm.D.lastInstructions
     const context = vm.D.pop()
     try {
       vm.B.popFrame()
