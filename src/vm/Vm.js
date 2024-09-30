@@ -1,8 +1,18 @@
 import { BindingStack } from '../core/bindings/BindingStack.js'
-import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
 import { ContextStack } from '../core/context/ContextStack.js'
 import { Stack } from '../core/stack/Stack.js'
 
+/**
+ * Virtual machine for executing instructions.
+ * @module vm/Vm
+ * @see {@link Stack}
+ * @see {@link BindingStack}
+ * @see {@link ContextStack}
+ *
+ * @example
+ * const vm = new VM()
+ * vm.loadProgram(instructions)
+ */
 export class VM {
   constructor () {
     this.S = new Stack() // main stack
