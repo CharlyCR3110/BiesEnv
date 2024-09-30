@@ -38,10 +38,13 @@ export class RetInstruction extends Instruction {
     try {
       vm.B.popFrame()
     } catch (error) {
-      vm.halted = true
-      return
     }
     vm.D.updateInstructionPointer(context.returnAddress)
+    console.log('Returning from function')
+    console.log(`Return value: ${returnValue}`)
+
+    console.log('Instructions left: ')
+    console.log(vm.C)
     vm.S.push(returnValue)
   }
 }
