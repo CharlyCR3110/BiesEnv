@@ -23,6 +23,7 @@ $END
 
 ; Definición de la función 'salude' que imprime el argumento
 $FUN $1 args: 1 parent: $0
+BLD 0 0
 PRN                        ; Imprimir el valor pasado a la función (saludo)
 RET                        ; Retornar después de imprimir
 $END
