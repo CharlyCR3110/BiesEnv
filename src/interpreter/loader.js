@@ -4,6 +4,7 @@ import InstructionBuilderVisitor from '../asm/InstructionBuilderVisitor.js'
 import { VM } from '../vm/Vm.js'
 import { createInstruction } from '../vm/factories/InstructionFactory.js'
 import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
+import { Environment } from '../core/environment/Environment.js'
 
 /**
  * Loader for loading and preparing code for the virtual machine.
@@ -57,7 +58,8 @@ const linkCode = (tree) => {
     const closure = new FunctionClosure(
       func.argCount,
       functionInstructions,
-      vm.B.frames.peek()
+      vm.B.frames.peek(),
+      func.parentName
     )
     vm.defineFunction(name, closure)
   }
