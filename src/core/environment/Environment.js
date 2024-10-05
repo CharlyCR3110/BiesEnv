@@ -18,12 +18,13 @@ export class Environment {
     this.bindings.set(name, value)
   }
 
-  lookup (name) {
-    if (this.bindings.has(name)) {
-      return this.bindings.get(name)
-    }
+  lookup (level, name) {
+    console.log('Level: ',level, level === 0, level === '0', level === "0")
+    if(level === '0' && this.bindings.has(name)) return this.bindings.get(name)
+    console.log(this.bindings, `name: ${name}`)
+    console.log('Value: ',this.bindings.get(name))
     if (this.parent) {
-      return this.parent.lookup(name)
+      return this.parent.lookup('0', name)
     }
     throw new Error(`Undefined variable: ${name}`)
   }
