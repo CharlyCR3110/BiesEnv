@@ -2,6 +2,10 @@ import { Instruction } from '../Instruction.js'
 
 export class LdfInstruction extends Instruction {
   execute (vm) {
+    const func = vm.functions[this.args[0]]
+    const parentFunc = vm.functions[func.parentName]
+    console.log(`Padre: ${JSON.stringify(parentFunc)}`)
+    func.newEnvironment(parentFunc.environment)
     vm.S.push(this.args[0])
   }
 }
@@ -24,6 +28,8 @@ export class AppInstruction extends Instruction {
     const { body, environment } = func.apply(args)
     vm.D.push(vm.D.currentInstructionPointer, vm.B.frames.peek())
     vm.B.frames.push(environment)
+    console.log('Environment of the before entries')
+    console.log(environment)
     Object.entries(environment.bindings).forEach(([key, value]) => {
       vm.B.define(key, value)
     })
