@@ -20,8 +20,8 @@ export class AppInstruction extends Instruction {
 
     console.log(`Function ${functionName}`, func)
     const args = []
-
-    for (let i = 0; i < 1; i++) {
+    console.log('argsCount: ', func.argsCount)
+    for (let i = 0; i < func.argsCount; i++) {
       args.unshift(vm.S.pop())
     }
 
