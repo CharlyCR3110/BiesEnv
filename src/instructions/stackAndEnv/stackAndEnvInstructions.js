@@ -17,7 +17,7 @@ export class PushInstruction extends Instruction {
 export class BldInstruction extends Instruction {
   execute (vm) {
     const [contextIndex, variableIndex] = this.args
-    const value = vm.B.frames.peek().lookup(contextIndex,variableIndex)
+    const value = vm.B.frames.peek().lookup(contextIndex, variableIndex)
     console.log(`ContextIndex ${contextIndex}, VariableIndex ${variableIndex}`)
     console.log('Frame: ', vm.B.frames.peek())
     console.log(value)

@@ -10,7 +10,7 @@ export class FunctionClosure {
 
   apply (args) {
     // const environment = new Environment(this.environment)
-    console.log('Padre: ',this.environment.parent)
+    console.log('Padre: ', this.environment.parent)
     args.forEach((arg, index) => {
       console.log(`Defining arg ${index} as ${arg}`)
       this.environment.define(String(index), arg)
@@ -19,7 +19,8 @@ export class FunctionClosure {
     console.log(`Recent environment create ${this.environment}`)
     return { body: this.body, environment: this.environment }
   }
-  newEnvironment(parentEnv){
+
+  newEnvironment (parentEnv) {
     this.environment = new Environment(parentEnv)
   }
 }

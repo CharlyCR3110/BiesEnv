@@ -12,6 +12,5 @@ loadAndRun('examples/03.basm')
 console.log('Running 04.basm')
 loadAndRun('examples/04.basm')
 
-
 console.log('Running 05.basm')
 loadAndRun('examples/05.basm')

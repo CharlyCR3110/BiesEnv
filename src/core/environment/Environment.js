@@ -19,10 +19,10 @@ export class Environment {
   }
 
   lookup (level, name) {
-    console.log('Level: ',level, level === 0, level === '0', level === "0")
-    if(level === '0' && this.bindings.has(name)) return this.bindings.get(name)
+    console.log('Level: ', level, level === 0, level === '0', level === '0')
+    if (level === '0' && this.bindings.has(name)) return this.bindings.get(name)
     console.log(this.bindings, `name: ${name}`)
-    console.log('Value: ',this.bindings.get(name))
+    console.log('Value: ', this.bindings.get(name))
     if (this.parent) {
       return this.parent.lookup('0', name)
     }
