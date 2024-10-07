@@ -1,4 +1,4 @@
-import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, PopInstruction, PushInstruction, SgnInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
+import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, PopInstruction, PushInstruction, SgnInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
 import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction, SqrtInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
@@ -17,6 +17,8 @@ const instructionMap = new Map([
   ['bf', (args) => new BfInstruction(...args)],
   ['swp', () => new SwpInstruction()],
   ['sgn', () => new SgnInstruction()],
+  ['eq', () => new EqInstruction()],
+  ['eqq', () => new EqqInstruction()],
   // arithmetic instructions
   ['add', () => new AddInstruction()],
   ['mul', () => new MultiplyInstruction()],
