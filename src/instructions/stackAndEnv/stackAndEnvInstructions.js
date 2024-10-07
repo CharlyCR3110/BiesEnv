@@ -45,7 +45,29 @@ export class BrInstruction extends Instruction {
     }
     // Calculate the new instruction pointer position by adding the offset.
     vm.D.updateInstructionPointer(offset);
-    // Optional: Log the action for debugging purposes
     console.log(`Branching to instruction pointer offset: ${offset}`);
+  }
+}
+
+// bt
+export class BtInstruction extends Instruction {
+  execute(vm) {
+    const condition = vm.S.pop();
+    // Type verification: ensure that condition is a boolean.
+    if (typeof condition !== 'boolean') {
+      throw new Error('Invalid type: expected a boolean for the condition.');
+    }
+    const offset = vm.S.pop();
+    // Type verification: ensure that offset is a number.
+    if (typeof offset !== 'number') {
+      throw new Error('Invalid type: expected a number for the offset.');
+    }
+    // If the condition is true, update the instruction pointer with the offset.
+    if (condition) {
+      vm.D.updateInstructionPointer(offset);
+      console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`);
+    } else {
+      console.log('Condition was false; not branching.');
+    }
   }
 }
