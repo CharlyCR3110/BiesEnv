@@ -140,3 +140,16 @@ export class EqInstruction extends Instruction {
     vm.S.push(a === b ? 1 : 0);
   }
 }
+
+// eqq
+export class EqqInstruction extends Instruction {
+  execute(vm) {
+    if (vm.S.length < 2) {
+      throw new Error('Not enough elements in the stack to evaluate strict equality.');
+    }
+    const b = vm.S.pop();
+    const a = vm.S.pop();
+    // Check if the two values are strictly equal and push 1 for true, 0 for false.
+    vm.S.push(a === b ? 1 : 0);
+  }
+}
