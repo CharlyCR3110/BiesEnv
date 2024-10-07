@@ -45,3 +45,17 @@ export class GtInstruction extends Instruction {
     vm.S.push(a > b ? 1 : 0)
   }
 }
+
+// unary arithmetic instruction
+// sqrt
+export class SqrtInstruction extends Instruction {
+  execute (vm) {
+    const a = vm.S.pop()
+    if (a < 0) {
+      throw new Error('Cannot calculate square root of a negative number')
+    }
+    vm.S.push(Math.sqrt(a))
+  }
+}
+
+
