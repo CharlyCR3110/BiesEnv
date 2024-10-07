@@ -34,3 +34,18 @@ export class BstInstruction extends Instruction {
     console.log(`Saving local ${contextIndex} , ${variableIndex}, value: ${value}`)
   }
 }
+
+// br
+export class BrInstruction extends Instruction {
+  execute(vm) {
+    const offset = vm.S.pop();
+    // Type verification: ensure that offset is a number.
+    if (typeof offset !== 'number') {
+      throw new Error('Invalid type: expected a number for the offset.');
+    }
+    // Calculate the new instruction pointer position by adding the offset.
+    vm.D.updateInstructionPointer(offset);
+    // Optional: Log the action for debugging purposes
+    console.log(`Branching to instruction pointer offset: ${offset}`);
+  }
+}
