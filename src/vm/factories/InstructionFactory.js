@@ -1,5 +1,5 @@
 import { BldInstruction, BstInstruction, PopInstruction, PushInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
-import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
+import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction, SqrtInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { HltInstruction } from '../../instructions/control/startAndStop.js'
@@ -16,6 +16,7 @@ const instructionMap = new Map([
   ['mul', () => new MultiplyInstruction()],
   ['div', () => new DivideInstruction()],
   ['gt', () => new GtInstruction()],
+  ['sqrt', () => new SqrtInstruction()],
   // function instructions
   ['ldf', (args) => new LdfInstruction(...args)],
   ['app', () => new AppInstruction()],
