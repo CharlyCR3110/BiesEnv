@@ -3,7 +3,7 @@ import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction, 
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { HltInstruction } from '../../instructions/control/startAndStop.js'
-import { StkInstruction } from '../../instructions/string/stringInstructions.js'
+import { SrkInstruction, StkInstruction } from '../../instructions/string/stringInstructions.js'
 
 // Factory function to create instructions
 const instructionMap = new Map([
@@ -29,6 +29,7 @@ const instructionMap = new Map([
   ['inp', () => new InpInstruction()],
   //string instructions
   ['skt', (args) => new StkInstruction(...args)],
+  ['srk', (args) => new SrkInstruction(...args)]
 
 ])
 
