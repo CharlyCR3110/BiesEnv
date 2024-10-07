@@ -12,6 +12,7 @@ const instructionMap = new Map([
   ['pop', () => new PopInstruction()],
   ['bld', (args) => new BldInstruction(...args)],
   ['bst', (args) => new BstInstruction(...args)],
+  ['br', (args) => new BstInstruction(...args)],
   // arithmetic instructions
   ['add', () => new AddInstruction()],
   ['mul', () => new MultiplyInstruction()],
