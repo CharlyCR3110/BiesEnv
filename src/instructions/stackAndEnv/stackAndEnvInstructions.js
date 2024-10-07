@@ -111,3 +111,32 @@ export class SwpInstruction extends Instruction {
     console.log(`Swapped top two elements: ${b} and ${a}`);
   }
 }
+
+// sgn
+export class SgnInstruction extends Instruction {
+  execute(vm) {
+    if (vm.S.length < 1) {
+      throw new Error('Not enough elements in the stack to evaluate sign.');
+    }
+    const number = vm.S.pop();
+    // Check the sign of the number and push 1 if it's greater than 0, otherwise push 0.
+    if (number > 0) {
+      vm.S.push(1);  // Push 1 if the number is positive
+    } else {
+      vm.S.push(0);  // Push 0 if the number is zero or negative
+    }
+  }
+}
+
+// eq
+export class EqInstruction extends Instruction {
+  execute(vm) {
+    if (vm.S.length < 2) {
+      throw new Error('Not enough elements in the stack to evaluate equality.');
+    }
+    const b = vm.S.pop();
+    const a = vm.S.pop();
+    // Check if the two values are equal and push 1 for true, 0 for false.
+    vm.S.push(a === b ? 1 : 0);
+  }
+}
