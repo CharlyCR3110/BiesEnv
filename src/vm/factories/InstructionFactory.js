@@ -32,7 +32,7 @@ const instructionMap = new Map([
   // start and stop instructions
   ['hlt', () => new HltInstruction()],
   // io instructions
-  ['prn', () => new PrintInstruction()]
+  ['prn', () => new PrintInstruction()],
   ['inp', () => new InpInstruction()],
   //string instructions
   ['skt', (args) => new StkInstruction(...args)],
