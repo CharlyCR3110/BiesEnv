@@ -94,3 +94,20 @@ export class BfInstruction extends Instruction {
     }
   }
 }
+
+// swp
+export class SwpInstruction extends Instruction {
+  execute(vm) {
+    // Ensure there are at least two elements in the stack.
+    if (vm.S.length < 2) {
+      throw new Error('Not enough elements in the stack to perform swap.');
+    }
+    // Pop the top two elements from the stack.
+    const a = vm.S.pop();
+    const b = vm.S.pop();
+    // Push them back onto the stack in reversed order.
+    vm.S.push(a);
+    vm.S.push(b);
+    console.log(`Swapped top two elements: ${b} and ${a}`);
+  }
+}
