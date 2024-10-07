@@ -43,6 +43,7 @@ instruction
     | TOS
     | CST expression
     | INO expression
+    | SQRT 
     ;
 
 // Directivas, incluyendo la definición de funciones ($FUN)
@@ -100,6 +101,7 @@ CAT: 'CAT';  // Concatenar
 TOS: 'TOS';  // Valor a String v.toString()
 CST: 'CST';  //Casting
 INO: 'INO';  // Instance of
+SQRT: 'SQRT';
 
 // Identificador para nombres de funciones o variables
 IDENTIFIER: [$a-zA-Z_][a-zA-Z_0-9]*;
