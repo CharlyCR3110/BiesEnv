@@ -1,6 +1,6 @@
 import { BldInstruction, BstInstruction, PopInstruction, PushInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
 import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction, SqrtInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
-import { PrintInstruction } from '../../instructions/io/ioInstructions.js'
+import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { HltInstruction } from '../../instructions/control/startAndStop.js'
 import { StkInstruction } from '../../instructions/string/stringInstructions.js'
@@ -26,6 +26,7 @@ const instructionMap = new Map([
   ['hlt', () => new HltInstruction()],
   // io instructions
   ['prn', () => new PrintInstruction()]
+  ['inp', () => new InpInstruction()],
   //string instructions
   ['skt', (args) => new StkInstruction(...args)],
 
