@@ -41,3 +41,20 @@ export class SrkInstruction extends Instruction {
     vm.S.push(result);
   }
 }
+
+//cat
+export class CatInstruction extends Instruction {
+  execute(vm) {
+    const str2 = vm.S.pop();
+    const str1 = vm.S.pop();
+    vm.S.push(str1 + str2);
+  }
+}
+
+//tos
+export class TosInstruction extends Instruction {
+  execute(vm) {
+    const value = vm.S.pop();
+    vm.S.push(value.toString());
+  }
+}

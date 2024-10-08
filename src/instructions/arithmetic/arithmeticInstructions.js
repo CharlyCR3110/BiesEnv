@@ -46,6 +46,33 @@ export class GtInstruction extends Instruction {
   }
 }
 
+//gte
+export class GteInstruction extends Instruction {
+  execute(vm) {
+    const b = vm.S.pop();
+    const a = vm.S.pop();
+    vm.S.push(a >= b);
+  }
+}
+
+//lt
+export class LtInstruction extends Instruction {
+  execute(vm) {
+    const b = vm.S.pop();
+    const a = vm.S.pop();
+    vm.S.push(a < b);
+  }
+}
+
+//lte
+export class LteInstruction extends Instruction {
+  execute(vm) {
+    const b = vm.S.pop();
+    const a = vm.S.pop();
+    vm.S.push(a <= b);
+  }
+}
+
 // unary arithmetic instruction
 // sqrt
 export class SqrtInstruction extends Instruction {

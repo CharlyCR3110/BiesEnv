@@ -154,3 +154,20 @@ export class EqqInstruction extends Instruction {
     vm.S.push(a === b ? 1 : 0);
   }
 }
+
+//ino
+export class InoInstruction extends Instruction {
+  execute(vm) {
+    const obj = vm.S.pop();
+    const className = this.args[0];
+    vm.S.push(obj instanceof className);
+  }
+}
+
+//snt
+export class SntInstruction extends Instruction {
+  execute(vm) {
+    const str = vm.S.pop();
+    vm.S.push(str === null || str === '');
+  }
+}
