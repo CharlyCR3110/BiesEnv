@@ -76,24 +76,25 @@ export class BtInstruction extends Instruction {
 export class BfInstruction extends Instruction {
   execute(vm) {
     const condition = vm.S.pop();
-    // Type verification: ensure that condition is a boolean.
-    if (typeof condition !== 'boolean') {
-      throw new Error('Invalid type: expected a boolean for the condition.');
+    // Type verification: ensure that condition is a number (0 or 1).
+    if (typeof condition !== 'number' || (condition !== 0 && condition !== 1)) {
+      throw new Error('Invalid value: expected a number (0 or 1) for the condition.');
     }
     const offset = vm.S.pop();
     // Type verification: ensure that offset is a number.
     if (typeof offset !== 'number') {
       throw new Error('Invalid type: expected a number for the offset.');
     }
-    // If the condition is false, update the instruction pointer with the offset.
-    if (!condition) {
+    // If the condition is 0, update the instruction pointer with the offset.
+    if (condition === 0) {
       vm.D.updateInstructionPointer(offset);
-      console.log(`Branching to instruction pointer offset: ${offset} due to false condition.`);
+      console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`);
     } else {
-      console.log('Condition was true; not branching.');
+      console.log('Condition was 1; not branching.');
     }
   }
 }
+
 
 // swp
 export class SwpInstruction extends Instruction {
