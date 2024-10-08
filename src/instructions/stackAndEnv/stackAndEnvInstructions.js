@@ -38,7 +38,7 @@ export class BstInstruction extends Instruction {
 // br
 export class BrInstruction extends Instruction {
   execute(vm) {
-    const offset = vm.S.pop();
+    const offset = this.args;
     // Type verification: ensure that offset is a number.
     if (typeof offset !== 'number') {
       throw new Error('Invalid type: expected a number for the offset.');
@@ -57,7 +57,7 @@ export class BtInstruction extends Instruction {
     if (typeof condition !== 'boolean') {
       throw new Error('Invalid type: expected a boolean for the condition.');
     }
-    const offset = vm.S.pop();
+    const offset = this.args;
     // Type verification: ensure that offset is a number.
     if (typeof offset !== 'number') {
       throw new Error('Invalid type: expected a number for the offset.');
@@ -80,7 +80,7 @@ export class BfInstruction extends Instruction {
     if (typeof condition !== 'number' || (condition !== 0 && condition !== 1)) {
       throw new Error('Invalid value: expected a number (0 or 1) for the condition.');
     }
-    const offset = vm.S.pop();
+    const offset = this.args;
     // Type verification: ensure that offset is a number.
     if (typeof offset !== 'number') {
       throw new Error('Invalid type: expected a number for the offset.');
