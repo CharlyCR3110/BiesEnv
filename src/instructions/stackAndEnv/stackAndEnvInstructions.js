@@ -82,12 +82,12 @@ export class BfInstruction extends Instruction {
     }
     const offset = this.args;
     // Type verification: ensure that offset is a number.
-    if (typeof offset !== 'number') {
-      throw new Error('Invalid type: expected a number for the offset.');
-    }
+    // if (typeof offset !== 'number') {
+    //   throw new Error('Invalid type: expected a number for the offset.');
+    // }
     // If the condition is 0, update the instruction pointer with the offset.
     if (condition === 0) {
-      vm.D.updateInstructionPointer(offset);
+      vm.D.updateInstructionPointer( offset);
       console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`);
     } else {
       console.log('Condition was 1; not branching.');
