@@ -10,6 +10,15 @@ export class AddInstruction extends Instruction {
   }
 }
 
+//sub
+export class SubInstruction extends Instruction{
+  execute(vm){
+    const b = parseInt(vm.S.pop())
+    const a = parseInt(vm.S.pop())
+    vm.S.push(a - b)
+  }
+}
+
 // mul
 export class MultiplyInstruction extends Instruction {
   execute (vm) {
@@ -42,7 +51,8 @@ export class GtInstruction extends Instruction {
   execute (vm) {
     const b = vm.S.pop()
     const a = vm.S.pop()
-    vm.S.push(a > b ? 1 : 0)
+    console.log(`tss ${a} > ${b}: `, Number(a) > Number(b))
+    vm.S.push(Number(a) > Number(b) ? 1 : 0)
   }
 }
 
@@ -51,7 +61,7 @@ export class GteInstruction extends Instruction {
   execute(vm) {
     const b = vm.S.pop();
     const a = vm.S.pop();
-    vm.S.push(a >= b);
+    vm.S.push(Number(a) >= Number(b) ? 1 : 0);
   }
 }
 

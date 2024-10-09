@@ -1,5 +1,5 @@
-import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, PopInstruction, PushInstruction, SgnInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
-import { AddInstruction, DivideInstruction, GtInstruction, MultiplyInstruction, SqrtInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
+import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, PopInstruction, PushInstruction, SgnInstruction, SntInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
+import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, MultiplyInstruction, NegateInstruction, SqrtInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { HltInstruction } from '../../instructions/control/startAndStop.js'
@@ -21,10 +21,13 @@ const instructionMap = new Map([
   ['eqq', () => new EqqInstruction()],
   // arithmetic instructions
   ['add', () => new AddInstruction()],
+  ['sub', () => new SubInstruction()],
   ['mul', () => new MultiplyInstruction()],
   ['div', () => new DivideInstruction()],
   ['gt', () => new GtInstruction()],
+  ['gte', () => new GteInstruction()],
   ['sqrt', () => new SqrtInstruction()],
+  ['neg', () => new NegateInstruction()],
   // function instructions
   ['ldf', (args) => new LdfInstruction(...args)],
   ['app', () => new AppInstruction()],
@@ -35,9 +38,9 @@ const instructionMap = new Map([
   ['prn', () => new PrintInstruction()],
   ['inp', () => new InpInstruction()],
   //string instructions
-  ['skt', (args) => new StkInstruction(...args)],
-  ['srk', (args) => new SrkInstruction(...args)]
-
+  ['stk', (args) => new StkInstruction(...args)],
+  ['srk', (args) => new SrkInstruction(...args)],
+  ['snt', () => new SntInstruction()]
 ])
 
 export function createInstruction (op, ...args) {

@@ -112,7 +112,7 @@ expression: NUMBER | STRING | IDENTIFIER;
 optionalExpression: NUMBER?;
 
 // Definición de números enteros, floats y en notacion cientifica
-NUMBER: [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
+NUMBER: [+-]?[0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 
 //Definición de Strings
 STRING: '"' (~["\\] | '\\' .)* '"';
