@@ -7,7 +7,7 @@ import { SrkInstruction, StkInstruction } from '../../instructions/string/string
 
 // Factory function to create instructions
 const instructionMap = new Map([
-  // stack and enviromment instructions
+  // stack and environment instructions
   ['ldv', (args) => new PushInstruction(...args)],
   ['pop', () => new PopInstruction()],
   ['bld', (args) => new BldInstruction(...args)],
@@ -19,32 +19,45 @@ const instructionMap = new Map([
   ['sgn', () => new SgnInstruction()],
   ['eq', () => new EqInstruction()],
   ['eqq', () => new EqqInstruction()],
+  ['ino', (args) => new InoInstruction(...args)], // Instance of check
   // arithmetic instructions
   ['add', () => new AddInstruction()],
   ['mul', () => new MultiplyInstruction()],
   ['div', () => new DivideInstruction()],
   ['gt', () => new GtInstruction()],
+  ['lt', () => new LtInstruction()],
+  ['lte', () => new LteInstruction()],
+  ['gte', () => new GteInstruction()],
   ['sqrt', () => new SqrtInstruction()],
+  // logical instructions
+  ['and', () => new AndInstruction()],
+  ['or', () => new OrInstruction()],
+  ['xor', () => new XorInstruction()],
+  ['not', () => new NotInstruction()],
   // function instructions
   ['ldf', (args) => new LdfInstruction(...args)],
   ['app', () => new AppInstruction()],
   ['ret', () => new RetInstruction()],
+  ['cst', (args) => new CstInstruction(...args)], // Casting
   // start and stop instructions
   ['hlt', () => new HltInstruction()],
   // io instructions
   ['prn', () => new PrintInstruction()],
   ['inp', () => new InpInstruction()],
-  //string instructions
+  // string instructions
+  ['cat', () => new CatInstruction()],  // Concatenate
+  ['tos', () => new TosInstruction()],  // To String
+  ['snt', () => new SntInstruction()],  // String null test
   ['skt', (args) => new StkInstruction(...args)],
   ['srk', (args) => new SrkInstruction(...args)]
+]);
 
-])
-
-export function createInstruction (op, ...args) {
+export function createInstruction(op, ...args) {
   if (!instructionMap.has(op)) {
-    throw new Error(`Unknown instruction ${op}`)
+    throw new Error(`Unknown instruction ${op}`);
   }
-  const returning = instructionMap.get(op)(args)
-  console.log(returning)
-  return returning
+  const returning = instructionMap.get(op)(args);
+  console.log(returning);
+  return returning;
 }
+
