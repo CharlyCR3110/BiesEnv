@@ -40,11 +40,12 @@ export class BrInstruction extends Instruction {
   execute(vm) {
     const offset = this.args;
     // Type verification: ensure that offset is a number.
-    if (typeof offset !== 'number') {
-      throw new Error('Invalid type: expected a number for the offset.');
-    }
+    // if (typeof offset !== 'number') {
+    //   throw new Error('Invalid type: expected a number for the offset.');
+    // }
     // Calculate the new instruction pointer position by adding the offset.
-    vm.D.updateInstructionPointer(offset);
+    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
+    vm.D.updateInstructionPointer(pc);
     console.log(`Branching to instruction pointer offset: ${offset}`);
   }
 }
@@ -54,17 +55,20 @@ export class BtInstruction extends Instruction {
   execute(vm) {
     const condition = vm.S.pop();
     // Type verification: ensure that condition is a boolean.
-    if (typeof condition !== 'boolean') {
-      throw new Error('Invalid type: expected a boolean for the condition.');
-    }
+    // if (typeof condition !== 'boolean') {
+    //   throw new Error('Invalid type: expected a boolean for the condition.');
+    // }
     const offset = this.args;
-    // Type verification: ensure that offset is a number.
-    if (typeof offset !== 'number') {
-      throw new Error('Invalid type: expected a number for the offset.');
-    }
+    // // Type verification: ensure that offset is a number.
+    // if (typeof offset !== 'number') {
+    //   throw new Error('Invalid type: expected a number for the offset.');
+    // }
+    console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
+    console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
+    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
     // If the condition is true, update the instruction pointer with the offset.
-    if (condition) {
-      vm.D.updateInstructionPointer(offset);
+    if (1 === Number(condition)) {
+      vm.D.updateInstructionPointer(pc);
       console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`);
     } else {
       console.log('Condition was false; not branching.');
@@ -86,8 +90,11 @@ export class BfInstruction extends Instruction {
     //   throw new Error('Invalid type: expected a number for the offset.');
     // }
     // If the condition is 0, update the instruction pointer with the offset.
-    if (condition === 0) {
-      vm.D.updateInstructionPointer( offset);
+    console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
+    console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
+    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
+    if (Number(condition) === 0) {
+      vm.D.updateInstructionPointer( pc);
       console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`);
     } else {
       console.log('Condition was 1; not branching.');
@@ -139,6 +146,7 @@ export class EqInstruction extends Instruction {
     const a = vm.S.pop();
     // Check if the two values are equal and push 1 for true, 0 for false.
     vm.S.push(a === b ? 1 : 0);
+    console.log(`Equals : ${ a=== b}`)
   }
 }
 
