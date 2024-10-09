@@ -19,7 +19,7 @@ instruction
     | HLT
     | LDF expression
     | APP optionalExpression
-    | STK expression
+    | STK 
     | SRK expression
     | INP
     | BR expression

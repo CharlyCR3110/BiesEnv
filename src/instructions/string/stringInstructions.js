@@ -5,17 +5,25 @@ import { Instruction } from '../Instruction.js'
 export class StkInstruction extends Instruction {
   execute(vm) {
     // Pop 'k' from the stack, which indicates the number of characters to take.
-    const k = vm.S.pop();
-    const str = vm.S.pop();
+    let k = Number(vm.S.pop());
+    let str = vm.S.pop();
     // Type verification: ensure that k is a number and str is a string.
     if (typeof k !== 'number' || typeof str !== 'string') {
-      throw new Error('Invalid types: expected a number for k and a string to operate on.');
+        throw new Error('Invalid types: expected a number for k and a string to operate on.');
     }
+    if (str[0] === '"' && str[str.length - 1] === '"') {
+      // Remove the quotes by slicing the string (removes first and last character).
+      str = str.slice(1, -1);
+  }
+
     // Check that 'k' does not exceed the length of the string.
     if (k > str.length) {
-      throw new Error(`Cannot take ${k} characters, string length is only ${str.length}.`);
+      vm.S.push(null)
+      return
+      // throw new Error(`Cannot take ${k} characters, string length is only ${str.length}.`);
     }
     // Extract the first 'k' characters from the string.
+    
     const result = str.slice(0, k);
     vm.S.push(result);
   }

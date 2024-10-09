@@ -68,9 +68,9 @@ export class GteInstruction extends Instruction {
 //lt
 export class LtInstruction extends Instruction {
   execute(vm) {
-    const b = vm.S.pop();
-    const a = vm.S.pop();
-    vm.S.push(a < b);
+    const b = Number(vm.S.pop());
+    const a = Number(vm.S.pop());
+    vm.S.push(Number(a) < Number(b) ? 1 : 0);
   }
 }
 
