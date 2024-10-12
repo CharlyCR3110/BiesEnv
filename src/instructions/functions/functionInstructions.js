@@ -63,16 +63,16 @@ export class RetInstruction extends Instruction {
 }
 
 export class CstInstruction extends Instruction {
-  execute(vm) {
-    const value = vm.S.pop();
-    const type = this.args[0];
-    
+  execute (vm) {
+    const value = vm.S.pop()
+    const type = this.args[0]
+
     if (type === 'int') {
-      vm.S.push(parseInt(value, 10));
+      vm.S.push(parseInt(value, 10))
     } else if (type === 'float') {
-      vm.S.push(parseFloat(value));
+      vm.S.push(parseFloat(value))
     } else if (type === 'string') {
-      vm.S.push(value.toString());
+      vm.S.push(value.toString())
     }
     // Agregar más tipos si es necesario
   }

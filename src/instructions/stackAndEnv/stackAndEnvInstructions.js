@@ -37,54 +37,54 @@ export class BstInstruction extends Instruction {
 
 // br
 export class BrInstruction extends Instruction {
-  execute(vm) {
-    const offset = this.args;
+  execute (vm) {
+    const offset = this.args
     // Type verification: ensure that offset is a number.
     // if (typeof offset !== 'number') {
     //   throw new Error('Invalid type: expected a number for the offset.');
     // }
     // Calculate the new instruction pointer position by adding the offset.
-    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
-    vm.D.updateInstructionPointer(pc);
-    console.log(`Branching to instruction pointer offset: ${offset}`);
+    const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
+    vm.D.updateInstructionPointer(pc)
+    console.log(`Branching to instruction pointer offset: ${offset}`)
   }
 }
 
 // bt
 export class BtInstruction extends Instruction {
-  execute(vm) {
-    const condition = vm.S.pop();
+  execute (vm) {
+    const condition = vm.S.pop()
     // Type verification: ensure that condition is a boolean.
     // if (typeof condition !== 'boolean') {
     //   throw new Error('Invalid type: expected a boolean for the condition.');
     // }
-    const offset = this.args;
+    const offset = this.args
     // // Type verification: ensure that offset is a number.
     // if (typeof offset !== 'number') {
     //   throw new Error('Invalid type: expected a number for the offset.');
     // }
     console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
     console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
-    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
+    const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
     // If the condition is true, update the instruction pointer with the offset.
-    if (1 === Number(condition)) {
-      vm.D.updateInstructionPointer(pc);
-      console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`);
+    if (Number(condition) === 1) {
+      vm.D.updateInstructionPointer(pc)
+      console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`)
     } else {
-      console.log('Condition was false; not branching.');
+      console.log('Condition was false; not branching.')
     }
   }
 }
 
 // bf
 export class BfInstruction extends Instruction {
-  execute(vm) {
-    const condition = vm.S.pop();
+  execute (vm) {
+    const condition = vm.S.pop()
     // Type verification: ensure that condition is a number (0 or 1).
     if (typeof condition !== 'number' || (condition !== 0 && condition !== 1)) {
-      throw new Error('Invalid value: expected a number (0 or 1) for the condition.');
+      throw new Error('Invalid value: expected a number (0 or 1) for the condition.')
     }
-    const offset = this.args;
+    const offset = this.args
     // Type verification: ensure that offset is a number.
     // if (typeof offset !== 'number') {
     //   throw new Error('Invalid type: expected a number for the offset.');
@@ -92,90 +92,89 @@ export class BfInstruction extends Instruction {
     // If the condition is 0, update the instruction pointer with the offset.
     console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
     console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
-    let pc= Number(offset) + Number(vm.D.currentInstructionPointer)
+    const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
     if (Number(condition) === 0) {
-      vm.D.updateInstructionPointer( pc);
-      console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`);
+      vm.D.updateInstructionPointer(pc)
+      console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`)
     } else {
-      console.log('Condition was 1; not branching.');
+      console.log('Condition was 1; not branching.')
     }
   }
 }
 
-
 // swp
 export class SwpInstruction extends Instruction {
-  execute(vm) {
+  execute (vm) {
     // Ensure there are at least two elements in the stack.
     if (vm.S.length < 2) {
-      throw new Error('Not enough elements in the stack to perform swap.');
+      throw new Error('Not enough elements in the stack to perform swap.')
     }
     // Pop the top two elements from the stack.
-    const a = vm.S.pop();
-    const b = vm.S.pop();
+    const a = vm.S.pop()
+    const b = vm.S.pop()
     // Push them back onto the stack in reversed order.
-    vm.S.push(a);
-    vm.S.push(b);
-    console.log(`Swapped top two elements: ${b} and ${a}`);
+    vm.S.push(a)
+    vm.S.push(b)
+    console.log(`Swapped top two elements: ${b} and ${a}`)
   }
 }
 
 // sgn
 export class SgnInstruction extends Instruction {
-  execute(vm) {
+  execute (vm) {
     if (vm.S.length < 1) {
-      throw new Error('Not enough elements in the stack to evaluate sign.');
+      throw new Error('Not enough elements in the stack to evaluate sign.')
     }
-    const number = vm.S.pop();
+    const number = vm.S.pop()
     // Check the sign of the number and push 1 if it's greater than 0, otherwise push 0.
     if (number > 0) {
-      vm.S.push(1);  // Push 1 if the number is positive
+      vm.S.push(1) // Push 1 if the number is positive
     } else {
-      vm.S.push(0);  // Push 0 if the number is zero or negative
+      vm.S.push(0) // Push 0 if the number is zero or negative
     }
   }
 }
 
 // eq
 export class EqInstruction extends Instruction {
-  execute(vm) {
+  execute (vm) {
     if (vm.S.length < 2) {
-      throw new Error('Not enough elements in the stack to evaluate equality.');
+      throw new Error('Not enough elements in the stack to evaluate equality.')
     }
-    const b = vm.S.pop();
-    const a = vm.S.pop();
+    const b = vm.S.pop()
+    const a = vm.S.pop()
     // Check if the two values are equal and push 1 for true, 0 for false.
-    vm.S.push(a === b ? 1 : 0);
-    console.log(`Equals : ${ a=== b}`)
+    vm.S.push(a === b ? 1 : 0)
+    console.log(`Equals : ${a === b}`)
   }
 }
 
 // eqq
 export class EqqInstruction extends Instruction {
-  execute(vm) {
+  execute (vm) {
     if (vm.S.length < 2) {
-      throw new Error('Not enough elements in the stack to evaluate strict equality.');
+      throw new Error('Not enough elements in the stack to evaluate strict equality.')
     }
-    const b = vm.S.pop();
-    const a = vm.S.pop();
+    const b = vm.S.pop()
+    const a = vm.S.pop()
     // Check if the two values are strictly equal and push 1 for true, 0 for false.
-    vm.S.push(a === b ? 1 : 0);
+    vm.S.push(a === b ? 1 : 0)
   }
 }
 
-//ino
+// ino
 export class InoInstruction extends Instruction {
-  execute(vm) {
-    const obj = vm.S.pop();
-    const className = this.args[0];
-    vm.S.push(obj instanceof className);
+  execute (vm) {
+    const obj = vm.S.pop()
+    const className = this.args[0]
+    vm.S.push(obj instanceof className)
   }
 }
 
-//snt
+// snt
 export class SntInstruction extends Instruction {
-  execute(vm) {
-    const str = vm.S.pop();
-    vm.S.push(str === null || str === '');
+  execute (vm) {
+    const str = vm.S.pop()
+    vm.S.push(str === null || str === '')
   }
 }

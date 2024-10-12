@@ -1,9 +1,9 @@
-import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, PopInstruction, PushInstruction, SgnInstruction, SntInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
+import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, InoInstruction, PopInstruction, PushInstruction, SgnInstruction, SntInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
 import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, LteInstruction, LtInstruction, MultiplyInstruction, NegateInstruction, SqrtInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
-import { AppInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
-import { HltInstruction } from '../../instructions/control/startAndStop.js'
-import { SrkInstruction, StkInstruction } from '../../instructions/string/stringInstructions.js'
+import { AppInstruction, CstInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
+import { AndInstruction, HltInstruction, NotInstruction, OrInstruction, XorInstruction } from '../../instructions/control/startAndStop.js'
+import { CatInstruction, SrkInstruction, StkInstruction, TosInstruction } from '../../instructions/string/stringInstructions.js'
 
 // Factory function to create instructions
 const instructionMap = new Map([
@@ -47,20 +47,18 @@ const instructionMap = new Map([
   ['prn', () => new PrintInstruction()],
   ['inp', () => new InpInstruction()],
   // string instructions
-  ['cat', () => new CatInstruction()],  // Concatenate
-  ['tos', () => new TosInstruction()],  // To String
-  ['snt', () => new SntInstruction()],  // String null test
+  ['cat', () => new CatInstruction()], // Concatenate
+  ['tos', () => new TosInstruction()], // To String
+  ['snt', () => new SntInstruction()], // String null test
   ['stk', (args) => new StkInstruction(...args)],
   ['srk', (args) => new SrkInstruction(...args)]
-]);
-
+])
 
 export function createInstruction (op, ...args) {
   if (!instructionMap.has(op)) {
-    throw new Error(`Unknown instruction ${op}`);
+    throw new Error(`Unknown instruction ${op}`)
   }
-  const returning = instructionMap.get(op)(args);
-  console.log(returning);
-  return returning;
+  const returning = instructionMap.get(op)(args)
+  console.log(returning)
+  return returning
 }
-

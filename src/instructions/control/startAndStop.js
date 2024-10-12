@@ -18,37 +18,37 @@ export class HltInstruction extends Instruction {
   }
 }
 
-//and
+// and
 export class AndInstruction extends Instruction {
-  execute(vm) {
-    const b = vm.S.pop();
-    const a = vm.S.pop();
-    vm.S.push(a && b);
+  execute (vm) {
+    const b = vm.S.pop()
+    const a = vm.S.pop()
+    vm.S.push(a && b)
   }
 }
 
-//or
+// or
 export class OrInstruction extends Instruction {
-  execute(vm) {
-    const b = vm.S.pop();
-    const a = vm.S.pop();
-    vm.S.push(a || b);
+  execute (vm) {
+    const b = vm.S.pop()
+    const a = vm.S.pop()
+    vm.S.push(a || b)
   }
 }
 
-//xor
+// xor
 export class XorInstruction extends Instruction {
-  execute(vm) {
-    const b = vm.S.pop();
-    const a = vm.S.pop();
-    vm.S.push((a || b) && !(a && b));
+  execute (vm) {
+    const b = vm.S.pop()
+    const a = vm.S.pop()
+    vm.S.push((a || b) && !(a && b))
   }
 }
 
-//not
+// not
 export class NotInstruction extends Instruction {
-  execute(vm) {
-    const a = vm.S.pop();
-    vm.S.push(!a);
+  execute (vm) {
+    const a = vm.S.pop()
+    vm.S.push(!a)
   }
 }
