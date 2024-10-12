@@ -1,13 +1,16 @@
-import { run } from './interpreter/runner.js'
+import { loadAndRun } from './interpreter/loader.js'
 
-console.log('Input 1:')
-run('examples/01.basm')
+console.log('Running 01.basm')
+loadAndRun('examples/06.basm')
 
-console.log('Input 2:')
-run('examples/02.basm')
+// console.log('Running 02.basm')
+// loadAndRun('examples/02.basm')
 
-console.log('Input 3:')
-run('examples/03.basm')
+// console.log('Running 03.basm')
+// loadAndRun('examples/03.basm')
 
-console.log('Input 4:')
-run('examples/04.basm')
+// console.log('Running 04.basm')
+// loadAndRun('examples/04.basm')
+
+// console.log('Running 05.basm')
+// loadAndRun('examples/05.basm')

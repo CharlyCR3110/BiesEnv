@@ -1,0 +1,84 @@
+$FUN $0 args:3 parent: $0
+; Cargar los valores de a, b, y c
+LDV 1
+BST 0 0 ; let a = 1
+LDV -3
+BST 0 1 ; let b = -3
+LDV 2
+BST 0 2 ; let c = 2
+BLD 0 0
+BLD 0 1
+BLD 0 2
+;Cargar y crear la clausura de $1
+LDF $1
+BST 0 3
+BLD 0 3
+APP 3
+PRN
+HLT
+$END
+
+$FUN $1 args:3 parent: $0
+; Calcular el discriminante: b^2 - 4ac
+BLD 0 1  ; carga b
+BLD 0 1  ; carga b de nuevo
+MUL      ; b * b
+BLD 0 0  ; carga a
+LDV 4    ; carga 4
+MUL      ; 4 * a
+BLD 0 2  ; carga c
+MUL      ; 4 * a * c
+SUB      ; b^2 - 4ac
+BST 0 3  ;guardar el discriminante
+; Calcular la raíz cuadrada del discriminante
+BLD 0 3  ;cargar a pila discriminante
+LDV 0
+GTE       ;se considera si el discriminante es < 0
+BF 31
+BLD 0 3  ;cargar a pila discriminante
+LDV 0
+EQ
+BT 20
+
+BLD 0 3  ;cargar a pila discriminante
+SQRT     ; sqrt(b^2 - 4ac)
+; Calcular -b
+BLD 0 1  ; carga b
+NEG      ; -b
+; Sumar -b y sqrt(b^2 - 4ac)
+ADD      ; -b + sqrt(b^2 - 4ac)
+; Calcular 2a
+BLD 0 0  ; carga a
+LDV 2    ; carga 2
+MUL      ; 2 * a
+; Dividir (-b + sqrt(b^2 - 4ac)) entre 2a
+DIV      ; (-b + sqrt(b^2 - 4ac)) / (2 * a)
+
+PRN
+
+; Calcular -b
+BLD 0 1  ; carga b
+NEG      ; -b
+BLD 0 3  ;cargar a pila discriminante
+SQRT     ; sqrt(b^2 - 4ac)
+; Sumar -b y sqrt(b^2 - 4ac)
+SUB      ; -b + sqrt(b^2 - 4ac)
+; Calcular 2a
+BLD 0 0  ; carga a
+LDV 2    ; carga 2
+MUL      ; 2 * a
+; Dividir (-b + sqrt(b^2 - 4ac)) entre 2a
+DIV      ; (-b + sqrt(b^2 - 4ac)) / (2 * a)
+BR 8
+
+BLD 0 1  ; carga b
+NEG      ; -b
+BLD 0 0  ; carga a
+LDV 2    ; carga 2
+MUL      ; 2 * a
+DIV      ; -b / (2*a)
+BR 1     ;salta al return
+
+LDV "No hay solucion real"
+RET
+$END

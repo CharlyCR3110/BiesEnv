@@ -18,7 +18,32 @@ instruction
     | RET
     | HLT
     | LDF expression
-    | APP
+    | APP optionalExpression
+    | STK 
+    | SRK expression
+    | INP
+    | BR expression
+    | BT expression
+    | BF expression
+    | SWP
+    | NEG
+    | SGN
+    | EQ
+    | EQQ
+    | GT
+    | GTE
+    | LT
+    | LTE
+    | AND
+    | OR
+    | XOR
+    | NOT 
+    | SNT
+    | CAT expression
+    | TOS
+    | CST expression
+    | INO expression
+    | SQRT 
     ;
 
 // Directivas, incluyendo la definición de funciones ($FUN)
@@ -26,7 +51,7 @@ directive: functionDefinition;
 
 // Definición de una función con un cuerpo de instrucciones
 functionDefinition
-    : '$FUN' IDENTIFIER 'args:' INT 'parent:' IDENTIFIER block '$END' 
+    : '$FUN' IDENTIFIER 'args:' NUMBER 'parent:' IDENTIFIER block '$END' 
     ;
 
 // Bloque de instrucciones dentro de una función
@@ -52,15 +77,45 @@ RET: 'RET';
 HLT: 'HLT';
 LDF: 'LDF';  // Instrucción para cargar una función
 APP: 'APP';  // Instrucción para aplicar una función
+STK: 'STK';  // Tomar el késimo
+SRK: 'SRK';  // Tomar el resto
+INP: 'INP';
+BR : 'BR' ;  // B.pc+= N 
+BT : 'BT' ;  // S.top() ?   B.pc+= N, S.pop()
+BF : 'BF' ;  // !S.top() ?   B.pc+= N, S.pop()
+SWP: 'SWP';  
+NEG: 'NEG';
+SGN: 'SGN';
+EQ : 'EQ' ;
+EQQ: 'EQQ';
+GT : 'GT' ;
+GTE: 'GTE';
+LT : 'LT' ;
+LTE: 'LTE';
+AND: 'AND';
+OR : 'OR' ;
+XOR: 'XOR';
+NOT: 'NOT';
+SNT: 'SNT';  // string null test
+CAT: 'CAT';  // Concatenar
+TOS: 'TOS';  // Valor a String v.toString()
+CST: 'CST';  //Casting
+INO: 'INO';  // Instance of
+SQRT: 'SQRT';
 
 // Identificador para nombres de funciones o variables
 IDENTIFIER: [$a-zA-Z_][a-zA-Z_0-9]*;
 
 // Expresiones numéricas
-expression: INT | IDENTIFIER;
+expression: NUMBER | STRING | IDENTIFIER;
 
-// Definición de números enteros
-INT: [0-9]+;
+optionalExpression: NUMBER?;
+
+// Definición de números enteros, floats y en notacion cientifica
+NUMBER: [+-]?[0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
+
+//Definición de Strings
+STRING: '"' (~["\\] | '\\' .)* '"';
 
 // Espacios en blanco (ignorar)
 WS: [ \t\r\n]+ -> skip;

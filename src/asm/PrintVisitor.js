@@ -39,7 +39,7 @@ export default class PrintVisitor extends BiesASMVisitor {
     }
 
     // Verifica los argumentos
-    const argsNodes = ctx.INT()
+    const argsNodes = ctx.NUMBER()
     if (argsNodes.length > 0) {
       const args = argsNodes.map(arg => arg.getText()).join(', ')
       console.log('Args:', args)

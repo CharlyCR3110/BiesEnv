@@ -19,17 +19,7 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
 
     // Obtiene los argumentos, si los hay, a partir del contexto
     const args = ctx.children.slice(1).map(child => {
-      if (child.getText() === 'BLD' || child.getText() === 'BST' || child.getText() === 'LDF') {
-        return {
-          type: 'expression',
-          value: child.getText()
-        }
-      } else {
-        return {
-          type: 'constant',
-          value: child.getText()
-        }
-      }
+      return child.getText()
     })
 
     // Agrega la instrucción a la lista de instrucciones
@@ -50,7 +40,7 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     const name = nameNode ? nameNode.getText() : 'unknown'
 
     // numero de argumentos
-    const argCount = parseInt(ctx.INT().getText(), 10)
+    const argCount = parseInt(ctx.NUMBER().getText(), 10)
 
     // parent context
     const parentNode = ctx.IDENTIFIER(1)

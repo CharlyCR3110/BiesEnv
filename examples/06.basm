@@ -1,0 +1,21 @@
+$FUN $0 args:2 parent: $0
+LDF $1
+BST 0 0 ; biggerThan = [$1]
+LDV 9
+LDV 10
+BLD 0 0 ; [$1] en pila
+APP 2
+PRN
+HLT  
+$END
+
+$FUN $1 args:2 parent: $0
+BLD 0 0
+BLD 0 1
+GT
+BF  2 ;if false goto the else
+BLD 0 0
+BR  1   ;goto the end of the if
+BLD 0 1
+RET
+$END
