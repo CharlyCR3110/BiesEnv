@@ -1,0 +1,41 @@
+$FUN $0 args:1 parent: $0
+LDV 10      ; Se asume que el argumento de entrada es el número para el cual queremos calcular Fibonacci (n=10)
+BST 0 0     ; Guardar n en el contexto 0
+LDV 0
+BST 0 1     ; Inicializar fib_0 = 0
+LDV 1
+BST 0 2     ; Inicializar fib_1 = 1
+LDV 1
+BST 0 3     ; Inicializar i = 1
+
+; Inicio del bucle
+BLD 0 0     ; Cargar n (el valor límite)
+BLD 0 3     ; Cargar i (el índice actual)
+GT         ; Comparar n - i
+NOT
+BT +15      ; Si i == n, salir del bucle
+
+BLD 0 1     ; Cargar fib_0
+BLD 0 2     ; Cargar fib_1
+ADD         ; fib_n = fib_0 + fib_1
+CST 'string'
+BST 0 4     ; Guardar fib_n en una variable temporal
+
+BLD 0 2     ; Cargar fib_1 (actual)
+BST 0 1     ; Actualizar fib_0 = fib_1
+BLD 0 4     ; Cargar fib_n (resultado anterior)
+BST 0 2     ; Actualizar fib_1 = fib_n
+
+BLD 0 3     ; Cargar el índice i
+LDV 1
+ADD         ; Incrementar i en 1
+CST 'string'
+BST 0 3     ; Actualizar i
+
+BR -20      ; Volver al inicio del bucle
+
+; Fin del bucle
+BLD 0 2     ; Cargar el último valor calculado de fib_1, que es Fibonacci(n)
+PRN         ; Imprimir el resultado
+HLT
+$END

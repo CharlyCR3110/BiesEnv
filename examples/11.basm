@@ -1,0 +1,41 @@
+$FUN $0 args:1 parent:$0
+LDV 3         ; Cargar n (el argumento de entrada)
+LDF $1        ; Cargar la función Fibonacci
+APP           ; Aplicar fibonacci(n)
+PRN           ; Imprimir el resultado
+HLT           ; Detener la ejecución
+$END
+
+$FUN $1 args:1 parent:$0
+BLD 0 0       ; Cargar n en la pila
+LDV 2         ; Cargar 2 para comparación
+GT            ; Verificar si n > 2
+NOT           ; Invertir el resultado (n <= 2)
+BT 16         ; Si n <= 2, saltar al caso base (índice 15)
+
+; Si n > 2, continuar con el cálculo recursivo
+BLD 0 0       ; Cargar n nuevamente
+LDV 1         ; Cargar 1
+SUB           ; Calcular n - 1
+
+LDF $1        ; Cargar la función Fibonacci para llamada recursiva
+APP           ; Aplicar fibonacci(n - 1)
+BST 0 1       ; Guardar el resultado de fibonacci(n - 1) en la posición 1
+
+BLD 0 0       ; Cargar n nuevamente
+LDV 2         ; Cargar 2
+SUB           ; Calcular n - 2
+
+LDF $1        ; Cargar la función Fibonacci para llamada recursiva
+APP           ; Aplicar fibonacci(n - 2)
+BST 0 2       ; Guardar el resultado de fibonacci(n - 2) en la posición 2
+
+BLD 0 1       ; Cargar fibonacci(n - 1) desde la posición 1
+BLD 0 2       ; Cargar fibonacci(n - 2) desde la posición 2
+ADD           ; Sumar fibonacci(n - 1) + fibonacci(n - 2)
+RET           ; Retornar el resultado
+
+; Caso base: si n <= 2, retornar 1
+LDV 1         ; Cargar 1 en la pila (caso base)
+RET           ; Retornar 1
+$END
