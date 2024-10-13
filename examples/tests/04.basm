@@ -1,0 +1,73 @@
+$FUN $0 args:1 parent: $0
+LDV "Hola mundo"
+BST 0 0
+LDF $1  ; funcion encarga de contar la longitud de la hilera
+BST 0 1
+BLD 0 0
+BLD 0 1
+APP
+LDF $2  ; funcion encargada de imprimir el valor
+BST 0 2
+BLD 0 1
+BLD 0 0
+BLD 0 2
+APP
+PRN
+HLT
+$END
+
+$FUN $1 args:1 parent: $0
+LDV 0
+BST 0 1 ;inicializa length
+LDV 1
+BST 0 2 ; inicializa i
+
+; Inicio de bucle
+BLD 0 0 ;carga a pila la hilera
+BLD 0 2 ;carga a pila el indice
+STK     ; toma el k-ésimo elemento , basado en el indice
+SNT     ;verifica que no sea null
+BT +9    ;si es null, sale del loop
+BLD 0 2 ;cargar el indice
+LDV 1
+ADD     ; se le suma 1
+BST 0 2 ;actualiza el indice
+BLD 0 1 ;cargar el length
+LDV 1   
+ADD     ;se le suma 1 al length
+BST 0 1 ;actualiza el length
+BR -14  ;regresa al inicio del loop
+
+;Fin del loop
+BLD 0 1  ;carga el valor del length en la pila
+RET
+$END
+
+; funcion para invertir una hilera y devolverla "Hola mundo" -> "odnum aloH"
+$FUN $2 args:2 parent: $0
+BLD 0 0 ; 10 - string length
+BLD 0 1 ; "Hola mundo"
+LDV 0   ; valor de i (iterador)
+BST 0 4 ; guarda el valor del iterador
+LDV " " ; hilera vacia (para concatenar)
+BST 0 5 ; guarda la hilera vacia
+
+; inicio del bucle
+BLD 0 4 ; carga el iterador (i)
+BLD 0 0 ; carga el length
+EQ      ; verifica si i == length
+BT +11  ; si i == length, sale del loop
+BLD 0 1 ; carga el string original
+BLD 0 4 ; carga el iterador (i)
+STK
+BLD 0 5 ; carga la hilera vacia
+CAT     ; concatena la hilera vacia con el caracter actual
+BST 0 5 ; guarda la hilera concatenada
+BLD 0 4 ; carga el iterador (i)
+LDV 1   ; carga el valor de i
+ADD     ; i++
+BST 0 4 ; guarda el valor de i
+BR -15  ; regresa al inicio del loop
+BLD 0 5 ; carga la hilera concatenada
+RET
+$END
