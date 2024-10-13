@@ -34,14 +34,82 @@ BST 0 3  ;guardar el discriminante
 BLD 0 3  ;cargar a pila discriminante
 LDV 0
 GTE       ;se considera si el discriminante es < 0
-BF 31
-BLD 0 3  ;cargar a pila discriminante
+BF 88     ;salta a no hay solucion real
+BLD 0 3   ;cargar a pila discriminante
 LDV 0
 EQ
-BT 20
+BT 68    ;solo se debe calcular un caso
+;calcular raiz del determinante
+BLD 0 3  ;cargar a pila d (numero a quien se le va a sacar la raíz)
+LDV 0
+EQ
+BT 52    ;return d
+BLD 0 3
+LDV 1
+EQ
+BT 49     ;return d
+;inicializar
+BLD 0 3   
+LDV 2
+DIV
+BST 0 4  ;guardamos el valor de root
 
-BLD 0 3  ;cargar a pila discriminante
-SQRT     ; sqrt(b^2 - 4ac)
+LDV 0
+BST 0 5 ;inicializamos i
+BLD 0 3
+LDV 2
+DIV
+BST 0 6 ;inicializamos x
+;inicio de loop 
+;Condiciones
+BLD 0 5
+LDV 20
+LT 
+
+BLD 0 6
+BLD 0 6
+MUL
+BLD 0 3
+SUB
+BST 0 7 ;guardamos condicion por si hay que sacar valor absoluto
+BLD 0 7 
+LDV 0
+LT
+BF 4
+BLD 0 7
+LDV -1
+MUL
+BST 0 7
+BLD 0 7
+LDV 1e-15
+GTE
+AND
+BF 15
+
+BLD 0 3   
+BLD 0 6
+DIV
+BLD 0 6
+ADD
+LDV 0.5
+MUL
+BST 0 6
+
+BLD 0 6
+BST 0 4
+
+BLD 0 5
+LDV 1
+ADD
+BST 0 5
+BR -37
+
+BLD 0 4
+BR 1
+BLD 0 3
+
+BST 0 5  ;guardar valor de raíz  
+BLD 0 5
 ; Calcular -b
 BLD 0 1  ; carga b
 NEG      ; -b
@@ -59,8 +127,7 @@ PRN
 ; Calcular -b
 BLD 0 1  ; carga b
 NEG      ; -b
-BLD 0 3  ;cargar a pila discriminante
-SQRT     ; sqrt(b^2 - 4ac)
+BLD 0 5
 ; Sumar -b y sqrt(b^2 - 4ac)
 SUB      ; -b + sqrt(b^2 - 4ac)
 ; Calcular 2a
@@ -80,5 +147,77 @@ DIV      ; -b / (2*a)
 BR 1     ;salta al return
 
 LDV "No hay solucion real"
+RET
+$END
+
+$FUN $2 args:1 parent: $1
+BLD 0 0  ;cargar a pila d (numero a quien se le va a sacar la raíz)
+LDV 0
+EQ
+BT 52    ;return d
+BLD 0 0
+LDV 1
+EQ
+BT 49     ;return d
+;inicializar
+BLD 0 0   
+LDV 2
+DIV
+BST 0 1  ;guardamos el valor de root
+
+LDV 0
+BST 0 2 ;inicializamos i
+BLD 0 0
+LDV 2
+DIV
+BST 0 3 ;inicializamos x
+;inicio de loop 
+;Condiciones
+BLD 0 2
+LDV 20
+LT 
+
+BLD 0 3
+BLD 0 3
+MUL
+BLD 0 0
+SUB
+BST 0 4 ;guardamos condicion por si hay que sacar valor absoluto
+BLD 0 4 
+LDV 0
+LT
+BF 4
+BLD 0 4
+LDV -1
+MUL
+BST 0 4
+BLD 0 4
+LDV 1e-15
+GTE
+AND
+BF 15
+
+BLD 0 0   
+BLD 0 3
+DIV
+BLD 0 3
+ADD
+LDV 0.5
+MUL
+BST 0 3
+
+BLD 0 3
+BST 0 1
+
+BLD 0 2
+LDV 1
+ADD
+BST 0 2
+BR -37
+
+BLD 0 1
+RET
+
+BLD 0 0
 RET
 $END
