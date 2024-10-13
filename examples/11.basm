@@ -1,5 +1,5 @@
 $FUN $0 args:1 parent:$0
-LDV 3         ; Cargar n (el argumento de entrada)
+LDV 4         ; Cargar n (el argumento de entrada)
 LDF $1        ; Cargar la función Fibonacci
 APP           ; Aplicar fibonacci(n)
 PRN           ; Imprimir el resultado
