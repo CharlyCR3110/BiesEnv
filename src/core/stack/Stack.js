@@ -45,7 +45,7 @@ export class Stack {
    * stack.pop() // Removes 20
    */
   pop () {
-    if (this.items.length === 0) { return 'Stack Error: Underflow' }
+    if (this.items.length === 0) { throw new Error('Stack is empty') }
     return this.items.pop()
   }
 

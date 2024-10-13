@@ -16,7 +16,7 @@ import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
  * @returns {Object} - Object containing the VM instance and the main program instructions.
  * @throws {Error} - If there is a problem reading or processing the file.
  */
-export const loadCode = (filePath) => {
+export const loadCode = (filePath, traceLevel) => {
   try {
     // Read the source code file
     const code = fs.readFileSync(filePath, 'utf8')
@@ -24,7 +24,7 @@ export const loadCode = (filePath) => {
     // Parse the source code into an AST
     const tree = parse(code)
 
-    return linkCode(tree)
+    return linkCode(tree, traceLevel)
   } catch (error) {
     throw new Error(`Error loading code: ${error.message}`)
   }
@@ -39,11 +39,11 @@ export const loadCode = (filePath) => {
  * @example
  * const { vm, mainInstructions } = linkCode(tree);
  */
-const linkCode = (tree) => {
+const linkCode = (tree, traceLevel) => {
   const visitor = new InstructionBuilderVisitor()
   const [rawInstructions, rawFunctions] = visitor.visit(tree)
 
-  const vm = new VM()
+  const vm = new VM(traceLevel)
 
   // Convert raw instructions to Instruction objects
   const convertInstructions = (instr) =>
@@ -51,8 +51,6 @@ const linkCode = (tree) => {
 
   // Process functions
   for (const [name, func] of Object.entries(rawFunctions)) {
-    console.log(`Processing function ${name}`)
-    console.log(func)
     const functionInstructions = convertInstructions(func.instructions)
     const closure = new FunctionClosure(
       func.argCount,
@@ -73,8 +71,8 @@ const linkCode = (tree) => {
  * Loads and runs a biesVM program.
  * @param {string} filePath - Path to the source code file.
  */
-export const loadAndRun = (filePath) => {
-  const { vm, mainInstructions } = loadCode(filePath)
+export const loadAndRun = (filePath, traceLevel) => {
+  const { vm, mainInstructions } = loadCode(filePath, traceLevel)
   vm.loadProgram(mainInstructions)
   vm.run()
 }
