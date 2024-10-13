@@ -138,14 +138,17 @@ export class SgnInstruction extends Instruction {
 // eq
 export class EqInstruction extends Instruction {
   execute (vm) {
+    console.log('EqInstruction')
     if (vm.S.length < 2) {
       throw new Error('Not enough elements in the stack to evaluate equality.')
     }
     const b = vm.S.pop()
     const a = vm.S.pop()
     // Check if the two values are equal and push 1 for true, 0 for false.
-    vm.S.push(a === b ? 1 : 0)
-    console.log(`Equals : ${a === b}`)
+    // eslint-disable-next-line eqeqeq
+    vm.S.push(a == b ? 1 : 0)
+    // eslint-disable-next-line eqeqeq
+    console.log(`Equals : ${a} == ${b} : ${a == b}`)
   }
 }
 
