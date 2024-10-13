@@ -26,7 +26,7 @@ export class BindingStack {
   }
 
   popFrame () {
-    if (this.frames.length > 1) {
+    if (this.frames.size() > 1) {
       this.frames.pop()
     } else {
       throw new Error('Cannot pop global environment')
