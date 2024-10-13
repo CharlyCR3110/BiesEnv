@@ -6,6 +6,7 @@ BST 0 1
 BLD 0 0
 BLD 0 1
 APP
+BST 0 1
 LDF $2  ; funcion encargada de imprimir el valor
 BST 0 2
 BLD 0 1
@@ -45,8 +46,6 @@ $END
 
 ; funcion para invertir una hilera y devolverla "Hola mundo" -> "odnum aloH"
 $FUN $2 args:2 parent: $0
-BLD 0 0 ; 10 - string length
-BLD 0 1 ; "Hola mundo"
 LDV 0   ; valor de i (iterador)
 BST 0 4 ; guarda el valor del iterador
 LDV " " ; hilera vacia (para concatenar)
