@@ -50,7 +50,9 @@ export class RetInstruction extends Instruction {
     const context = vm.D.pop()
     try {
       vm.B.popFrame()
+      console.log('Frame succesfully deleted')
     } catch (error) {
+      console.log('Error deleting frames')
     }
     vm.D.updateInstructionPointer(context.returnAddress)
     console.log('Returning from function')
