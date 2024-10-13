@@ -14,7 +14,7 @@ import { Stack } from '../core/stack/Stack.js'
  * vm.loadProgram(instructions)
  */
 export class VM {
-  constructor () {
+  constructor (traceLevel = 0) {
     this.S = new Stack() // main stack
     this.C = [] // running code
     this.B = new BindingStack() // bindings
@@ -22,6 +22,8 @@ export class VM {
 
     this.functions = {} // functions (hoisted)
     this.halted = false
+
+    this.traceLevel = traceLevel
   }
 
   loadProgram (instructions) {
@@ -39,17 +41,19 @@ export class VM {
     console.log(`Running program with ${this.C.length} instructions`)
     console.log(this.functions)
     while (this.D.currentInstructionPointer < this.C.length && !this.halted) {
-      console.log('---'.repeat(20))
-      console.log(`Instruction pointer: ${this.D.currentInstructionPointer}`)
-      console.log(`Instruction: ${this.C[this.D.currentInstructionPointer].constructor.name}`)
-      console.log(`Args: ${this.C[this.D.currentInstructionPointer].args}`)
-      console.log(`Stack: ${[...this.S.items]}`)
-      for (let index = 0; index < this.B.frames.size(); index++) {
-        console.log('Frame ' + index + ': ', this.B.getFrame(index))
-      }
-      console.log('---'.repeat(20))
       const instruction = this.C[this.D.currentInstructionPointer]
-      instruction.execute(this)
+
+      if (this.traceLevel > 0) {
+        console.error(`Executing instruction: ${instruction.constructor.name}`)
+      }
+
+      try {
+        instruction.execute(this)
+      } catch (error) {
+        console.error(`Error executing instruction: ${error.message}`)
+        this.halted = true
+      }
+
       if (!this.halted) {
         this.D.updateInstructionPointer(this.D.currentInstructionPointer + 1)
       }
