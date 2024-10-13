@@ -22,9 +22,8 @@ export class StkInstruction extends Instruction {
       return
       // throw new Error(`Cannot take ${k} characters, string length is only ${str.length}.`);
     }
-    // Extract the first 'k' characters from the string.
 
-    const result = str.slice(0, k)
+    const result = str[k]
     vm.S.push(result)
   }
 }
@@ -72,6 +71,7 @@ export class CatInstruction extends Instruction {
     console.log(`Concatenating ${str1} and ${str2}`)
 
     vm.S.push(str1 + str2)
+    console.log('stack post cat: ', vm.S.printStack())
   }
 }
 
