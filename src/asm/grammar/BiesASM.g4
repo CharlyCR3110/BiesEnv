@@ -39,7 +39,7 @@ instruction
     | XOR
     | NOT 
     | SNT
-    | CAT expression
+    | CAT
     | TOS
     | CST expression
     | INO expression
@@ -115,7 +115,7 @@ optionalExpression: NUMBER?;
 NUMBER: [+-]?[0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 
 //Definición de Strings
-STRING: '"' (~["\\] | '\\' .)* '"';
+STRING: '"' ( ~["\\] | '\\' . )* '"';
 
 // Espacios en blanco (ignorar)
 WS: [ \t\r\n]+ -> skip;
