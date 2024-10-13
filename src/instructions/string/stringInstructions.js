@@ -53,8 +53,24 @@ export class SrkInstruction extends Instruction {
 // cat
 export class CatInstruction extends Instruction {
   execute (vm) {
-    const str2 = vm.S.pop()
-    const str1 = vm.S.pop()
+    let str2 = vm.S.pop()
+    let str1 = vm.S.pop()
+    // Type verification: ensure that both operands are strings.
+    if (typeof str1 !== 'string' || typeof str2 !== 'string') {
+      throw new Error('Invalid types: expected two strings to concatenate.')
+    }
+
+    // remove quotes if they exist
+    if (str1[0] === '"' && str1[str1.length - 1] === '"') {
+      str1 = str1.slice(1, -1)
+    }
+
+    if (str2[0] === '"' && str2[str2.length - 1] === '"') {
+      str2 = str2.slice(1, -1)
+    }
+
+    console.log(`Concatenating ${str1} and ${str2}`)
+
     vm.S.push(str1 + str2)
   }
 }
