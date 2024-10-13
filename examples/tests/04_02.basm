@@ -56,7 +56,7 @@ BLD 0 1 ; carga el length original (para iterar)
 BST 0 4 ; guarda el length
 
 ; inicio del bucle
-LDV 0   ; caso base, cuando i sea 0 se termina el loop
+LDV -1   ; caso base, cuando i sea -1 se termina el loop
 BLD 0 4 ; carga el length (en este caso el iterador)
 EQ      ; verifica si i == length
 BT +11  ; si i == length, sale del loop
