@@ -13,7 +13,7 @@ export class ContextStack {
   constructor () {
     this.contexts = new Stack()
     this.currentInstructionPointer = 0
-    this.lastInstructions = {}
+    this.lastInstructions = new Stack()
   }
 
   push (returnAddress, localEnvironment) {

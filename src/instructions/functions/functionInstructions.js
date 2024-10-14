@@ -33,7 +33,7 @@ export class AppInstruction extends Instruction {
     Object.entries(environment.bindings).forEach(([key, value]) => {
       vm.B.define(key, value)
     })
-    vm.D.lastInstructions = vm.C
+    vm.D.lastInstructions.push(vm.C)
     vm.C = body
     vm.D.updateInstructionPointer(-1)
 
@@ -46,7 +46,7 @@ export class AppInstruction extends Instruction {
 export class RetInstruction extends Instruction {
   execute (vm) {
     const returnValue = vm.S.pop()
-    vm.C = vm.D.lastInstructions
+    vm.C = vm.D.lastInstructions.pop()
     const context = vm.D.pop()
     try {
       vm.B.popFrame()
@@ -55,6 +55,7 @@ export class RetInstruction extends Instruction {
       console.log('Error deleting frames')
     }
     vm.D.updateInstructionPointer(context.returnAddress)
+    console.log(context.returnAddress)
     console.log('Returning from function')
     console.log(`Return value: ${returnValue}`)
 

@@ -2,7 +2,7 @@
 ; $1 es la función factorial
 ;
 $FUN $0 args:1 parent:$0
-LDV 0         ; Cargar el valor de n (argumento de main)
+LDV 5         ; Cargar el valor de n (argumento de main)
 LDF $1        ; Cargar la función factorial
 APP           ; Aplicar factorial(n)
 PRN           ; Imprimir el resultado
@@ -13,10 +13,7 @@ $FUN $1 args:1 parent:$0
 BLD 0 0       ; Cargar n en la pila
 LDV 0         ; Cargar 0 para comparación
 EQQ           ; Verificar si n == 0
-NOT
-BT 2
-LDV 1         ; Cargar 1 en la pila (caso base)
-RET           ; Retornar 1
+BT 9
 
 BLD 0 0       ; Cargar n en la pila
 LDV 1         ; Cargar 1
@@ -24,6 +21,10 @@ SUB           ; Calcular n - 1
 CST 'string'  ; Usar la instrucción CstInstruction para convertir a string
 LDF $1        ; Cargar la función factorial para llamada recursiva
 APP           ; Aplicar factorial(n - 1)
+BLD 0 0
 MUL           ; Multiplicar n * factorial(n - 1)
 RET           ; Retornar el resultado
+
+LDV 1         ; Cargar 1 en la pila (caso base)
+RET           ; Retornar 1
 $END
