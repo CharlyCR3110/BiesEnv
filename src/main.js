@@ -32,7 +32,7 @@ const main = () => {
     outfile: 'output.txt',
     errfile: 'error.txt',
     traceLevel: 0,
-    inputFile: null
+    inputFile: '../examples/tests/10.basm'
   }
 
   // Procesar los argumentos de la línea de comandos
