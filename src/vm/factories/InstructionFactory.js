@@ -67,6 +67,16 @@ const instructionMap = new Map([
   ['tol', () => new TolInstruction()]
 ])
 
+/**
+ * Creates an instruction based on the provided operation and arguments.
+ *
+ * @param {string} op - The operation code for the instruction to be created.
+ * @param {...*} args - The arguments to be passed to the instruction constructor.
+ * @returns {Object} The created instruction instance.
+ * @throws {Error} Throws an error if the operation code is not recognized.
+ * @example
+ * const instruction = createInstruction('add');
+ */
 export function createInstruction (op, ...args) {
   if (!instructionMap.has(op)) {
     throw new Error(`Unknown instruction ${op}`)

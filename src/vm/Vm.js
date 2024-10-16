@@ -22,6 +22,10 @@ import { Stack } from '../core/stack/Stack.js'
  * vm.loadProgram(instructions)
  */
 export class VM {
+  /**
+   * Creates an instance of the VM (Virtual Machine).
+   * @param {number} [traceLevel=0] - The level of tracing to be used for debugging.
+   */
   constructor (traceLevel = 0) {
     this.S = new Stack() // main stack
     this.C = [] // running code
@@ -34,6 +38,11 @@ export class VM {
     this.traceLevel = traceLevel
   }
 
+  /**
+   * Loads a program into the virtual machine.
+   * @param {Array<Object>} instructions - An array of instruction objects with op and args properties.
+   * @throws {Error} Throws an error if no instructions are provided.
+   */
   loadProgram (instructions) {
     console.log(`loading program with: ${instructions}`)
     // instructions is an array of objects with op and args properties
@@ -45,6 +54,12 @@ export class VM {
     this.C = instructions
   }
 
+  /**
+   * Executes the loaded program instructions.
+
+   * This method processes instructions until either all instructions are executed
+   * or the virtual machine is halted.
+   */
   run () {
     console.log(`Running program with ${this.C.length} instructions`)
     console.log(this.functions)
@@ -68,6 +83,11 @@ export class VM {
     }
   }
 
+  /**
+   * Defines a function within the virtual machine.
+   * @param {string} name - The name of the function to be defined.
+   * @param {Function} closure - The function implementation (closure) to be associated with the name.
+   */
   defineFunction (name, closure) {
     console.log(`Defining function ${name}`)
     this.functions[name] = closure
