@@ -25,7 +25,8 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
    * Visits the program node and processes all child nodes.
    *
    * @param {Object} ctx - The context of the program node.
-   * @returns {[]} - An array containing the list of instructions and function definitions.
+   * @returns {Array.<Array.<Object>, Object>} - An array containing the list of instructions and function definitions.
+ */
    */
   visitProgram (ctx) {
     // Visits all child nodes of the program context
