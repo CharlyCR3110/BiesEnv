@@ -4,7 +4,7 @@
 ;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
 
 $FUN $0 args:1 parent: $0
-LDV [1,2,3,2,5]
+LDV [1,2,3,2,1]
 BST 0 0  ;guardar la lista
 
 ;conseguir la longitud de la lista
