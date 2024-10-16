@@ -1,4 +1,4 @@
-import { IniInstruction, HltInstruction, AndInstruction, OrInstruction, XorInstruction, NotInstruction } from '../../src/instructions/control/startAndStop'
+import { HltInstruction, AndInstruction, OrInstruction, XorInstruction, NotInstruction } from '../../src/instructions/control/startAndStop'
 import { jest } from '@jest/globals'
 
 const createMockVM = () => ({
