@@ -98,7 +98,7 @@ export class Stack {
    * Return the element at the specified index.
    *
    * @param {int} index
-   * @returns
+   * @returns {*}
    */
   get (index) {
     return this.items[index]

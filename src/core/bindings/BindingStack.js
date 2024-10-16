@@ -5,12 +5,12 @@ import { Stack } from '../stack/Stack.js'
  * Manages a stack of environments, corresponding to the B component in the VM.
  * @class
  * @property {Stack<Environment>} frames - A stack of environments.
- * @example
  * @authors
  * -Raquel Alfaro Barrantes
  * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
+ * @example
  * const stack = new BindingStack()
  * stack.pushFrame()
  * stack.define('x', 10)

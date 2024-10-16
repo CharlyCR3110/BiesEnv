@@ -107,6 +107,20 @@ The following are a few of the supported instructions for `biesVM`:
 - **Function calls**: `APP`, `RET`
 - **List operations**: `LIN`, `LTK`, `LRK`
 
+### Testing
+Unit tests are included to ensure the functionality of key features. To run the tests:
+
+```bash
+npm run test
+```
+
+### Documentation
+To generate the documentation, run:
+
+```bash
+npm run doc
+```
+
 ### Authors
 - Carlos González Garita
 - Felipe Brenes Calderón
