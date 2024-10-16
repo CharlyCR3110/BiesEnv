@@ -1,16 +1,36 @@
 import fs from 'fs'
 import { loadAndRun } from './interpreter/loader.js'
 
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
+/**
+ * Reads a configuration file and returns the parsed JSON object.
+ *
+ * @param {string} configFile - The path to the configuration file.
+ * @returns {Object|null} The parsed configuration data or null if an error occurs.
+ */
 const readConfig = (configFile) => {
   try {
     const configData = fs.readFileSync(configFile, 'utf8')
     return JSON.parse(configData)
   } catch (error) {
-    console.error(`Error al leer el archivo de configuración: ${error.message}`)
-    return null // Retorna null si hay un error
+    console.error(`Error reading configuration file: ${error.message}`)
+    return null // Returns null if there is an error
   }
 }
 
+/**
+ * Sets up output redirection for standard output and error streams.
+ *
+ * @param {string} outfile - The file path where standard output will be redirected.
+ * @param {string} errfile - The file path where error output will be redirected.
+ */
 const setupOutputRedirection = (outfile, errfile) => {
   const originalStdoutWrite = process.stdout.write
   const originalStderrWrite = process.stderr.write
@@ -26,6 +46,10 @@ const setupOutputRedirection = (outfile, errfile) => {
   }
 }
 
+/**
+ * Main function that processes command-line arguments,
+ * sets up output redirection, and executes the input file.
+ */
 const main = () => {
   const args = process.argv.slice(2)
   const options = {
@@ -35,7 +59,7 @@ const main = () => {
     inputFile: '../examples/tests/10.basm'
   }
 
-  // Procesar los argumentos de la línea de comandos
+  // Process command-line arguments
   args.forEach((arg) => {
     if (arg.startsWith('--o=')) {
       options.outfile = arg.split('=')[1]
@@ -49,21 +73,21 @@ const main = () => {
       if (config) {
         options.outfile = config.outfile || options.outfile
         options.errfile = config.errfile || options.errfile
-        options.traceLevel = config.traceLevel !== undefined ? config.traceLevel : options.traceLevel // Verifica que el valor no sea undefined
+        options.traceLevel = config.traceLevel !== undefined ? config.traceLevel : options.traceLevel // Checks if the value is not undefined
       } else {
-        console.error(`No se pudo cargar la configuración de ${configFile}`)
+        console.error(`Could not load configuration from ${configFile}`)
       }
     } else {
-      // se asume que es el input file
+      // Assumes it is the input file
       options.inputFile = arg
     }
   })
 
-  // Redirigir la salida y los errores
+  // Redirect output and errors
   setupOutputRedirection(options.outfile, options.errfile)
 
   if (!options.inputFile) {
-    console.error('No se ha especificado un archivo de entrada')
+    console.error('No input file specified')
     process.exit(1)
   }
 
