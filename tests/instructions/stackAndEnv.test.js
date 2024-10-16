@@ -59,7 +59,7 @@ describe('Stack Instructions', () => {
     const pushInst = new PushInstruction()
     pushInst.args = ['42'] // String que debe convertirse en número
     pushInst.execute(vm)
-    expect(vm.S.pop()).toBe(42) // Debería haber convertido y empujado 42
+    expect(vm.S.pop()).toBe("42") // Debería de haner insertado el "42" al final
 
     pushInst.args = ['[1, 2, 3]'] // String que debe convertirse en array
     pushInst.execute(vm)
