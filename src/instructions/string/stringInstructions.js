@@ -8,9 +8,16 @@ import { Instruction } from '../Instruction.js'
  * -Isaac Felipe Brenes Calderón
  */
 
-// string manipulation instruction
-// stk
+/**
+ * Represents a string manipulation instruction that retrieves a character from a string based on the given index.
+ */
 export class StkInstruction extends Instruction {
+  /**
+   * Executes the stk instruction by popping a character index from the stack and retrieving the corresponding character from the string.
+   *
+   * @param {Object} vm - The virtual machine instance.
+   * @throws {Error} Throws an error if the types of k or str are invalid.
+   */
   execute (vm) {
     // Pop 'k' from the stack, which indicates the number of characters to take.
     const k = Number(vm.S.pop())
@@ -36,8 +43,16 @@ export class StkInstruction extends Instruction {
   }
 }
 
-// srk
+/**
+ * Represents a string manipulation instruction that removes a specified number of characters from the start of a string.
+ */
 export class SrkInstruction extends Instruction {
+  /**
+   * Executes the srk instruction by popping the number of characters to remove and the string from the stack.
+   *
+   * @param {Object} vm - The virtual machine instance.
+   * @throws {Error} Throws an error if the types of k or str are invalid.
+   */
   execute (vm) {
     // Pop 'k' from the stack, which indicates the number of characters to remove.
     const k = vm.S.pop()
@@ -57,8 +72,16 @@ export class SrkInstruction extends Instruction {
   }
 }
 
-// cat
+/**
+ * Represents a string manipulation instruction that concatenates two strings.
+ */
 export class CatInstruction extends Instruction {
+  /**
+   * Executes the cat instruction by popping two strings from the stack and concatenating them.
+   *
+   * @param {Object} vm - The virtual machine instance.
+   * @throws {Error} Throws an error if the types of the operands are invalid.
+   */
   execute (vm) {
     let str2 = vm.S.pop()
     let str1 = vm.S.pop()
@@ -67,7 +90,7 @@ export class CatInstruction extends Instruction {
       throw new Error('Invalid types: expected two strings to concatenate.')
     }
 
-    // remove quotes if they exist
+    // Remove quotes if they exist
     if (str1[0] === '"' && str1[str1.length - 1] === '"') {
       str1 = str1.slice(1, -1)
     }
@@ -82,8 +105,15 @@ export class CatInstruction extends Instruction {
   }
 }
 
-// tos
+/**
+ * Represents an instruction that converts a value to a string.
+ */
 export class TosInstruction extends Instruction {
+  /**
+   * Executes the tos instruction by converting the top value from the stack to a string and pushing it back onto the stack.
+   *
+   * @param {Object} vm - The virtual machine instance.
+   */
   execute (vm) {
     const value = vm.S.pop()
     vm.S.push(value.toString())
