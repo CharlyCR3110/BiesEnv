@@ -45,6 +45,7 @@ export class LrkInstruction extends Instruction {
 export class TolInstruction extends Instruction {
   execute (vm) {
     const list = vm.S.pop()
+    const value = vm.S.pop()
     vm.S.push(Array.isArray(list) ? value : [list])
   }
 }
