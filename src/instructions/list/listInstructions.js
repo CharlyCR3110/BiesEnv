@@ -10,8 +10,8 @@ import { Instruction } from '../Instruction.js'
 
 export class LntInstruction extends Instruction {
   execute (vm) {
-    const list = [vm.S.pop()]
-    vm.S.push(list === null || list.length === 0)
+    const list = vm.S.pop()
+    vm.S.push(!!(list === null || (list instanceof Array && list.length === 0) || list === undefined))
   }
 }
 
