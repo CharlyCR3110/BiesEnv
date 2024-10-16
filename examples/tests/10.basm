@@ -3,7 +3,7 @@
 ;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
 
 $FUN $0 args:1 parent: $0
-LDV 10      ; Se asume que el argumento de entrada es el número para el cual queremos calcular Fibonacci (n=10)
+LDV 8       ; Se asume que el argumento de entrada es el número para el cual queremos calcular Fibonacci (n=10)
 BST 0 0     ; Guardar n en el contexto 0
 LDV 0
 BST 0 1     ; Inicializar fib_0 = 0
@@ -39,7 +39,15 @@ BST 0 3     ; Actualizar i
 BR -20      ; Volver al inicio del bucle
 
 ; Fin del bucle
-BLD 0 2     ; Cargar el último valor calculado de fib_1, que es Fibonacci(n)
+BLD 0 0     ; Cargar el último valor calculado de fib_1, que es Fibonacci(n)
+LDV 0       ;
+EQQ
+BF 3
+BLD 0 1
+PRN         ; Imprimir el resultado
+HLT
+BLD 0 2
 PRN         ; Imprimir el resultado
 HLT
 $END
+
