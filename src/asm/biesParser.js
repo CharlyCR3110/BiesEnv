@@ -4,9 +4,11 @@ import BiesASMParser from './grammar/.antlr/biesASMParser.js'
 import { MyErrorListener } from '../errors/MyErrorListener.js'
 
 /**
- * Parses the input code.
- * @param {*} input
- * @returns {Tree}
+ * Parses the input code using ANTLR4.
+ * This function takes a string input representing BIESVM assembly code,
+ * processes it using a lexer and parser, and returns the resulting parse tree.
+ * @param {string} input - The BIESVM assembly code to be parsed.
+ * @returns {Tree} - The parse tree generated from the input code.
  * @throws {Error} - If there is a problem parsing the code.
  * @module asm/biesParser
  * @example
@@ -18,6 +20,11 @@ import { MyErrorListener } from '../errors/MyErrorListener.js'
  * HLT
  * `
  * const tree = parse(input)
+ * @authors
+ * - Raquel Alfaro Barrantes
+ * - Carlos González Garita
+ * - Samuel Alfaro Rodríguez
+ * - Isaac Felipe Brenes Calderón
  */
 export const parse = (input) => {
   const chars = new antlr4.InputStream(input)
