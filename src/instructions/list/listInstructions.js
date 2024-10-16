@@ -19,7 +19,11 @@ export class LinInstruction extends Instruction {
   execute (vm) {
     const list = vm.S.pop()
     const value = vm.S.pop()
-    list.unshift(value)
+    list instanceof Array
+      ? list.unshift(value)
+      : vm.S.push([value])
+
+    vm.S.push(list)
   }
 }
 
