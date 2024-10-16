@@ -1,0 +1,84 @@
+$FUN $0 args:1 parent: $0
+; Cargar la lista
+LDV [1, 2]
+BST 0 0  ; Guardar lista en 0
+
+; Cargar la longitud de la lista
+BLD 0 0
+LDF $1
+APP 1
+BST 0 1  ; Guardar longitud en 1
+
+; Inicializar índices: i = 0, j = length - 1
+LDV 0
+BST 0 2  ; i = 0
+BLD 0 1
+LDV 1
+SUB
+BST 0 3  ; j = length - 1
+
+; Inicializar palíndromo como true
+LDV 1
+BST 0 4  ; palindrome = true
+
+; Inicio del bucle (equivalente a LOOP)
+BLD 0 2  ; i
+BLD 0 3  ; j
+LT       ; i < j
+BF 13    ; Si no se cumple la condición, saltar al final del bucle
+
+; Comparar lista[i] con lista[j]
+BLD 0 0  ; lista
+BLD 0 2  ; i
+LTK      ; lista[i]
+BLD 0 0  ; lista
+BLD 0 3  ; j
+LTK      ; lista[j]
+EQ       ; lista[i] == lista[j]
+BF 6     ; Si no son iguales, saltar al código para cambiar palindrome a false
+
+; Continuar comparando los siguientes elementos
+; Incrementar i, decrementar j
+BLD 0 2
+LDV 1
+ADD
+BST 0 2  ; i++
+BLD 0 3
+LDV 1
+SUB
+BST 0 3  ; j--
+BR -16   ; Saltar al inicio del bucle
+
+; Si lista[i] != lista[j], poner palindrome = false
+LDV 0
+BST 0 4  ; palindrome = false
+BR 2     ; Saltar al final del bucle
+
+; Fin del bucle
+BLD 0 4  ; Verificar si la lista es palindrome
+PRN
+HLT
+
+$END
+
+; Función para obtener la longitud de una lista
+$FUN $1 args:1 parent: $0
+LDV 0
+BST 0 4 ; inicializar length = 0
+
+; Inicio del bucle para calcular la longitud (sin LOOP)
+BLD 0 0 ; cargar lista
+LNT     ; verificar si es null
+BT 5    ; si es null, saltar al final del bucle
+
+; Incrementar length
+BLD 0 4
+LDV 1
+ADD
+BST 0 4  ; length++
+BR -6   ; Saltar al inicio del bucle
+
+; Fin del bucle para calcular la longitud
+BLD 0 4  ; devolver length
+RET
+$END
