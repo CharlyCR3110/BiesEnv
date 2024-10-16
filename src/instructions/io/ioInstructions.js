@@ -60,19 +60,19 @@ export class InpInstruction extends Instruction {
    * @returns {Promise<string>} A promise that resolves to the user input.
    * @memberof InpInstruction
    */
-  getUserInput () {
-    return new Promise((resolve) => {
-      // Create a readline interface to read from the console
-      const readline = require('readline').createInterface({
-        input: process.stdin,
-        output: process.stdout
-      })
+  async getUserInput() {
+    // Importando readline dinámicamente con import()
+    const readline = (await import('readline')).createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
 
+    return new Promise((resolve) => {
       // Ask the user for input
       readline.question('Enter a value: ', (value) => {
-        readline.close()
-        resolve(value) // Resolve the promise with the user input
-      })
-    })
+        readline.close();
+        resolve(value); // Resolve the promise with the user input
+      });
+    });
   }
 }
