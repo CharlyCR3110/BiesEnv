@@ -83,14 +83,3 @@ export class LteInstruction extends Instruction {
   }
 }
 
-// unary arithmetic instruction
-// sqrt
-export class SqrtInstruction extends Instruction {
-  execute (vm) {
-    const a = vm.S.pop()
-    if (a < 0) {
-      throw new Error('Cannot calculate square root of a negative number')
-    }
-    vm.S.push(Math.sqrt(a))
-  }
-}

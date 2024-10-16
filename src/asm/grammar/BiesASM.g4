@@ -43,7 +43,11 @@ instruction
     | TOS
     | CST expression
     | INO expression
-    | SQRT 
+    | LNT
+    | LIN
+    | LTK
+    | LRK
+    | TOL 
     ;
 
 // Directivas, incluyendo la definición de funciones ($FUN)
@@ -101,13 +105,17 @@ CAT: 'CAT';  // Concatenar
 TOS: 'TOS';  // Valor a String v.toString()
 CST: 'CST';  //Casting
 INO: 'INO';  // Instance of
-SQRT: 'SQRT';
+LNT: 'LNT';
+LIN: 'LIN';
+LTK: 'LTK';
+LRK: 'LRK';
+TOL: 'TOL';
 
 // Identificador para nombres de funciones o variables
 IDENTIFIER: [$a-zA-Z_][a-zA-Z_0-9]*;
 
 // Expresiones numéricas
-expression: NUMBER | STRING | IDENTIFIER;
+expression: NUMBER | STRING | IDENTIFIER | list;
 
 optionalExpression: NUMBER?;
 
@@ -116,6 +124,8 @@ NUMBER: [+-]?[0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 
 //Definición de Strings
 STRING: '"' ( ~["\\] | '\\' . )* '"';
+
+list: '[' (expression (',' expression)*)? ']';
 
 // Espacios en blanco (ignorar)
 WS: [ \t\r\n]+ -> skip;

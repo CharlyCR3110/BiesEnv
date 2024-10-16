@@ -1,9 +1,10 @@
 import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, InoInstruction, PopInstruction, PushInstruction, SgnInstruction, SntInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
-import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, LteInstruction, LtInstruction, MultiplyInstruction, NegateInstruction, SqrtInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
+import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, LteInstruction, LtInstruction, MultiplyInstruction, NegateInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, CstInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { AndInstruction, HltInstruction, NotInstruction, OrInstruction, XorInstruction } from '../../instructions/control/startAndStop.js'
 import { CatInstruction, SrkInstruction, StkInstruction, TosInstruction } from '../../instructions/string/stringInstructions.js'
+import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInstruction } from '../../instructions/list/listInstructions.js'
 
 // Factory function to create instructions
 const instructionMap = new Map([
@@ -51,7 +52,12 @@ const instructionMap = new Map([
   ['tos', () => new TosInstruction()], // To String
   ['snt', () => new SntInstruction()], // String null test
   ['stk', (args) => new StkInstruction(...args)],
-  ['srk', (args) => new SrkInstruction(...args)]
+  ['srk', (args) => new SrkInstruction(...args)],
+  ['lnt', () => new LntInstruction()],
+  ['lin', () => new LinInstruction()],
+  ['ltk', () => new LtkInstruction()],
+  ['lrk', () => new LrkInstruction()],
+  ['tol', () => new TolInstruction()]
 ])
 
 export function createInstruction (op, ...args) {

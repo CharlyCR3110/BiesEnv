@@ -9,7 +9,17 @@ export class PopInstruction extends Instruction {
 // ldv
 export class PushInstruction extends Instruction {
   execute (vm) {
-    vm.S.push(this.args[0])
+    const value = this.args[0];
+
+    // Intenta convertir la cadena a un array si es necesario
+    if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
+      // Convierte la cadena a un array
+      const parsedArray = JSON.parse(value);
+      vm.S.push(parsedArray);
+    } else {
+      // Empuja el valor tal como está
+      vm.S.push(value);
+    }
   }
 }
 

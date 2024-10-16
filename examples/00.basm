@@ -1,0 +1,12 @@
+$FUN $0 args:1 parent: $0
+LDV ["H","O","L","A"]
+LDV 1
+LRK
+PRN
+
+LDV [45,24,32]
+LDV 1
+LTK 
+PRN
+HLT
+$END
