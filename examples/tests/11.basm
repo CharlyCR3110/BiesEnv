@@ -12,15 +12,16 @@ $END
 
 $FUN $1 args:1 parent:$0
 BLD 0 0       ; Cargar n en la pila
-LDV 2         ; Cargar 2 para comparación
-GT            ; Verificar si n > 2
-NOT           ; Invertir el resultado (n <= 2)
-BT 16         ; Si n <= 2, saltar al caso base (índice 15)
+LDV 1         ; Cargar 1 para comparación
+GT            ; Verificar si n > 1
+NOT           ; Invertir el resultado (n <= 1)
+BT 19         ; Si n <= 2, saltar al caso base (índice 15)
 
 ; Si n > 2, continuar con el cálculo recursivo
 BLD 0 0       ; Cargar n nuevamente
 LDV 1         ; Cargar 1
 SUB           ; Calcular n - 1
+CST 'string'
 
 LDF $1        ; Cargar la función Fibonacci para llamada recursiva
 APP           ; Aplicar fibonacci(n - 1)
@@ -29,6 +30,7 @@ BST 0 1       ; Guardar el resultado de fibonacci(n - 1) en la posición 1
 BLD 0 0       ; Cargar n nuevamente
 LDV 2         ; Cargar 2
 SUB           ; Calcular n - 2
+CST 'string'
 
 LDF $1        ; Cargar la función Fibonacci para llamada recursiva
 APP           ; Aplicar fibonacci(n - 2)
@@ -37,9 +39,20 @@ BST 0 2       ; Guardar el resultado de fibonacci(n - 2) en la posición 2
 BLD 0 1       ; Cargar fibonacci(n - 1) desde la posición 1
 BLD 0 2       ; Cargar fibonacci(n - 2) desde la posición 2
 ADD           ; Sumar fibonacci(n - 1) + fibonacci(n - 2)
+CST 'string'
 RET           ; Retornar el resultado
 
 ; Caso base: si n <= 2, retornar 1
 LDV 1         ; Cargar 1 en la pila (caso base)
+BLD 0 0
+EQQ
+BF 2
+LDV 1
 RET           ; Retornar 1
+LDV 0         ; Cargar 0 en la pila (caso base)
+BLD 0 0
+EQQ
+LDV 0
+RET
 $END
+
