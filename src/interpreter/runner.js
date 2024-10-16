@@ -15,8 +15,9 @@ import { loadCode } from './loader.js'
 
 /**
  * Runs a source code file using the virtual machine.
- * @param {string} filePath - Path to the source code file.
- * @throws {Error} - If there is an issue loading or executing the code.
+ *
+ * @param {string} filePath - Path to the source code file to be executed.
+ * @throws {Error} Throws an error if there is an issue loading or executing the code.
  * @example
  * run('examples/01.basm')
  */
@@ -24,13 +25,13 @@ export const run = (filePath) => {
   try {
     const [instructions, vm] = loadCode(filePath)
 
-    // Obtener la primera función para ejecutar, si existe
+    // Obtain the first function to execute, if it exists
     const keys = Object.keys(vm.functions)
     const firstElement = vm.functions[keys[0]]
 
-    const functionInstructions = firstElement?.instructions || instructions // Usar las instrucciones de la función o las globales
+    const functionInstructions = firstElement?.instructions || instructions // Use the function's instructions or the global instructions
 
-    // Ejecutar las instrucciones
+    // Execute the instructions
     vm.execute(functionInstructions)
 
     console.log('Execution completed successfully.')
@@ -41,8 +42,9 @@ export const run = (filePath) => {
 
 /**
  * Prints a source code file using the print visitor.
- * @param {string} filePath - Path to the source code file.
- * @throws {Error} - If there is an issue loading or printing the code.
+ *
+ * @param {string} filePath - Path to the source code file to be printed.
+ * @throws {Error} Throws an error if there is an issue loading or printing the code.
  * @example
  * print('examples/01.basm')
  */
