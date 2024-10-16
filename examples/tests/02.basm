@@ -1,3 +1,7 @@
+;Authors:
+;Raquel Alfaro Barrantes, Carlos González Garita 
+;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
+
 $FUN $0 args:3 parent: $0
 ; Cargar los valores de a, b, y c
 LDV 1

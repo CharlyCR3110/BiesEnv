@@ -6,6 +6,14 @@ import { AndInstruction, HltInstruction, NotInstruction, OrInstruction, XorInstr
 import { CatInstruction, SrkInstruction, StkInstruction, TosInstruction } from '../../instructions/string/stringInstructions.js'
 import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInstruction } from '../../instructions/list/listInstructions.js'
 
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
 // Factory function to create instructions
 const instructionMap = new Map([
   // stack and environment instructions

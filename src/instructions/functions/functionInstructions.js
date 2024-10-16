@@ -1,5 +1,13 @@
 import { Instruction } from '../Instruction.js'
 
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
 export class LdfInstruction extends Instruction {
   execute (vm) {
     const func = vm.functions[this.args[0]]

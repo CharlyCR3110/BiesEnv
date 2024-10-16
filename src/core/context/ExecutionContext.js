@@ -1,4 +1,10 @@
 /**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ * 
  * Represents a single execution context with a return address and local environment.
  * @class
  * @property {number} returnAddress - The address to return to after execution.

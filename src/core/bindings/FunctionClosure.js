@@ -1,5 +1,11 @@
 import { Environment } from '../environment/Environment.js'
-
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
 export class FunctionClosure {
   constructor (argsCount, body, environment, parentName) {
     this.argsCount = argsCount

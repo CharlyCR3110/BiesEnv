@@ -1,6 +1,11 @@
 import { Instruction } from '../Instruction.js'
-// ([[INI N]|C], [], [], [[]]) => (C, S, B, D) si código C es cargado, S, B y D
-// inicializados y D.current = C
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
 
 // ini
 export class IniInstruction extends Instruction {

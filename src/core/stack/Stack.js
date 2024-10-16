@@ -1,4 +1,10 @@
 /**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ * 
  * Stack class
  * @class
  * @classdesc A stack is a basic data structure where insertion and deletion of items take place at one end called the top of the stack. It follows the Last In, First Out (LIFO) principle.

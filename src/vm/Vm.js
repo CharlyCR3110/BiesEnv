@@ -3,6 +3,14 @@ import { ContextStack } from '../core/context/ContextStack.js'
 import { Stack } from '../core/stack/Stack.js'
 
 /**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
+/**
  * Virtual machine for executing instructions.
  * @module vm/Vm
  * @see {@link Stack}

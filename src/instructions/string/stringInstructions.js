@@ -1,5 +1,13 @@
 import { Instruction } from '../Instruction.js'
 
+/**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
 // string manipulation instruction
 // stk
 export class StkInstruction extends Instruction {

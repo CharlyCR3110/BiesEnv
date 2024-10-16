@@ -1,6 +1,14 @@
 import { loadCode } from './loader.js'
 
 /**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
+/**
  * Runner to execute or print code using the virtual machine.
  * @module interpreter/runner
  */

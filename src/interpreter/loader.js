@@ -6,6 +6,14 @@ import { createInstruction } from '../vm/factories/InstructionFactory.js'
 import { FunctionClosure } from '../core/bindings/FunctionClosure.js'
 
 /**
+ * @authors
+ * -Raquel Alfaro Barrantes
+ * -Carlos González Garita 
+ * -Samuel Alfaro Rodríguez
+ * -Isaac Felipe Brenes Calderón
+ */
+
+/**
  * Loader for loading and preparing code for the virtual machine.
  * @module interpreter/loader
  */
