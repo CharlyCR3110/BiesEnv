@@ -3,43 +3,38 @@
 ;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
 
 $FUN $0 args:1 parent: $0
-LDV 5      ; Se asume que el argumento de entrada es el número para el cual queremos calcular el factorial (n=10)
-BST 0 0     ; Guardar n en el contexto 0
-LDV 1
-BST 0 1     ; Inicializar resultado = 1 (resultado temporal)
-LDV 1
-BST 0 2     ; Inicializar i = 1 (índice temporal)
-
-; Inicio del bucle
-BLD 0 0     ; Cargar n (el valor límite)
-BLD 0 2     ; Cargar i (el índice actual)
-GT          ; Comparar n y i (n > i)
-NOT         ; Invertir el resultado de la comparación
-BT +13       ; Si i >= n, salir del bucle (en este caso, se usa >= para evitar el último paso innecesario)
-
-; Cuerpo del bucle
-BLD 0 1     ; Cargar resultado
-BLD 0 2     ; Cargar i
-MUL         ; resultado = resultado * i
-BST 0 1     ; Actualizar resultado
-
-; Imprimir el resultado de la multiplicación
-BLD 0 1     ; Cargar el nuevo resultado
-PRN         ; Imprimir resultado después de la multiplicación
-
-BLD 0 2     ; Cargar i
-LDV 1
-ADD         ; Incrementar i en 1
-BST 0 2     ; Actualizar i
-
-; Imprimir el valor de i después de la suma
-BLD 0 2     ; Cargar el nuevo valor de i
-PRN         ; Imprimir el nuevo i
-
-BR -18      ; Volver al inicio del bucle
-
-; Fin del bucle
-BLD 0 1     ; Cargar el resultado final (factorial de n)
-PRN         ; Imprimir el resultado final
+LDV 5
+LDF $1
+BST 0 0
+BLD 0 0
+APP 1
+PRN
 HLT
+$END
+
+
+$FUN $1 args:1 parent: $0
+LDV 1
+BST 0 1 ; inicializa resultado
+
+LDV 1
+BST 0 2  ;inicializa i
+
+;inicio del loop
+BLD 0 2 ;carga valor de i
+BLD 0 0 ;carga el valor de n
+LTE
+BF  9   ;salir del loop
+BLD 0 1
+BLD 0 2
+MUL
+BST 0 1  ;actualiza resultado resultado *=i
+LDV 1
+BLD 0 2
+ADD
+BST 0 2 ;actualiza valor de indice i++
+BR -13
+
+BLD 0 1
+RET
 $END
