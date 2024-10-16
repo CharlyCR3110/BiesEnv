@@ -9,7 +9,7 @@ import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInst
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
  */
@@ -38,7 +38,6 @@ const instructionMap = new Map([
   ['lt', () => new LtInstruction()],
   ['lte', () => new LteInstruction()],
   ['gte', () => new GteInstruction()],
-  ['sqrt', () => new SqrtInstruction()],
   ['neg', () => new NegateInstruction()],
   // logical instructions
   ['and', () => new AndInstruction()],

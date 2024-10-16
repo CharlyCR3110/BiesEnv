@@ -2,7 +2,7 @@ import { Instruction } from '../Instruction.js'
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
  */

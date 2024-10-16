@@ -1,10 +1,10 @@
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
- * 
+ *
  * Represents a single scope or environment for variable bindings.
  * @class
  * @property {Map<string, any>} bindings - A map of variable names to values.
