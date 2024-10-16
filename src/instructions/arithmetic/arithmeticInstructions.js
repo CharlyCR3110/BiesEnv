@@ -3,7 +3,7 @@ import { Instruction } from '../Instruction.js'
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
  */
@@ -90,4 +90,3 @@ export class LteInstruction extends Instruction {
     vm.S.push(a <= b)
   }
 }
-

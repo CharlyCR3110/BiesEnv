@@ -3,7 +3,7 @@ import { Instruction } from '../Instruction.js'
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
  */
@@ -17,20 +17,19 @@ export class PopInstruction extends Instruction {
 // ldv
 export class PushInstruction extends Instruction {
   execute (vm) {
-    const value = this.args[0];
+    const value = this.args[0]
 
     // Intenta convertir la cadena a un array si es necesario
     if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
       // Convierte la cadena a un array
-      const parsedArray = JSON.parse(value);
-      vm.S.push(parsedArray);
+      const parsedArray = JSON.parse(value)
+      vm.S.push(parsedArray)
     } else if (!isNaN(value)) {
       // Si el valor no es una cadena y puede convertirse a número, lo guarda como NUMBER
-      vm.S.push(Number(value));
-    }
-      else {
+      vm.S.push(Number(value))
+    } else {
       // Empuja el valor tal como está
-      vm.S.push(value);
+      vm.S.push(value)
     }
   }
 }

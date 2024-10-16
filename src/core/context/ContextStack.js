@@ -4,10 +4,10 @@ import { Stack } from '../stack/Stack.js'
 /**
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
- * 
+ *
  * Manages the stack of execution contexts, corresponding to the D component in the VM.
  * @module ContextStack
  * @see {@link ExecutionContext}

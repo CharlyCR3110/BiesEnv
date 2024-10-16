@@ -8,7 +8,7 @@ import { Stack } from '../stack/Stack.js'
  * @example
  * @authors
  * -Raquel Alfaro Barrantes
- * -Carlos González Garita 
+ * -Carlos González Garita
  * -Samuel Alfaro Rodríguez
  * -Isaac Felipe Brenes Calderón
  * const stack = new BindingStack()
