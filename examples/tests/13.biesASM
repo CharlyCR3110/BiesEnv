@@ -1,0 +1,20 @@
+;Authors:
+;Raquel Alfaro Barrantes, Carlos González Garita
+;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
+$FUN $0 args:1 parent:$0
+LDV 1.2          ; Cargar 1 en la pila
+BST 0 0        ; Guardarlo en la posicion 0 0
+BLD 0 0
+PRN            ; Imprimirlo
+BLD 0 0        ; Carga el valor
+CST 'float'
+BST 0 0
+BLD 0 0
+PRN
+BLD 0 0
+CST 'int'      ; Castearlo a int
+BST 0 0
+BLD 0 0
+PRN
+HLT
+$END
