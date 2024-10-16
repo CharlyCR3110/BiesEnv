@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { PrintInstruction, InpInstruction } from '../../src/instructions/io/ioInstructions'
 import { jest } from '@jest/globals'
 

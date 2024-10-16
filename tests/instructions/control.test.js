@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { HltInstruction, AndInstruction, OrInstruction, XorInstruction, NotInstruction } from '../../src/instructions/control/startAndStop'
 import { jest } from '@jest/globals'
 

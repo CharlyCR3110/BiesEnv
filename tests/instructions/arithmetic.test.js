@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 import { AddInstruction, SubInstruction, MultiplyInstruction, DivideInstruction } from '../../src/instructions/arithmetic/arithmeticInstructions'
-
 const createMockVM = () => ({
   S: {
     stack: [],

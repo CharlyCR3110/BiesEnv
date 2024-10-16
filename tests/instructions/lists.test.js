@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInstruction } from '../../src/instructions/list/listInstructions'
 
 const createMockVM = () => ({

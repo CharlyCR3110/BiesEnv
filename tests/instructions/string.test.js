@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { StkInstruction, SrkInstruction, CatInstruction, TosInstruction } from '../../src/instructions/string/stringInstructions'
 
 describe('String Manipulation Instructions', () => {
