@@ -38,7 +38,6 @@ const instructionMap = new Map([
   ['lt', () => new LtInstruction()],
   ['lte', () => new LteInstruction()],
   ['gte', () => new GteInstruction()],
-  ['sqrt', () => new SqrtInstruction()],
   ['neg', () => new NegateInstruction()],
   // logical instructions
   ['and', () => new AndInstruction()],
