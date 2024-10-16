@@ -24,7 +24,11 @@ export class PushInstruction extends Instruction {
       // Convierte la cadena a un array
       const parsedArray = JSON.parse(value);
       vm.S.push(parsedArray);
-    } else {
+    } else if (!isNaN(value)) {
+      // Si el valor no es una cadena y puede convertirse a número, lo guarda como NUMBER
+      vm.S.push(Number(value));
+    }
+      else {
       // Empuja el valor tal como está
       vm.S.push(value);
     }
