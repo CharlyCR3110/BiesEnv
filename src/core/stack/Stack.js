@@ -1,9 +1,9 @@
 /**
  * @authors
- * -Raquel Alfaro Barrantes
- * -Carlos González Garita
- * -Samuel Alfaro Rodríguez
- * -Isaac Felipe Brenes Calderón
+ * - Raquel Alfaro Barrantes
+ * - Carlos González Garita
+ * - Samuel Alfaro Rodríguez
+ * - Isaac Felipe Brenes Calderón
  *
  * Stack class
  * @class
@@ -32,7 +32,7 @@ export class Stack {
 
   /**
    * Adds an element to the top of the stack.
-   * @param {*} element
+   * @param {*} element - The element to be added to the stack.
    * @memberof Stack
    * @example
    * stack.push(10)
@@ -43,7 +43,7 @@ export class Stack {
 
   /**
    * Removes and returns the top element of the stack.
-   * @returns {*}
+   * @returns {*} - The top element of the stack.
    * @memberof Stack
    * @example
    * stack.push(10)
@@ -56,8 +56,8 @@ export class Stack {
   }
 
   /**
-   * Returns the top element of the stack without removing it
-   * @returns {*}
+   * Returns the top element of the stack without removing it.
+   * @returns {*} - The top element of the stack.
    * @memberof Stack
    * @example
    * stack.push(10)
@@ -70,7 +70,7 @@ export class Stack {
 
   /**
    * Checks if the stack is empty.
-   * @returns {boolean}
+   * @returns {boolean} - True if the stack is empty, false otherwise.
    * @memberof Stack
    * @example
    * stack.isEmpty() // true
@@ -82,8 +82,8 @@ export class Stack {
   }
 
   /**
-   * Prints all elements in the stack.
-   * @returns {string}
+   * Prints all elements in the stack as a string.
+   * @returns {string} - A string representation of the stack's elements.
    * @memberof Stack
    * @example
    * stack.push(10)
@@ -96,9 +96,8 @@ export class Stack {
 
   /**
    * Return the element at the specified index.
-   *
-   * @param {int} index
-   * @returns {*}
+   * @param {int} index - The index of the element to retrieve.
+   * @returns {*} - The element at the specified index.
    */
   get (index) {
     return this.items[index]
@@ -106,30 +105,29 @@ export class Stack {
 
   /**
    * Return the size of the stack.
-   *
-   * @returns {int}
+   * @returns {int} - The number of elements in the stack.
    */
   size () {
     return this.items.length
   }
 
   /**
- * Extracts the last 'n' elements from the stack without modifying the original stack.
- * @param {int} n - The number of elements to extract.
- * @returns {Array} - The last 'n' elements from the stack.
- */
+   * Extracts the last 'n' elements from the stack without modifying the original stack.
+   * @param {int} n - The number of elements to extract.
+   * @returns {Array} - The last 'n' elements from the stack.
+   */
   getLast (n) {
-    const startIndex = Math.max(0, this.items.length - n) // Asegúrate de no ir a índices negativos
-    return this.items.slice(startIndex) // Retorna los elementos desde el índice calculado hasta el final
+    const startIndex = Math.max(0, this.items.length - n) // Ensure not to go to negative indices
+    return this.items.slice(startIndex) // Return the elements from the calculated index to the end
   }
 
   /**
- * Creates a shallow copy of the stack.
- * @returns {Stack} - A new Stack instance with the same items.
- */
+   * Creates a shallow copy of the stack.
+   * @returns {Stack} - A new Stack instance with the same items.
+   */
   clone () {
     const newStack = new Stack()
-    newStack.items = [...this.items] // Crea una copia superficial del array de items
+    newStack.items = [...this.items] // Creates a shallow copy of the items array
     return newStack
   }
 }
