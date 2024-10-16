@@ -60,7 +60,7 @@ export class VM {
    * This method processes instructions until either all instructions are executed
    * or the virtual machine is halted.
    */
-  run () {
+  async run () {
     console.log(`Running program with ${this.C.length} instructions`)
     console.log(this.functions)
     while (this.D.currentInstructionPointer < this.C.length && !this.halted) {
@@ -71,7 +71,7 @@ export class VM {
       }
 
       try {
-        instruction.execute(this)
+        await instruction.execute(this);
       } catch (error) {
         console.error(`Error executing instruction: ${error.message}`)
         this.halted = true
