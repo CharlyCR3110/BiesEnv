@@ -1,0 +1,114 @@
+
+$FUN $0 args:1 parent: $0
+LDV "Hola mundo"
+BST 0 0 ;guardar hilera
+LDV "mundo"
+BST 0 2
+
+LDF $1
+BST 0 1 ;guardar funcion de indice de subhilera
+
+BLD 0 0
+BLD 0 2
+BLD 0 1
+APP 2
+PRN
+HLT
+$END
+
+; indice de subhilera
+$FUN $1 args:2 parent: $0
+LDF $2
+BST 0 2  ;cargar funcion $2 -> length
+
+BLD 0 0
+BLD 0 2
+APP 1
+BST 0 3  ;guardar length de la hilera
+
+BLD 0 1
+BLD 0 2
+APP 1
+BST 0 4  ;guardar length de la subhilera
+
+;inicializar i y j 
+LDV 0
+BST 0 5  ;variable i -> 0 5
+LDV 0
+BST 0 6  ;variable j -> 0 6
+
+;inicio del loop
+BLD 0 5
+BLD 0 3
+BLD 0 4
+SUB
+LTE
+BF 29    ;salir del loop 
+
+LDV 1
+BST 0 7  ;variable coincide = 1 (true)
+
+;loop interno
+BLD 0 6
+BLD 0 4
+LT
+BF  14  ;salir del loop
+BLD 0 0
+BLD 0 5
+BLD 0 6
+ADD
+STK    ;obtener hilera [i+j]
+BLD 0 2
+BLD 0 6
+STK    ;obtener subhilera[j]
+EQ
+BT 3
+LDV 0
+BST 0 7 ;coincide = 0
+BR 1
+BR -16
+
+LDV 1
+BLD 0 7
+EQ       ; coincide = true
+BT 5
+
+LDV 1
+BLD 0 5
+ADD
+BST 0 5  ;actauliza i 28
+BR -35
+BLD 0 5
+LDV 1
+SUB
+RET
+$END
+
+
+;largo de una hilera
+$FUN $2 args:1 parent: $1
+LDV 0
+BST 0 4 ;inicializa length
+LDV 1
+BST 0 5 ; inicializa i
+
+; Inicio de bucle
+BLD 0 0 ;carga a pila la hilera
+BLD 0 5 ;carga a pila el indice
+STK     ; toma el k-ésimo elemento , basado en el indice
+SNT     ;verifica que no sea null
+BT +9    ;si es null, sale del loop
+BLD 0 5 ;cargar el indice
+LDV 1
+ADD     ; se le suma 1
+BST 0 5 ;actualiza el indice
+BLD 0 4 ;cargar el length
+LDV 1   
+ADD     ;se le suma 1 al length
+BST 0 4 ;actualiza el length
+BR -14  ;regresa al inicio del loop
+
+;Fin del loop
+BLD 0 4  ;carga el valor del length en la pila
+RET
+$END

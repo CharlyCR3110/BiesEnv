@@ -87,6 +87,6 @@ export class LteInstruction extends Instruction {
   execute (vm) {
     const b = vm.S.pop()
     const a = vm.S.pop()
-    vm.S.push(a <= b)
+    vm.S.push(a <= b ? 1 : 0)
   }
 }
