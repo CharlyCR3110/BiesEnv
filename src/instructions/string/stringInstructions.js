@@ -79,7 +79,6 @@ export class CatInstruction extends Instruction {
     console.log(`Concatenating ${str1} and ${str2}`)
 
     vm.S.push(str1 + str2)
-    console.log('stack post cat: ', vm.S.printStack())
   }
 }
 
