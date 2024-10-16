@@ -1,0 +1,96 @@
+
+;Authors:
+;Raquel Alfaro Barrantes, Carlos González Garita 
+;Samuel Alfaro Rodríguez, Isaac Felipe Brenes Calderón
+
+$FUN $0 args:1 parent: $0
+LDV [1,2,3,2,5]
+BST 0 0  ;guardar la lista
+
+;conseguir la longitud de la lista
+BLD 0 0
+LDF $2
+APP 1
+LDV 1
+SUB
+BST 0 1
+
+;cargar argumentos para ver si es palindrome
+BLD 0 0
+LDV 0
+BLD 0 1
+LDF $1   ;cargar la funcion encargada
+BST 0 4
+BLD 0 4
+APP 3
+PRN
+
+HLT
+$END 
+
+$FUN $1 args:3 parent: $0
+;caso base o es una lista vacia
+BLD 0 1
+BLD 0 2
+GTE
+BT 19   ;debe retornar true
+
+BLD 0 0  ;cargar lista
+BLD 0 1  ;variable de inicio
+LTK
+BLD 0 0 
+BLD 0 2  ;variable de final
+LTK
+EQ
+BF 13    ;debe retornar false
+
+;recursividad
+BLD 0 0  ;lista
+LDV 1
+BLD 0 1
+ADD     ;inicio + 1
+BLD 0 2 
+LDV 1
+SUB     ;final - 1
+
+LDF $1
+BST 0 3
+BLD 0 3
+APP 3
+
+LDV 1
+BR 1
+LDV 0
+
+RET
+$END
+
+; Función para obtener la longitud de una lista
+$FUN $2 args:1 parent: $0
+LDV 0
+BST 0 4 ; inicializar length = 0
+LDV 0
+BST 0 5
+
+; Inicio del bucle para calcular la longitud (sin LOOP)
+BLD 0 0 ; cargar lista
+BLD 0 5
+LTK
+LNT     ; verificar si es null
+BT 9    ; si es null, saltar al final del bucle
+
+; Incrementar length
+BLD 0 4
+LDV 1
+ADD
+BST 0 4  ; length++
+BLD 0 5
+LDV 1
+ADD
+BST 0 5  ; length++
+BR -14   ; Saltar al inicio del bucle
+
+; Fin del bucle para calcular la longitud
+BLD 0 4  ; devolver length
+RET
+$END
