@@ -48,6 +48,8 @@ instruction
     | LTK
     | LRK
     | TOL 
+    | LEN
+    | POW 
     ;
 
 // Directivas, incluyendo la definición de funciones ($FUN)
@@ -110,6 +112,8 @@ LIN: 'LIN';
 LTK: 'LTK';
 LRK: 'LRK';
 TOL: 'TOL';
+LEN: 'LEN';
+POW: 'POW';
 
 // Identificador para nombres de funciones o variables
 IDENTIFIER: [$a-zA-Z_][a-zA-Z_0-9]*;

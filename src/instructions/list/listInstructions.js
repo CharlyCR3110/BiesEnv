@@ -51,6 +51,13 @@ export class LinInstruction extends Instruction {
   }
 }
 
+export class LenInstruction extends Instruction {
+  execute (vm) {
+    const list = vm.S.pop()
+    vm.S.push(list.length)
+  }
+}
+
 /**
  * Represents an instruction to retrieve an element from a list by index.
  * @class

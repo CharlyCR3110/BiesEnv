@@ -1,10 +1,10 @@
 import { BfInstruction, BldInstruction, BrInstruction, BstInstruction, BtInstruction, EqInstruction, EqqInstruction, InoInstruction, PopInstruction, PushInstruction, SgnInstruction, SntInstruction, SwpInstruction } from '../../instructions/stackAndEnv/stackAndEnvInstructions.js'
-import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, LteInstruction, LtInstruction, MultiplyInstruction, NegateInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
+import { AddInstruction, DivideInstruction, GteInstruction, GtInstruction, LteInstruction, LtInstruction, MultiplyInstruction, NegateInstruction, PowInstruction, SubInstruction } from '../../instructions/arithmetic/arithmeticInstructions.js'
 import { InpInstruction, PrintInstruction } from '../../instructions/io/ioInstructions.js'
 import { AppInstruction, CstInstruction, LdfInstruction, RetInstruction } from '../../instructions/functions/functionInstructions.js'
 import { AndInstruction, HltInstruction, NotInstruction, OrInstruction, XorInstruction } from '../../instructions/control/startAndStop.js'
 import { CatInstruction, SrkInstruction, StkInstruction, TosInstruction } from '../../instructions/string/stringInstructions.js'
-import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInstruction } from '../../instructions/list/listInstructions.js'
+import { LntInstruction, LinInstruction, LtkInstruction, LrkInstruction, TolInstruction, LenInstruction } from '../../instructions/list/listInstructions.js'
 
 /**
  * @authors
@@ -64,7 +64,9 @@ const instructionMap = new Map([
   ['lin', () => new LinInstruction()],
   ['ltk', () => new LtkInstruction()],
   ['lrk', () => new LrkInstruction()],
-  ['tol', () => new TolInstruction()]
+  ['tol', () => new TolInstruction()],
+  ['len', () => new LenInstruction()],
+  ['pow', ()=> new PowInstruction()]
 ])
 
 /**
