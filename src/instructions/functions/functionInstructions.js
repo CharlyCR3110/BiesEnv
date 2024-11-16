@@ -98,7 +98,9 @@ export class RetInstruction extends Instruction {
    * retInstruction.execute(vm);
    */
   execute (vm) {
-    const returnValue = vm.S.pop()
+    const returnValue = !vm.S.isEmpty()
+      ? vm.S.pop()
+      : {}
     vm.C = vm.D.lastInstructions.pop()
     const context = vm.D.pop()
     try {
