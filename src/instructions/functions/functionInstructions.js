@@ -141,9 +141,11 @@ export class CstInstruction extends Instruction {
     const type = this.args[0]
 
     if (type === 'int') {
-      vm.S.push(parseInt(value, 10))
+      const sanitizedValue = value.slice(1, -1)
+      vm.S.push(parseInt(sanitizedValue, 10))
     } else if (type === 'float') {
-      vm.S.push(parseFloat(value))
+      const sanitizedValue = value.slice(1, -1)
+      vm.S.push(parseFloat(sanitizedValue))
     } else if (type === 'string') {
       vm.S.push(value.toString())
     }

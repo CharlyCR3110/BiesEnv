@@ -225,3 +225,14 @@ export class LteInstruction extends Instruction {
     vm.S.push(a <= b ? 1 : 0)
   }
 }
+
+export class PowInstruction extends Instruction {
+  execute (vm) {
+    const exponent= vm.S.pop()
+    const base= vm.S.pop()
+    const result = base ** exponent
+    console.log(`Base ${base}, exponent ${exponent}`)
+    console.log(result)
+    vm.S.push(result)
+  }
+}

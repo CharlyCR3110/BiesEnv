@@ -125,4 +125,5 @@ export default class InstructionBuilderVisitor extends BiesASMVisitor {
     console.log(`Comment: ${ctx.getText().slice(1).trim()}`)
     return null
   }
+  
 }
