@@ -34,7 +34,7 @@ export const run = (filePath) => {
     // Execute the instructions
     vm.execute(functionInstructions)
 
-    console.log('Execution completed successfully.')
+    // console.log('Execution completed successfully.')
   } catch (error) {
     console.error(`Error running the code: ${error.message}`)
   }
@@ -50,19 +50,19 @@ export const run = (filePath) => {
  */
 export const print = (filePath) => {
   try {
-    console.log('Printing the code in path:', filePath)
+    // console.log('Printing the code in path:', filePath)
     // Load, parse, and link the source code into an executable format (array of instructions)
     const [instructions, functions] = loadCode(filePath)
 
-    console.log('--INSTRUCTIONS--')
+    // console.log('--INSTRUCTIONS--')
     instructions.forEach(instruction => {
-      console.log(instruction)
+      // console.log(instruction)
     })
 
-    console.log('--FUNCTIONS--')
-    console.log(functions)
+    // console.log('--FUNCTIONS--')
+    // console.log(functions)
 
-    console.log('Printing completed successfully.')
+    // console.log('Printing completed successfully.')
   } catch (error) {
     console.error(`Error printing the code: ${error.message}`)
   }

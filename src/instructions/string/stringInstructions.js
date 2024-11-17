@@ -99,7 +99,7 @@ export class CatInstruction extends Instruction {
       str2 = str2.slice(1, -1)
     }
 
-    console.log(`Concatenating ${str1} and ${str2}`)
+    // console.log(`Concatenating ${str1} and ${str2}`)
 
     vm.S.push(str1 + str2)
   }

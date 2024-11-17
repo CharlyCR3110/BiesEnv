@@ -35,13 +35,13 @@ export class FunctionClosure {
    */
   apply (args) {
     // const environment = new Environment(this.environment)
-    console.log('Padre: ', this.environment.parent)
+    // console.log('Padre: ', this.environment.parent)
     args.forEach((arg, index) => {
-      console.log(`Defining arg ${index} as ${arg}`)
+      // console.log(`Defining arg ${index} as ${arg}`)
       this.environment.define(String(index), arg)
-      console.log(`Saving local ${index}, value: ${arg}`)
+      // console.log(`Saving local ${index}, value: ${arg}`)
     })
-    console.log(`Recent environment create ${this.environment}`)
+    // console.log(`Recent environment create ${this.environment}`)
     return { body: this.body, environment: this.environment }
   }
 

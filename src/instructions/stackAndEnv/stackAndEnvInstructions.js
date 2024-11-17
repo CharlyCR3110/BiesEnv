@@ -36,9 +36,9 @@ export class BldInstruction extends Instruction {
   execute (vm) {
     const [contextIndex, variableIndex] = this.args
     const value = vm.B.frames.peek().lookup(contextIndex, variableIndex)
-    console.log(`ContextIndex ${contextIndex}, VariableIndex ${variableIndex}`)
-    console.log('Frame: ', vm.B.frames.peek())
-    console.log(value)
+    // console.log(`ContextIndex ${contextIndex}, VariableIndex ${variableIndex}`)
+    // console.log('Frame: ', vm.B.frames.peek())
+    // console.log(value)
     vm.S.push(value)
   }
 }
@@ -49,7 +49,7 @@ export class BstInstruction extends Instruction {
     const value = vm.S.pop()
     const [contextIndex, variableIndex] = this.args
     vm.B.getFrame(contextIndex).define(variableIndex, value)
-    console.log(`Saving local ${contextIndex} , ${variableIndex}, value: ${value}`)
+    // console.log(`Saving local ${contextIndex} , ${variableIndex}, value: ${value}`)
   }
 }
 
@@ -64,7 +64,7 @@ export class BrInstruction extends Instruction {
     // Calculate the new instruction pointer position by adding the offset.
     const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
     vm.D.updateInstructionPointer(pc)
-    console.log(`Branching to instruction pointer offset: ${offset}`)
+    // console.log(`Branching to instruction pointer offset: ${offset}`)
   }
 }
 
@@ -81,15 +81,15 @@ export class BtInstruction extends Instruction {
     // if (typeof offset !== 'number') {
     //   throw new Error('Invalid type: expected a number for the offset.');
     // }
-    console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
-    console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
+    // console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
+    // console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
     const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
     // If the condition is true, update the instruction pointer with the offset.
     if (Number(condition) === 1) {
       vm.D.updateInstructionPointer(pc)
-      console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`)
+      // console.log(`Branching to instruction pointer offset: ${offset} due to true condition.`)
     } else {
-      console.log('Condition was false; not branching.')
+      // console.log('Condition was false; not branching.')
     }
   }
 }
@@ -108,14 +108,14 @@ export class BfInstruction extends Instruction {
     //   throw new Error('Invalid type: expected a number for the offset.');
     // }
     // If the condition is 0, update the instruction pointer with the offset.
-    console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
-    console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
+    // console.log(`Offset ${offset} & instruction poninter: ${vm.D.currentInstructionPointer}`)
+    // console.log(`New instruction pointer: ${Number(offset) + Number(vm.D.currentInstructionPointer)}`)
     const pc = Number(offset) + Number(vm.D.currentInstructionPointer)
     if (Number(condition) === 0) {
       vm.D.updateInstructionPointer(pc)
-      console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`)
+      // console.log(`Branching to instruction pointer offset: ${offset} due to condition being 0.`)
     } else {
-      console.log('Condition was 1; not branching.')
+      // console.log('Condition was 1; not branching.')
     }
   }
 }
@@ -133,7 +133,7 @@ export class SwpInstruction extends Instruction {
     // Push them back onto the stack in reversed order.
     vm.S.push(a)
     vm.S.push(b)
-    console.log(`Swapped top two elements: ${b} and ${a}`)
+    // console.log(`Swapped top two elements: ${b} and ${a}`)
   }
 }
 
@@ -156,7 +156,7 @@ export class SgnInstruction extends Instruction {
 // eq
 export class EqInstruction extends Instruction {
   execute (vm) {
-    console.log('EqInstruction')
+    // console.log('EqInstruction')
     if (vm.S.length < 2) {
       throw new Error('Not enough elements in the stack to evaluate equality.')
     }
@@ -166,7 +166,7 @@ export class EqInstruction extends Instruction {
     // eslint-disable-next-line eqeqeq
     vm.S.push(a == b ? 1 : 0)
     // eslint-disable-next-line eqeqeq
-    console.log(`Equals : ${a} == ${b} : ${a == b}`)
+    // console.log(`Equals : ${a} == ${b} : ${a == b}`)
   }
 }
 

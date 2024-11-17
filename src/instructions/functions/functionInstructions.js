@@ -27,7 +27,7 @@ export class LdfInstruction extends Instruction {
   execute (vm) {
     const func = vm.functions[this.args[0]]
     const parentFunc = vm.functions[func.parentName]
-    console.log(`Padre: ${JSON.stringify(parentFunc)}`)
+    // console.log(`Padre: ${JSON.stringify(parentFunc)}`)
     func.newEnvironment(parentFunc.environment)
     vm.S.push(this.args[0])
   }
@@ -56,9 +56,9 @@ export class AppInstruction extends Instruction {
       throw new Error(`Function ${functionName} not found`)
     }
 
-    console.log(`Function ${functionName}`, func)
+    // console.log(`Function ${functionName}`, func)
     const args = []
-    console.log('argsCount: ', func.argsCount)
+    // console.log('argsCount: ', func.argsCount)
     for (let i = 0; i < func.argsCount; i++) {
       args.unshift(vm.S.pop())
     }
@@ -66,8 +66,8 @@ export class AppInstruction extends Instruction {
     const { body, environment } = func.apply(args)
     vm.D.push(vm.D.currentInstructionPointer, vm.B.frames.peek())
     vm.B.frames.push(environment)
-    console.log('Environment of the before entries')
-    console.log(environment)
+    // console.log('Environment of the before entries')
+    // console.log(environment)
     Object.entries(environment.bindings).forEach(([key, value]) => {
       vm.B.define(key, value)
     })
@@ -76,8 +76,8 @@ export class AppInstruction extends Instruction {
     vm.D.updateInstructionPointer(-1)
 
     // show environment of the function
-    console.log('Environment of the function')
-    console.log(environment)
+    // console.log('Environment of the function')
+    // console.log(environment)
   }
 }
 
@@ -105,17 +105,17 @@ export class RetInstruction extends Instruction {
     const context = vm.D.pop()
     try {
       vm.B.popFrame()
-      console.log('Frame successfully deleted')
+      // console.log('Frame successfully deleted')
     } catch (error) {
-      console.log('Error deleting frames')
+      // console.log('Error deleting frames')
     }
     vm.D.updateInstructionPointer(context.returnAddress)
-    console.log(context.returnAddress)
-    console.log('Returning from function')
-    console.log(`Return value: ${returnValue}`)
+    // console.log(context.returnAddress)
+    // console.log('Returning from function')
+    // console.log(`Return value: ${returnValue}`)
 
-    console.log('Instructions left: ')
-    console.log(vm.C)
+    // console.log('Instructions left: ')
+    // console.log(vm.C)
     vm.S.push(returnValue)
   }
 }

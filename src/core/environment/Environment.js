@@ -49,10 +49,10 @@ export class Environment {
    * @throws {Error} If the variable is not defined in the current or parent environments.
    */
   lookup (level, name) {
-    console.log('Level: ', level, level === 0, level === '0', level === '0')
+    // console.log('Level: ', level, level === 0, level === '0', level === '0')
     if (level === '0' && this.bindings.has(name)) return this.bindings.get(name)
-    console.log(this.bindings, `name: ${name}`)
-    console.log('Value: ', this.bindings.get(name))
+    // console.log(this.bindings, `name: ${name}`)
+    // console.log('Value: ', this.bindings.get(name))
     if (this.parent) {
       return this.parent.lookup('0', name)
     }

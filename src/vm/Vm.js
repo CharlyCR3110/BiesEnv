@@ -44,7 +44,7 @@ export class VM {
    * @throws {Error} Throws an error if no instructions are provided.
    */
   loadProgram (instructions) {
-    console.log(`loading program with: ${instructions}`)
+    // console.log(`loading program with: ${instructions}`)
     // instructions is an array of objects with op and args properties
     // if args is not present, it defaults to an empty array
     if (instructions.length === 0) {
@@ -61,8 +61,8 @@ export class VM {
    * or the virtual machine is halted.
    */
   async run () {
-    console.log(`Running program with ${this.C.length} instructions`)
-    console.log(this.functions)
+    // console.log(`Running program with ${this.C.length} instructions`)
+    // console.log(this.functions)
     while (this.D.currentInstructionPointer < this.C.length && !this.halted) {
       const instruction = this.C[this.D.currentInstructionPointer]
 
@@ -89,7 +89,7 @@ export class VM {
    * @param {Function} closure - The function implementation (closure) to be associated with the name.
    */
   defineFunction (name, closure) {
-    console.log(`Defining function ${name}`)
+    // console.log(`Defining function ${name}`)
     this.functions[name] = closure
   }
 }

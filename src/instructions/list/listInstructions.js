@@ -74,9 +74,9 @@ export class LtkInstruction extends Instruction {
   execute (vm) {
     const k = vm.S.pop()
     const list = vm.S.pop()
-    console.log(list)
+    // console.log(list)
 
-    console.log(list[k])
+    // console.log(list[k])
     vm.S.push(list[k])
   }
 }

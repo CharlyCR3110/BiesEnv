@@ -26,7 +26,7 @@ export class PrintInstruction extends Instruction {
    * printInstruction.execute(vm);
    */
   execute (vm) {
-    console.log(`Printing: ${vm.S.pop()}`)
+    console.log(`${vm.S.pop()}`)
   }
 }
 

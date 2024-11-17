@@ -152,7 +152,7 @@ export class GtInstruction extends Instruction {
   execute (vm) {
     const b = vm.S.pop()
     const a = vm.S.pop()
-    console.log(`tss ${a} > ${b}: `, Number(a) > Number(b))
+    // console.log(`tss ${a} > ${b}: `, Number(a) > Number(b))
     vm.S.push(Number(a) > Number(b) ? 1 : 0)
   }
 }
@@ -231,8 +231,8 @@ export class PowInstruction extends Instruction {
     const exponent= vm.S.pop()
     const base= vm.S.pop()
     const result = base ** exponent
-    console.log(`Base ${base}, exponent ${exponent}`)
-    console.log(result)
+    // console.log(`Base ${base}, exponent ${exponent}`)
+    // console.log(result)
     vm.S.push(result)
   }
 }

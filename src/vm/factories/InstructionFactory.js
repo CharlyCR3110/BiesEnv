@@ -84,6 +84,6 @@ export function createInstruction (op, ...args) {
     throw new Error(`Unknown instruction ${op}`)
   }
   const returning = instructionMap.get(op)(args)
-  console.log(returning)
+  // console.log(returning)
   return returning
 }
