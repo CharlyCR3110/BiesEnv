@@ -54,7 +54,13 @@ export class LinInstruction extends Instruction {
 export class LenInstruction extends Instruction {
   execute (vm) {
     const list = vm.S.pop()
-    vm.S.push(list.length)
+    if (typeof list === "string") {
+      const cleaned=list.slice(1, -1)
+      vm.S.push(cleaned.length)
+    }else{
+      vm.S.push(list.length)
+    }
+    
   }
 }
 
